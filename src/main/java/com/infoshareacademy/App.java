@@ -1,4 +1,4 @@
-package com.infoshareakademy;
+package com.infoshareacademy;
 
 /**
  * Hello world!
