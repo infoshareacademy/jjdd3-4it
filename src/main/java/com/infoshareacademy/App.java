@@ -9,6 +9,5 @@ import com.infoshareacademy.view.InputDisplay;
 public class App 
 {
     public static void main( String[] args )    {
-        InputDisplay.greetingScreen();
     } // end of method main
 } // end of class App
