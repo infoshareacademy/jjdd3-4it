@@ -5,13 +5,11 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class ImportStock {
-    private String sourceFile;
     private File file;
-    ResourceFromFile resource;
+    private ResourceFromFile resource;
 
     public ImportStock(String pathToFile) {
-        this.sourceFile = pathToFile;
-        this.file = new File(sourceFile);
+        this.file = new File(pathToFile);
         this.resource = new ResourceFromFile();
     }
 
