@@ -7,7 +7,7 @@ public class ResourceFromFile {
     private List<String> date;
     private List<String> priceUSD;
 
-    public ResourceFromFile() {
+    ResourceFromFile() {
         date = new ArrayList<>();
         priceUSD = new ArrayList<>();
     }

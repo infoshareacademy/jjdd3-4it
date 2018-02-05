@@ -5,9 +5,15 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class ImportStock {
-    String sourceFile = "src/main/resources/bitcoin.csv";
-    File file = new File(sourceFile);
-    ResourceFromFile resource = new ResourceFromFile();
+    private String sourceFile;
+    private File file;
+    ResourceFromFile resource;
+
+    public ImportStock(String pathToFile) {
+        this.sourceFile = pathToFile;
+        this.file = new File(sourceFile);
+        this.resource = new ResourceFromFile();
+    }
 
     public void readFromFile() {
         try (Scanner inputStream = new Scanner(file)) {
@@ -25,6 +31,15 @@ public class ImportStock {
             System.out.println(fnfExc);
         }
 
+    }
+
+    public void showPrice() {
+        System.out.println("Price array list size: " + resource.getPriceUSD().size());
+        resource.showPrice();
+    }
+    public void showDate() {
+        System.out.println("Date array list size: " + resource.getDate().size());
+        resource.showDate();
     }
 
 }

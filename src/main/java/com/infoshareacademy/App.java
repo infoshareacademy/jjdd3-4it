@@ -11,8 +11,10 @@ public class App
     public static void main( String[] args )
     {
 
-        System.out.println("Hello World!");
-        ImportStock importStock = new ImportStock();
+        ImportStock importStock = new ImportStock("src/main/resources/bitcoin.csv");
         importStock.readFromFile();
+        importStock.showPrice();
+        System.out.println("-----------------------------------------");
+        importStock.showDate();
     }
 }
