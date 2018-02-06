@@ -49,7 +49,7 @@ public void listavar(){
         }return yMax;
     }
 
-    
+
         public int methodmin() {
 
             for (int i = x1; i < x2; i++) {
