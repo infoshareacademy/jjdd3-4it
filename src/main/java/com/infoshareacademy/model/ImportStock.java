@@ -2,16 +2,19 @@ package com.infoshareacademy.model;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class ImportStock {
     private File file;
-    private ResourceFromFile resource;
+    private List<InputData> resources;
 
     public ImportStock(String pathToFile) {
         this.file = new File(pathToFile);
-        this.resource = new ResourceFromFile();
+        this.resources = new ArrayList<>();
     }
+
 
     public void readFromFile() {
         try (Scanner inputStream = new Scanner(file)) {
@@ -21,8 +24,9 @@ public class ImportStock {
             while (inputStream.hasNext()) {
                 String inputData = inputStream.next();
                 String[] stringsArray = inputData.split(",");
-                resource.addDateElement(stringsArray[0]);
-                resource.addPriceUSD(stringsArray[4]);
+
+                InputData r = new InputData(stringsArray[4], stringsArray[0]);
+                resources.add(r);
             }
         } catch (FileNotFoundException fnfExc) {
             System.out.println("Invalid file name or wrong path to file!!!");
@@ -31,13 +35,13 @@ public class ImportStock {
 
     }
 
-    public void showPrice() {
-        System.out.println("Price array list size: " + resource.getPriceUSD().size());
-        resource.showPrice();
+    public void showPriceAndDate() {
+        System.out.println("Number of items: " + resources.size());
+        for (InputData i : resources) {
+            System.out.print(i.getDate());
+            System.out.println(" " + i.getPrice());
+        }
     }
-    public void showDate() {
-        System.out.println("Date array list size: " + resource.getDate().size());
-        resource.showDate();
-    }
+
 
 }

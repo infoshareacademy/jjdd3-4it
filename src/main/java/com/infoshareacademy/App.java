@@ -13,8 +13,6 @@ public class App
 
         ImportStock importStock = new ImportStock("src/main/resources/bitcoin.csv");
         importStock.readFromFile();
-        importStock.showPrice();
-        System.out.println("-----------------------------------------");
-        importStock.showDate();
+        importStock.showPriceAndDate();
     }
 }
