@@ -22,17 +22,13 @@ public class App
 
         SortStock sortStock=new SortStock();
 
-
 sortStock.listavar();
 
+        System.out.println(sortStock.methodMax());
+        System.out.println(sortStock.methodMin());
 
 
-
-
-        System.out.println(sortStock.methodmax());
-
-
-        System.out.println(sortStock.methodmin());
+        System.out.println(sortStock.methodAverrage());
 
 
     }
