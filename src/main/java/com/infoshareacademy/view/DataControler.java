@@ -22,10 +22,46 @@ public class DataControler {
     public static final String DATE_REGEXP = "(201[0-9])-(0?[19]|1[012])-(0?[1-9]|[12][0-9]|3[01])";
     Pattern pattern = Pattern.compile(DATE_REGEXP);
 
-    //Matcher matcher = pattern.matcher("1215");
-    public boolean validate(String date){
-        return pattern.matcher(date).matches();
+    String date = "2017-02-05";
+    Matcher matcher = pattern.matcher(date);
+    int year = Integer.parseInt((matcher.group(1)));
+    String month = matcher.group(2);
+    String day = matcher.group(3);
+
+    public boolean dateValidate(){
+        if(matcher.find()){
+            if((month.equals("4") || month.equals("6") || month.equals("9") || month.equals("11")) && day.equals("31")){
+                return false;
+            } else if (year%4 == 0 && month.equals("02") && (day.equals("29") || day.equals("30") || day.equals(31))){
+
+            }
+
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+        return true;
     }
+
+
+
+
+
+
+
+    //    public boolean validate(String date){
+//        return pattern.matcher(date).matches();
+//    }
 
 
 
