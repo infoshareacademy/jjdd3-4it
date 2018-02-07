@@ -29,6 +29,11 @@ sortStock.listavar();
 
 
         System.out.println(sortStock.methodAverrage());
+      //  System.out.println(sortStock.methodMedian());
+
+        System.out.println("***********************************************");
+        sortStock.sortAndRemoveThingsInListForMedian();
+
 
 
     }
