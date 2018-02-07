@@ -2,7 +2,19 @@ package com.infoshareacademy.view;
 
 import java.util.Scanner;
 
+/**
+ * Generics:
+ * The Class InputDisply shows the user a text console menu the user can navigate
+**/
+
 public class InputDisplay {
+
+    /**
+     * greetingScreen is the first menu the user see when the application starts
+     * and give a choice of CryptoCurrencies to choose
+     *
+     * @return getChoice integer value corresponding to user keyboard input
+    **/
 
     public int greetingScreen(){
         clearScreen();
@@ -21,6 +33,13 @@ public class InputDisplay {
         System.out.println("5. Monero    - Open-source cryptocurrency that focuses on privacy and decentralization.");
         return getChoice(5);
     }
+
+    /**
+     * optionMenuScreen is shown when the user has defined
+     * CryptoCurrencies on which perform and various possible operations
+     *
+     * @return getChoice integer value corresponding to user keyboard input
+     **/
 
     public int optionMenuScreen(int choice){
         clearScreen();
@@ -43,6 +62,13 @@ public class InputDisplay {
         return getChoice(7);
     }
 
+    /**
+     * getChoice call a Scanner object to catch
+     * the keyboard input from the user
+     *
+     * @return Choice integer value corresponding to user keyboard input
+     **/
+
     public int getChoice(int numberOfChoice){
         int choice = 0;
         do {
@@ -56,6 +82,11 @@ public class InputDisplay {
 
         return choice;
     }
+
+    /**
+     * clearScreen clean the terminal when
+     * switching through the menus
+     **/
 
     public static void clearScreen() {
         System.out.print("\033[H\033[2J");
