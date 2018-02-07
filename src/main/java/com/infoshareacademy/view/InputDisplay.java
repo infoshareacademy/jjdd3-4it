@@ -4,8 +4,6 @@ import java.util.Scanner;
 
 public class InputDisplay {
 
-    public static String[] cryptoCurrencies = new String[]{"Bitcoin", "Dogecoin", "Ethereum", "Litecoin", "Monero"};
-
     public int greetingScreen(){
         clearScreen();
 
@@ -31,7 +29,7 @@ public class InputDisplay {
         System.out.println("JJDD3_4 IT: Development TEAM");
         System.out.println("                                            Operations Menu");
         System.out.println("-----------------------------------------------------------------------------------------------------");
-        System.out.println("Your choice of Crypto Currency is: " + cryptoCurrencies[choice-1]);
+        System.out.println("Your choice of Crypto Currency is: "); // To be implemented : show on this line the name of the actual currency selected
         System.out.println("Select an option to be performed from the below list by typing the related number at the left of the screen:");
         System.out.println();
         System.out.println("1. Go back to Crypto Currency Menu to select a different Currency.");
