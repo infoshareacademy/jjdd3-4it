@@ -4,19 +4,19 @@ import java.time.LocalDate;
 
 public class InputData {
 
-    private String price;
-    private String date;
+    private LocalDate date;
+    private Double price;
 
-    InputData(String price, String date) {
-        this.price = price;
+    InputData(LocalDate date, Double price) {
         this.date = date;
+        this.price = price;
     }
 
-    public String getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
