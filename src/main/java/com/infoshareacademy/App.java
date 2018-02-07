@@ -1,4 +1,7 @@
-package com.infoshareakademy;
+package com.infoshareacademy;
+
+import com.infoshareacademy.controller.MathStock;
+import com.infoshareacademy.view.DataControler;
 
 /**
  * Hello world!
@@ -8,6 +11,14 @@ public class App
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        DataControler regex = new DataControler();
+        if(regex.validate("2019-12-31")){
+            System.out.println("ok");
+
+    }
+
+
+
+
     }
 }
