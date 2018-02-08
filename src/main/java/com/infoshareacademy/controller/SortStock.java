@@ -2,122 +2,171 @@ package com.infoshareacademy.controller;
 
 //import com.sun.java.util.jar.pack.ConstantPool;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 public class SortStock {
 
+    private int dateFrom = 0;
+    private int dateFor = 3;
+    private boolean isMax=true;
 
-    private int yMinFullRange;
-    private int yMaxFullRange;
-    private int yMax;
-    private int yMin;
-    private int avverageY;
-private int medianY;
+    private double priceMinFullRange;
+    private double priceMaxFullRange;
+    private double priceMax;
+    private double priceMin;
 
-    private int x1 = 0;
-    private int x2 = 3;
+    private double avveragePrice;
+    private double medianPrice;
 
 
-    ArrayList<Integer> list = new ArrayList<Integer>();
+
+    ArrayList<Double> list = new ArrayList<Double>();
     ArrayList<Integer> listHelp = new ArrayList<Integer>();
 
 
     public void listavar() {
-        list.add(2);
-        list.add(4);
-        list.add(7);
-        list.add(99);
-        list.add(7);
-        list.add(0);
-        list.add(44);
-        list.add(8);
-        list.add(65);
-        list.add(8);
-        list.add(4);
+        list.add(2.6);
+        list.add(4.0);
+        list.add(7.3);
+        list.add(99.0);
+        list.add(7.6);
+        list.add(0.1);
+        list.add(44.1);
+        list.add(8.3);
+        list.add(65.4);
+        list.add(8.9);
     }
 
 
-    public int methodMax() {
-        yMax = methodMinFullRange();
-        for (int i = x1; i < x2; i++) {
-            if (list.get(i) > yMax) {
-                yMax = list.get(i);
+    private double minMaxLoop() {
+        double varMaxMin;
+        int date1;
+        int date2;
+
+        for (int i = date1; i < date2; i++) {
+            if (isMax) {
+                while (list.get(i) > varMaxMin) {
+                    varMaxMin = list.get(i);
+                }
+            } else {
+                while (list.get(i) < varMaxMin) {
+                    varMaxMin = list.get(i);
+                }
             }
+            return varMaxMin;
         }
-        return yMax;
-    }
 
 
-    public int methodMin() {
-        yMin = methodMaxFullRange();
-        for (int i = x1; i < x2; i++) {
-            if (list.get(i) < yMin) {
-                yMin = list.get(i);
+
+
+
+        public int maxPrice () {
+
+            priceMax = minPriceFullRange();
+            date1 = dateFrom;
+            date2 = dateFor;
+
+            minMaxLoop();
+
+        }
+
+
+        public int minPriceFullRange () {
+            double priceMaxFullRange;
+            date1 = 0;
+            date2 = list.size();
+            minMaxLoop();
+            return priceMaxFullRange;
+        }
+
+
+        public int maxPriceFullRange () {
+            double priceMaxFullRange;
+            date1 = 0;
+            date2 = list.size();
+            minMaxLoop();
+            return priceMaxFullRange;
+        }
+
+
+        public int methodMax () {
+            yMax = methodMinFullRange();
+            for (int i = x1; i < x2; i++) {
+                if (list.get(i) > yMax) {
+                    yMax = list.get(i);
+                }
             }
+            return yMax;
         }
-        return yMin;
-    }
 
 
-    public int methodMaxFullRange() {
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i) > yMaxFullRange) {
-                yMaxFullRange = list.get(i);
+        public int methodMaxFullRange () {
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i) > yMaxFullRange) {
+                    yMaxFullRange = list.get(i);
+                }
             }
+            return yMaxFullRange;
         }
-        return yMaxFullRange;
-    }
 
 
-    public int methodMinFullRange() {
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i) < yMinFullRange) {
-                yMinFullRange = list.get(i);
+        public int methodMin () {
+            yMin = methodMaxFullRange();
+            for (int i = x1; i < x2; i++) {
+                if (list.get(i) < yMin) {
+                    yMin = list.get(i);
+                }
             }
+            return yMin;
         }
-        return yMinFullRange;
-    }
 
 
-    public int methodAverrage() {
-        for (int i = x1; i < x2; i++) {
-            avverageY = avverageY + list.get(i);
+        public int methodMinFullRange () {
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i) < yMinFullRange) {
+                    yMinFullRange = list.get(i);
+                }
+            }
+            return yMinFullRange;
         }
-        avverageY = avverageY / (x2-x1);
-        return avverageY;
+
+
+        public int methodAverrage () {
+            for (int i = x1; i < x2; i++) {
+                avverageY = avverageY + list.get(i);
+            }
+            avverageY = avverageY / (x2 - x1);
+            return avverageY;
+        }
+
+
+        public void sortAndRemoveThingsInListForMedian () {
+            int x3 = x2 - x1;
+            // x1 do x2
+            for (int i = x1; i < x2; i++) {
+                listHelp.add(list.get(i));
+                System.out.println(list.get(i));
+            }
+
+            Collections.sort(listHelp);
+            System.out.println("***************");
+            System.out.println(listHelp);
+            int x4;
+            if (x3 % 2 != 0) {
+
+
+                return;
+            } else {
+                x4 = x2 - 1;
+                x4 = x4 / 2;
+            }
+            System.out.println(listHelp.get(x4));
+
+        }
+
+
     }
-
-
-
-public void sortAndRemoveThingsInListForMedian() {
-int x3=x2-x1;
-    // x1 do x2
-    for (int i = x1; i < x2; i++) {
-        listHelp.add(list.get(i));
-        System.out.println(list.get(i));
-    }
-
-    Collections.sort(listHelp);
-    System.out.println("***************");
-    System.out.println(listHelp);
-    int x4;
-    if (x3%2!=0) {
-
-
-        return;
-    }else{
-        x4=x2-1;
-        x4=x4/2;
-    }
-    System.out.println(listHelp.get(x4));
-
-}
-
-
-
 //    ------------->
 
 
@@ -136,7 +185,7 @@ int x3=x2-x1;
 ////         number=(yMax-yMin)/2;
 ////        return number;
 //    }
-}
+
 
 
 
