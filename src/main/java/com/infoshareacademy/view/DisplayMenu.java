@@ -1,6 +1,11 @@
 package com.infoshareacademy.view;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.SortedMap;
 
 /**
  * Generics:
@@ -9,9 +14,28 @@ import java.util.Scanner;
 
 public class DisplayMenu {
 
+    private final String teamName = "JJDD3_4 IT: Development TEAM";
+    private final String pathCurrency = "currencies";
+    private final String pathOperations = "operations";
+    private List operationsList = getFromFile(getPathOperations());
+    private List currencyList = getFromFile(getPathCurrency());
+
+
+    public String getPathCurrency() {
+        return pathCurrency;
+    }
+
+    public String getPathOperations() {
+        return pathOperations;
+    }
+
+    public String getTeamName() {
+        return teamName;
+    }
+
     public void menuHeading(){
         System.out.println("-----------------------------------------------------------------------------------------------------");
-        System.out.println("JJDD3_4 IT: Development TEAM");
+        System.out.println(getTeamName());
     }
 
     public void menuFooting() {
@@ -19,62 +43,52 @@ public class DisplayMenu {
         System.out.println();
     }
 
-    public int menuCurrency(){
+    public int menuCurrency() {
         clearScreen();
 
         menuHeading();
         menuCurrencyTitle();
         menuFooting();
-        menuCurrencyOptions();
+        menuCurrencySubTitle();
+        printOutList(currencyList);
 
-        return getChoice(5);
+        return getChoice(currencyList.size());
     }
 
     public void menuCurrencyTitle() {
         System.out.println("                                          Crypto Currency Menu");
     }
 
-    public void menuCurrencyOptions(){
+    public void menuCurrencySubTitle(){
         System.out.println("Select a Crypto Currency from the list below by typing the related number at the left of the currency:");
         System.out.println();
-        System.out.println("1. Bitcoin   - Most popular cryptovalue on the market.");
-        System.out.println("2. Dogecoin  - Currency gaining traction as an Internet tipping system.");
-        System.out.println("3. Ethereum  - Ethereum is an open-source, public, blockchain-based distributed computing platform.");
-        System.out.println("4. LiteCoin  - Peer-to-peer cryptocurrency and open source software project released under the MIT/X11 license.");
-        System.out.println("5. Monero    - Open-source cryptocurrency that focuses on privacy and decentralization.");
     }
 
-    public int menuOperations(int choice){
+    public int menuOperations(int choice) {
         clearScreen();
 
         menuHeading();
         menuOperationsTitle();
         menuFooting();
-        menuOperationsDisplayCurrency();
-        menuOperationsOptions();
+        menuOperationsDisplayCurrency(choice);
+        menuOperationsSubTitle();
+        printOutList(operationsList);
 
-        return getChoice(7);
+        return getChoice(operationsList.size());
     }
 
     public void menuOperationsTitle(){
         System.out.println("                                            Operations Menu");
     }
 
-    public void menuOperationsDisplayCurrency(){
-        System.out.println("Your choice of Crypto Currency is: "); // To be implemented : show on this line the name of the actual currency selected
+    public void menuOperationsDisplayCurrency(int choice){
+        System.out.println("Your choice of Crypto Currency is: " + currencyList.get(choice)); // To be implemented : show on this line the name of the actual currency selected
         System.out.println();
     }
 
-    public void menuOperationsOptions(){
+    public void menuOperationsSubTitle(){
         System.out.println("Select an option from the below list to be performed by typing the related number at the left of the screen:");
         System.out.println();
-        System.out.println("1. Go back to Crypto Currency Menu to select a different Currency.");
-        System.out.println("2. Print to the screen the minimum value of the currency in beetween the dates defined.");
-        System.out.println("3. Print to the screen the maximum value of the currency in beetween the dates defined.");
-        System.out.println("4. Print to the screen the average value of the currency in beetween the dates defined.");
-        System.out.println("5. Print to the screen the mediana value of the currency in beetween the dates defined.");
-        System.out.println("6. Print to the screen the moving average value of the currency in beetween the dates defined.");
-        System.out.println("7. Print to the screen all the Crypto Currency daily value in beetween the dates defined.");
     }
 
     public int getChoice(int numberOfChoice){
@@ -94,5 +108,36 @@ public class DisplayMenu {
     public static void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
+    }
+
+    public List getFromFile(String pathCurrency){
+
+        Scanner newScanner = null;
+
+        try {
+            newScanner = new Scanner(new File(pathCurrency));
+        } catch (FileNotFoundException e) {
+            System.out.println("Problems with origin file");
+            return new ArrayList();
+        }
+
+        List newList = new ArrayList();
+
+        for (; newScanner.hasNext(); ) {
+            String line = newScanner.nextLine();
+            newList.add(line);
+
+        }
+        return newList;
+    }
+
+    public void printOutList(List ArrayList) {
+        for (int i = 0; i < ArrayList.size(); i++) {
+            System.out.println(i + "  " + ArrayList.get(i));
+        }
+    }
+
+    public boolean hasIncorrectLists() {
+        return operationsList.isEmpty() || currencyList.isEmpty();
     }
 }
