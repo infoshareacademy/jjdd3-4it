@@ -105,7 +105,7 @@ public class SortStock {
     }
 
 
-    public void getRemovesSortAndExportElementsFromListToListHelpForFindMedian() {
+    public void gettingRemovesSortAndExportElementsFromListToListHelpForFindMedian() {
 
         for (int i = dateFrom; i < dateFor; i++) {
             listHelp.add(list.get(i));

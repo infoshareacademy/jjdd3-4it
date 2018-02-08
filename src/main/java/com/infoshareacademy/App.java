@@ -23,7 +23,7 @@ public class App {
         System.out.println("***********************************************");
         System.out.println(sortStock.averragePriceFromRage());
         System.out.println("***********************************************");
-        sortStock.getRemovesSortAndExportElementsFromListToListHelpForFindMedian();
+        sortStock.gettingRemovesSortAndExportElementsFromListToListHelpForFindMedian();
         System.out.println("***********************************************");
     }
 
