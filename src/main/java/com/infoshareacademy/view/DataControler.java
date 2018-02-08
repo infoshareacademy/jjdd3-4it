@@ -1,7 +1,8 @@
 package com.infoshareacademy.view;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -40,18 +41,22 @@ public class DataControler {
 
 
 
-//    TODO change regex form to LocalDate
-//    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-//    public LocalDate getDate(String input) {
-//            throw new UnsupportedOperationException("please implement");
-//    }
-//
-//    public boolean isDateValid(String input) {
-//        try {
-//            FORMATTER.parse(input);
-//            return true;
-//        } catch (DateTimeParseException e) {
-//            return false;
-//        }
-//    }
+
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    public String getDate(String inputDate) {
+            if(isDateValid(inputDate)){
+              return inputDate;
+            } else {
+                return "please write correct date format yyyy-mm-dd";
+            }
+    }
+
+    public boolean isDateValid(String inputDate) {
+        try {
+            DATE_FORMATTER.parse(inputDate);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+    }
     }
