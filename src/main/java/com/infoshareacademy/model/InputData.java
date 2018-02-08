@@ -4,8 +4,8 @@ import java.time.LocalDate;
 
 public class InputData {
 
-    private LocalDate date;
-    private Double price;
+    private final LocalDate date;
+    private final Double price;
 
     InputData(LocalDate date, Double price) {
         this.date = date;
