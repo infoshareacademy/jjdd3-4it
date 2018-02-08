@@ -7,20 +7,19 @@ import java.util.Collections;
 
 public class SortStock {
 
-    private int dateFrom = 0;
-    private int dateFor = 3;
+    private int dateFrom = 2;
+    private int dateFor = 7;
     private boolean isMax;
 
     private double priceMax;
     private double priceMin;
-
+    private double avveragePrice;
 
     private double varPriceforMinMaxLoop;
     private int startDateForMinMaxLoop;
     private int endDateForMinMaxLoop;
 
 
-    private double avveragePrice;
     private double medianPrice;
 
 
@@ -30,14 +29,14 @@ public class SortStock {
 
     public void listavar() {
         list.add(2.6);
-        list.add(4.0);
-        list.add(7.3);
-        list.add(99.0);
+        list.add(5.0);
+        list.add(2.3);
+        list.add(9.0);
         list.add(7.6);
         list.add(0.1);
-        list.add(44.1);
+        list.add(4.1);
         list.add(8.3);
-        list.add(65.4);
+        list.add(5.4);
         list.add(8.9);
     }
 
@@ -101,47 +100,36 @@ public class SortStock {
         for (int i = dateFrom; i < dateFor; i++) {
             avveragePrice = avveragePrice + list.get(i);
         }
-        avveragePrice = avveragePrice / (dateFrom - dateFor);
+        avveragePrice = avveragePrice / (dateFor - dateFrom);
         return avveragePrice;
     }
+
+
+    public void getRemovesSortAndExportElementsFromListToListHelpForFindMedian() {
+
+        for (int i = dateFrom; i < dateFor; i++) {
+            listHelp.add(list.get(i));
+            System.out.println(list.get(i));
+        }
+        Collections.sort(listHelp);
+
+        System.out.println("***************");
+        System.out.println(listHelp);
+
+        int medianRange = dateFor - dateFrom;
+        if (medianRange % 2 != 0) {
+            medianRange = (medianRange - 1) / 2;
+            medianPrice = listHelp.get(medianRange);
+            System.out.println(medianPrice);
+
+        } else {
+            medianRange = medianRange / 2;
+            medianPrice = (listHelp.get(medianRange) + listHelp.get(medianRange - 1)) / 2;
+            System.out.println(medianPrice);
+        }
+
+    }
+
+
 }
-
-//    //  to jest mi potrzebne  do liczenia mediany
-
-//    public void sortAndRemoveThingsInListForMedian() {
-//        int helpDateAlmostInMediumPlace = dateFrom - dateFor;
-//        for (int i = dateFrom; i < dateFor; i++) {
-//            listHelp.add(list.get(i));
-//            System.out.println(list.get(i));
-//        }
-//        Collections.sort(listHelp);
-//        System.out.println("***************");
-//        System.out.println(listHelp);
-//        int x4;
-//        if (helpDateAlmostInMediumPlace % 2 != 0) {
-//
-//
-//            return;
-//        } else {
-//            x4 = x2 - 1;
-//            x4 = x4 / 2;
-//        }
-//        System.out.println(listHelp.get(x4));
-//
-//    }
-//}
-
-
-//    }
-//    ------------->
-
-
-//    public int methodMedian() {
-////medianY=list.get(x2)-
-////         number=(yMax-yMin)/2;
-////        return number;
-//    }
-
-
-
 
