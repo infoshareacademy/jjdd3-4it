@@ -1,4 +1,4 @@
-package com.infoshareakademy;
+package com.infoshareacademy;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

@@ -1,70 +1,42 @@
 package com.infoshareacademy.view;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DataControler {
-    //input data in table with data
-    /*
-    "DAY(0?[1-9]|
-    [12][0-9]|
-    3[01])
-    MOUNTH/(0?[1-9]|
-    1[012])
-    YEAR/((19|20)dd)";
-    (20dd)    /
-    */
+    public static final String DATE_REGEXP = "(201[0-9])-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])";
+    public static final String MENU_REGEXP = "[0-9]";
+    private Pattern datePattern = Pattern.compile(DATE_REGEXP);
+    private Pattern menuPattern = Pattern.compile(MENU_REGEXP);
 
-    //pattern in regex
-    public static final String DATE_REGEXP = "(201[0-9])-(0?[19]|1[012])-(0?[1-9]|[12][0-9]|3[01])";
-    Pattern pattern = Pattern.compile(DATE_REGEXP);
-
-    String date = "2017-02-05";
-    Matcher matcher = pattern.matcher(date);
-    int year = Integer.parseInt((matcher.group(1)));
-    String month = matcher.group(2);
-    String day = matcher.group(3);
-
-    public boolean dateValidate(){
-        if(matcher.find()){
-            if((month.equals("4") || month.equals("6") || month.equals("9") || month.equals("11")) && day.equals("31")){
-                return false;
-            } else if (year%4 == 0 && month.equals("02") && (day.equals("29") || day.equals("30") || day.equals(31))){
-
-            }
-
-
-
-
-
-
-
-
+    public boolean isDateExists(String date) {
+        Matcher matcher = datePattern.matcher(date);
+        if (matcher.matches()) {
+            return isDateInRange(matcher);
         }
-
-
-
-
-
-
-        return true;
+        return false;
     }
 
+    private boolean isDateInRange(Matcher matcher) {
+        int year = Integer.parseInt((matcher.group(1)));
+        String month = matcher.group(2);
+        String day = matcher.group(3);
 
+        if ((month.equals("04") || month.equals("06") || month.equals("09") || month.equals("11")) && day.equals("31")) {
+            return false;
+        } else if (month.equals("02") && (day.equals("30") || day.equals("31") || (year % 4 == 0 && day.equals("29")))) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
-
-
-
-
-    //    public boolean validate(String date){
-//        return pattern.matcher(date).matches();
-//    }
-
-
-
+    private boolean isMenuNumberInRange(String menuNumber){
+        Matcher matcher = menuPattern.matcher(menuNumber);
+        return matcher.matches();
+    }
 
 
 
@@ -82,4 +54,4 @@ public class DataControler {
 //            return false;
 //        }
 //    }
-}
+    }
