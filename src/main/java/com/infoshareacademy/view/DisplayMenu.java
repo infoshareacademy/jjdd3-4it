@@ -4,10 +4,10 @@ import java.util.Scanner;
 
 /**
  * Generics:
- * The Class InputDisply shows the user a text console menu the user can navigate
+ * The Class DisplayMenu shows the user a text console menu the user can navigate
 **/
 
-public class InputDisplay {
+public class DisplayMenu {
 
     /**
      * greetingScreen is the first menu the user see when the application starts
@@ -16,7 +16,7 @@ public class InputDisplay {
      * @return getChoice integer value corresponding to user keyboard input
     **/
 
-    public int greetingScreen(){
+    public int menuCurrency(){
         clearScreen();
 
         System.out.println("-----------------------------------------------------------------------------------------------------");
@@ -41,7 +41,7 @@ public class InputDisplay {
      * @return getChoice integer value corresponding to user keyboard input
      **/
 
-    public int optionMenuScreen(int choice){
+    public int menuOperations(int choice){
         clearScreen();
 
         System.out.println("-----------------------------------------------------------------------------------------------------");
