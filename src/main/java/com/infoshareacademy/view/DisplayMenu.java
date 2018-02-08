@@ -5,7 +5,6 @@ import java.util.Scanner;
 /**
  * Generics:
  * The Class DisplayMenu provides the user a text console menu the user can navigate
- * and
 **/
 
 public class DisplayMenu {
@@ -19,13 +18,6 @@ public class DisplayMenu {
         System.out.println("-----------------------------------------------------------------------------------------------------");
         System.out.println();
     }
-
-    /**
-     * greetingScreen is the first menu the user see when the application starts
-     * and give a choice of CryptoCurrencies to choose
-     *
-     * @return getChoice integer value corresponding to user keyboard input
-    **/
 
     public int menuCurrency(){
         clearScreen();
@@ -51,13 +43,6 @@ public class DisplayMenu {
         System.out.println("4. LiteCoin  - Peer-to-peer cryptocurrency and open source software project released under the MIT/X11 license.");
         System.out.println("5. Monero    - Open-source cryptocurrency that focuses on privacy and decentralization.");
     }
-
-    /**
-     * optionMenuScreen is shown when the user has defined
-     * CryptoCurrencies on which perform and various possible operations
-     *
-     * @return getChoice integer value corresponding to user keyboard input
-     **/
 
     public int menuOperations(int choice){
         clearScreen();
@@ -92,13 +77,6 @@ public class DisplayMenu {
         System.out.println("7. Print to the screen all the Crypto Currency daily value in beetween the dates defined.");
     }
 
-    /**
-     * getChoice call a Scanner object to catch
-     * the keyboard input from the user
-     *
-     * @return Choice integer value corresponding to user keyboard input
-     **/
-
     public int getChoice(int numberOfChoice){
         int choice = 0;
         do {
@@ -112,11 +90,6 @@ public class DisplayMenu {
 
         return choice;
     }
-
-    /**
-     * clearScreen clean the terminal when
-     * switching through the menus
-     **/
 
     public static void clearScreen() {
         System.out.print("\033[H\033[2J");
