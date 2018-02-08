@@ -4,10 +4,21 @@ import java.util.Scanner;
 
 /**
  * Generics:
- * The Class DisplayMenu shows the user a text console menu the user can navigate
+ * The Class DisplayMenu provides the user a text console menu the user can navigate
+ * and
 **/
 
 public class DisplayMenu {
+
+    public void menuHeading(){
+        System.out.println("-----------------------------------------------------------------------------------------------------");
+        System.out.println("JJDD3_4 IT: Development TEAM");
+    }
+
+    public void menuFooting() {
+        System.out.println("-----------------------------------------------------------------------------------------------------");
+        System.out.println();
+    }
 
     /**
      * greetingScreen is the first menu the user see when the application starts
@@ -19,11 +30,19 @@ public class DisplayMenu {
     public int menuCurrency(){
         clearScreen();
 
-        System.out.println("-----------------------------------------------------------------------------------------------------");
-        System.out.println("JJDD3_4 IT: Development TEAM");
+        menuHeading();
+        menuCurrencyTitle();
+        menuFooting();
+        menuCurrencyOptions();
+
+        return getChoice(5);
+    }
+
+    public void menuCurrencyTitle() {
         System.out.println("                                          Crypto Currency Menu");
-        System.out.println("-----------------------------------------------------------------------------------------------------");
-        System.out.println();
+    }
+
+    public void menuCurrencyOptions(){
         System.out.println("Select a Crypto Currency from the list below by typing the related number at the left of the currency:");
         System.out.println();
         System.out.println("1. Bitcoin   - Most popular cryptovalue on the market.");
@@ -31,7 +50,6 @@ public class DisplayMenu {
         System.out.println("3. Ethereum  - Ethereum is an open-source, public, blockchain-based distributed computing platform.");
         System.out.println("4. LiteCoin  - Peer-to-peer cryptocurrency and open source software project released under the MIT/X11 license.");
         System.out.println("5. Monero    - Open-source cryptocurrency that focuses on privacy and decentralization.");
-        return getChoice(5);
     }
 
     /**
@@ -44,12 +62,26 @@ public class DisplayMenu {
     public int menuOperations(int choice){
         clearScreen();
 
-        System.out.println("-----------------------------------------------------------------------------------------------------");
-        System.out.println("JJDD3_4 IT: Development TEAM");
+        menuHeading();
+        menuOperationsTitle();
+        menuFooting();
+        menuOperationsDisplayCurrency();
+        menuOperationsOptions();
+
+        return getChoice(7);
+    }
+
+    public void menuOperationsTitle(){
         System.out.println("                                            Operations Menu");
-        System.out.println("-----------------------------------------------------------------------------------------------------");
+    }
+
+    public void menuOperationsDisplayCurrency(){
         System.out.println("Your choice of Crypto Currency is: "); // To be implemented : show on this line the name of the actual currency selected
-        System.out.println("Select an option to be performed from the below list by typing the related number at the left of the screen:");
+        System.out.println();
+    }
+
+    public void menuOperationsOptions(){
+        System.out.println("Select an option from the below list to be performed by typing the related number at the left of the screen:");
         System.out.println();
         System.out.println("1. Go back to Crypto Currency Menu to select a different Currency.");
         System.out.println("2. Print to the screen the minimum value of the currency in beetween the dates defined.");
@@ -58,8 +90,6 @@ public class DisplayMenu {
         System.out.println("5. Print to the screen the mediana value of the currency in beetween the dates defined.");
         System.out.println("6. Print to the screen the moving average value of the currency in beetween the dates defined.");
         System.out.println("7. Print to the screen all the Crypto Currency daily value in beetween the dates defined.");
-
-        return getChoice(7);
     }
 
     /**
