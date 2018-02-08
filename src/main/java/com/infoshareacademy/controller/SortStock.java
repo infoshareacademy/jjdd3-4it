@@ -9,20 +9,23 @@ public class SortStock {
 
     private int dateFrom = 0;
     private int dateFor = 3;
-    private boolean isMax=true;
+    private boolean isMax;
 
-    private double priceMinFullRange;
-    private double priceMaxFullRange;
     private double priceMax;
     private double priceMin;
+
+
+    private double varPriceforMinMaxLoop;
+    private int startDateForMinMaxLoop;
+    private int endDateForMinMaxLoop;
+
 
     private double avveragePrice;
     private double medianPrice;
 
 
-
     ArrayList<Double> list = new ArrayList<Double>();
-    ArrayList<Integer> listHelp = new ArrayList<Integer>();
+    ArrayList<Double> listHelp = new ArrayList<Double>();
 
 
     public void listavar() {
@@ -40,144 +43,97 @@ public class SortStock {
 
 
     private double minMaxLoop() {
-        double varMaxMin;
-        int date1;
-        int date2;
 
-        for (int i = date1; i < date2; i++) {
+
+        for (int i = startDateForMinMaxLoop; i < endDateForMinMaxLoop; i++) {
             if (isMax) {
-                while (list.get(i) > varMaxMin) {
-                    varMaxMin = list.get(i);
+                while (list.get(i) > varPriceforMinMaxLoop) {
+                    varPriceforMinMaxLoop = list.get(i);
                 }
             } else {
-                while (list.get(i) < varMaxMin) {
-                    varMaxMin = list.get(i);
+                while (list.get(i) < varPriceforMinMaxLoop) {
+                    varPriceforMinMaxLoop = list.get(i);
                 }
             }
-            return varMaxMin;
-        }
-
-
-
-
-
-        public int maxPrice () {
-
-            priceMax = minPriceFullRange();
-            date1 = dateFrom;
-            date2 = dateFor;
-
-            minMaxLoop();
 
         }
-
-
-        public int minPriceFullRange () {
-            double priceMaxFullRange;
-            date1 = 0;
-            date2 = list.size();
-            minMaxLoop();
-            return priceMaxFullRange;
-        }
-
-
-        public int maxPriceFullRange () {
-            double priceMaxFullRange;
-            date1 = 0;
-            date2 = list.size();
-            minMaxLoop();
-            return priceMaxFullRange;
-        }
-
-
-        public int methodMax () {
-            yMax = methodMinFullRange();
-            for (int i = x1; i < x2; i++) {
-                if (list.get(i) > yMax) {
-                    yMax = list.get(i);
-                }
-            }
-            return yMax;
-        }
-
-
-        public int methodMaxFullRange () {
-            for (int i = 0; i < list.size(); i++) {
-                if (list.get(i) > yMaxFullRange) {
-                    yMaxFullRange = list.get(i);
-                }
-            }
-            return yMaxFullRange;
-        }
-
-
-        public int methodMin () {
-            yMin = methodMaxFullRange();
-            for (int i = x1; i < x2; i++) {
-                if (list.get(i) < yMin) {
-                    yMin = list.get(i);
-                }
-            }
-            return yMin;
-        }
-
-
-        public int methodMinFullRange () {
-            for (int i = 0; i < list.size(); i++) {
-                if (list.get(i) < yMinFullRange) {
-                    yMinFullRange = list.get(i);
-                }
-            }
-            return yMinFullRange;
-        }
-
-
-        public int methodAverrage () {
-            for (int i = x1; i < x2; i++) {
-                avverageY = avverageY + list.get(i);
-            }
-            avverageY = avverageY / (x2 - x1);
-            return avverageY;
-        }
-
-
-        public void sortAndRemoveThingsInListForMedian () {
-            int x3 = x2 - x1;
-            // x1 do x2
-            for (int i = x1; i < x2; i++) {
-                listHelp.add(list.get(i));
-                System.out.println(list.get(i));
-            }
-
-            Collections.sort(listHelp);
-            System.out.println("***************");
-            System.out.println(listHelp);
-            int x4;
-            if (x3 % 2 != 0) {
-
-
-                return;
-            } else {
-                x4 = x2 - 1;
-                x4 = x4 / 2;
-            }
-            System.out.println(listHelp.get(x4));
-
-        }
-
+        return varPriceforMinMaxLoop;
 
     }
+
+    public double maxPrice() {
+        varPriceforMinMaxLoop = minPriceFullRange();
+        isMax = true;
+        startDateForMinMaxLoop = dateFrom;
+        endDateForMinMaxLoop = dateFor;
+        priceMax = minMaxLoop();
+        return priceMax;
+    }
+
+
+    public double minPriceFullRange() {
+        isMax = false;
+        startDateForMinMaxLoop = 0;
+        endDateForMinMaxLoop = list.size();
+        return minMaxLoop();
+    }
+
+
+    public double minPrice() {
+        varPriceforMinMaxLoop = maxPriceFullRange();
+        isMax = false;
+        startDateForMinMaxLoop = dateFrom;
+        endDateForMinMaxLoop = dateFor;
+        priceMin = minMaxLoop();
+        return priceMin;
+    }
+
+
+    public double maxPriceFullRange() {
+        isMax = true;
+        startDateForMinMaxLoop = 0;
+        endDateForMinMaxLoop = list.size();
+        return minMaxLoop();
+    }
+
+
+    public double averragePriceFromRage() {
+        for (int i = dateFrom; i < dateFor; i++) {
+            avveragePrice = avveragePrice + list.get(i);
+        }
+        avveragePrice = avveragePrice / (dateFrom - dateFor);
+        return avveragePrice;
+    }
+}
+
+//    //  to jest mi potrzebne  do liczenia mediany
+
+//    public void sortAndRemoveThingsInListForMedian() {
+//        int helpDateAlmostInMediumPlace = dateFrom - dateFor;
+//        for (int i = dateFrom; i < dateFor; i++) {
+//            listHelp.add(list.get(i));
+//            System.out.println(list.get(i));
+//        }
+//        Collections.sort(listHelp);
+//        System.out.println("***************");
+//        System.out.println(listHelp);
+//        int x4;
+//        if (helpDateAlmostInMediumPlace % 2 != 0) {
+//
+//
+//            return;
+//        } else {
+//            x4 = x2 - 1;
+//            x4 = x4 / 2;
+//        }
+//        System.out.println(listHelp.get(x4));
+//
+//    }
+//}
+
+
+//    }
 //    ------------->
-
-
-
-
-
-
-
-
-
-
 
 
 //    public int methodMedian() {

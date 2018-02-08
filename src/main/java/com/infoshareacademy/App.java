@@ -16,23 +16,28 @@ public class App
 
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+
 
 
 
         SortStock sortStock=new SortStock();
 
 sortStock.listavar();
-
-        System.out.println(sortStock.methodMax());
-        System.out.println(sortStock.methodMin());
-
-
-        System.out.println(sortStock.methodAverrage());
-      //  System.out.println(sortStock.methodMedian());
-
         System.out.println("***********************************************");
-        sortStock.sortAndRemoveThingsInListForMedian();
+        System.out.println(sortStock.maxPrice());
+        System.out.println(sortStock.minPrice());
+        System.out.println("***********************************************");
+        System.out.println(sortStock.maxPriceFullRange());
+        System.out.println(sortStock.minPriceFullRange());
+        System.out.println("***********************************************");
+
+
+
+//        System.out.println(sortStock.methodAverrage());
+//      //  System.out.println(sortStock.methodMedian());
+//
+//        System.out.println("***********************************************");
+//        sortStock.sortAndRemoveThingsInListForMedian();
 
 
 
