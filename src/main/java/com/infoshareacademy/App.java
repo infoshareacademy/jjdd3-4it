@@ -10,8 +10,8 @@ public class App
 {
     public static void main( String[] args )
     {
-
-        ImportStock importStock = new ImportStock("src/main/resources/bitcoin.csv");
+        String pathToFile = "src/main/resources/bitCoin.csv";
+        ImportStock importStock = new ImportStock(pathToFile);
         importStock.readFromFile();
         importStock.showPriceAndDate();
     }

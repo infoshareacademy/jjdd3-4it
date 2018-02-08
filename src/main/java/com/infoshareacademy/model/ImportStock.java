@@ -15,6 +15,9 @@ public class ImportStock {
         this.file = new File(pathToFile);
     }
 
+    public List<InputData> getResources() {
+        return resources;
+    }
 
     public void readFromFile() {
         try (Scanner inputStream = new Scanner(file)) {
@@ -25,14 +28,14 @@ public class ImportStock {
                 String inputData = inputStream.next();
                 String[] stringsArray = inputData.split(",");
 
-                InputData r = new InputData(LocalDate.parse(stringsArray[0]), Double.parseDouble(stringsArray[4]));
+                InputData r = new InputData(LocalDate.parse(stringsArray[0]),
+                        Double.parseDouble(stringsArray[4]));
                 resources.add(r);
             }
         } catch (FileNotFoundException fnfExc) {
             System.out.println("Invalid file name or wrong path to file!!!");
-            System.out.println(fnfExc.getCause());
+            System.out.println(fnfExc);
         }
-
     }
 
     public void showPriceAndDate() {
