@@ -2,6 +2,9 @@ package com.infoshareacademy.controller;
 
 //import com.sun.java.util.jar.pack.ConstantPool;
 
+import com.infoshareacademy.model.ImportStock;
+import com.infoshareacademy.model.InputData;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -26,32 +29,46 @@ public class SortStock {
     ArrayList<Double> list = new ArrayList<Double>();
     ArrayList<Double> listHelp = new ArrayList<Double>();
 
-
-    public void listavar() {
-        list.add(2.6);
-        list.add(5.0);
-        list.add(2.3);
-        list.add(9.0);
-        list.add(7.6);
-        list.add(0.1);
-        list.add(4.1);
-        list.add(8.3);
-        list.add(5.4);
-        list.add(8.9);
-    }
-
+    ImportStock importStock=new ImportStock("src/main/resources/bitCoin.csv");
+    //InputData inputData=InputData();
+   // ArrayList<Double> listacsv=new ArrayList<>();
+//    public void method() {
+//        String pathToFile = "src/main/resources/bitCoin.csv";
+//        ImportStock importStock = new ImportStock(pathToFile);
+//        importStock.readFromFile();
+//        importStock.getResources();
+//    }
+//
+//    public void listavar() {
+//        list.add(2.6);
+//        list.add(5.0);
+//        list.add(2.3);
+//        list.add(9.0);
+//        list.add(7.6);
+//        list.add(0.1);
+//        list.add(4.1);
+//        list.add(8.3);
+//        list.add(5.4);
+//        list.add(8.9);
+//    }
+//list.get(i)
 
     private double minMaxLoop() {
 
-
         for (int i = startDateForMinMaxLoop; i < endDateForMinMaxLoop; i++) {
+            InputData inputData = importStock.getResources().get(i);
+            double price = inputData.getPrice();
+
             if (isMax) {
-                while (list.get(i) > varPriceforMinMaxLoop) {
-                    varPriceforMinMaxLoop = list.get(i);
+
+                while (price > varPriceforMinMaxLoop) {
+                    varPriceforMinMaxLoop = price;
                 }
-            } else {
-                while (list.get(i) < varPriceforMinMaxLoop) {
-                    varPriceforMinMaxLoop = list.get(i);
+            }
+
+            else {
+                while (price < varPriceforMinMaxLoop) {
+                    varPriceforMinMaxLoop = price;
                 }
             }
 
@@ -73,10 +90,10 @@ public class SortStock {
     public double minPriceFullRange() {
         isMax = false;
         startDateForMinMaxLoop = 0;
-        endDateForMinMaxLoop = list.size();
+        endDateForMinMaxLoop = importStock.getResources().size();
         return minMaxLoop();
     }
-
+//list.size()
 
     public double minPrice() {
         varPriceforMinMaxLoop = maxPriceFullRange();
@@ -91,7 +108,7 @@ public class SortStock {
     public double maxPriceFullRange() {
         isMax = true;
         startDateForMinMaxLoop = 0;
-        endDateForMinMaxLoop = list.size();
+        endDateForMinMaxLoop = importStock.getResources().size();
         return minMaxLoop();
     }
 
