@@ -42,4 +42,12 @@ public class DataControlerTest  {
 //        assertFalse(actual);
 //
 //    }
+
+    @Test
+    public void getDate(){
+        String s = "2017-12-40";
+        LocalDate now = LocalDate.parse(null);
+        System.out.println(now);
+        System.out.println(now.toString());
+    }
 }

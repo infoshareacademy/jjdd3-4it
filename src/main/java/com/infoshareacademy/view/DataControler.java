@@ -3,6 +3,7 @@ package com.infoshareacademy.view;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -40,23 +41,61 @@ public class DataControler {
     }
 
 
+//    private void run() {
+//
+//        String value = scanner();
+//
+//        if (isFormatCorrect(value)) {
+//            if (isDateValid(value)) {
+//                return localDate;
+//            } else {
+//                run();
+//        } else {
+//          run();
+//        }
+//    }
+//
+//    private boolean isFormatCorrect(String input) {
+//        return false;
+//    }
 
+//    private LocalDate parseDate(String input) throws DateTimeParseException, NullPointerException {
+//        return LocalDate.parse(input);
+//    }
 
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    public String getDate(String inputDate) {
-            if(isDateValid(inputDate)){
-              return inputDate;
-            } else {
-                return "please write correct date format yyyy-mm-dd";
-            }
+
+//    public void run() {
+//        LocalDate date = null;
+//        while(date == null) {
+//            input = scanner.get();
+//            date = getDate(input);
+//        }
+//    }
+
+    public void dateValid(String inputDate) throws DateTimeParseException {
+            DATE_FORMATTER.parse(inputDate);
     }
 
-    public boolean isDateValid(String inputDate) {
-        try {
-            DATE_FORMATTER.parse(inputDate);
-            return true;
-        } catch (DateTimeParseException e) {
-            return false;
-        }
+    public LocalDate getDateInRange(String inputDate) throws DateTimeParseException{
+        return LocalDate.parse(inputDate);
     }
+
+    //pobieranie
+    public LocalDate getDate(String input) throws DateTimeParseException {
+            dateValid(input);
+            return  getDateInRange(input);
+
+//
+//        if(is()){
+//            return LocalDate.parse(input);
+//        } else{
+//            System.out.println("please write correct format");
+//            return getDate(input);
+//        }
+
     }
+
+}
+
+
