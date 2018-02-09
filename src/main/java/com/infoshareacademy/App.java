@@ -11,12 +11,12 @@ public class App
         // for testing purposes only
         
         DisplayMenu newMenu = new DisplayMenu();
+
         if (newMenu.hasIncorrectLists()) {
             return;
         }
 
-        int choice = newMenu.menuCurrency();
-        newMenu.menuOperations(choice);
+        newMenu.menuControl();
 
     } // end of method main
 } // end of class App
