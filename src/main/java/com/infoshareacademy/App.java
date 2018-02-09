@@ -1,31 +1,14 @@
 package com.infoshareacademy;
 
-import com.infoshareacademy.controller.SortStock;
+import com.infoshareacademy.model.ImportStock;
 
-/**
- * Hello world!
- */
-public class App {
-
-
-    public static void main(String[] args) {
-
-
-        SortStock sortStock = new SortStock();
-
-        sortStock.listavar();
-        System.out.println("***********************************************");
-        System.out.println(sortStock.maxPrice());
-        System.out.println(sortStock.minPrice());
-        System.out.println("***********************************************");
-        System.out.println(sortStock.maxPriceFullRange());
-        System.out.println(sortStock.minPriceFullRange());
-        System.out.println("***********************************************");
-        System.out.println(sortStock.averragePriceFromRage());
-        System.out.println("***********************************************");
-        sortStock.gettingRemovesSortAndExportElementsFromListToListHelpForFindMedian();
-        System.out.println("***********************************************");
+public class App
+{
+    public static void main( String[] args )
+    {
+        String pathToFile = "src/main/resources/bitCoin.csv";
+        ImportStock importStock = new ImportStock(pathToFile);
+        importStock.readFromFile();
+        importStock.showPriceAndDate();
     }
-
-
 }
