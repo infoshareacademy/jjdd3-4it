@@ -1,15 +1,17 @@
 package com.infoshareacademy;
 
+import com.infoshareacademy.model.ImportStock;
 import com.infoshareacademy.view.DisplayMenu;
-
-import java.io.FileNotFoundException;
 
 public class App
 {
-    public static void main( String[] args ){
+    public static void main( String[] args )
+    {
+        String pathToFile = "src/main/resources/bitCoin.csv";
+        ImportStock importStock = new ImportStock(pathToFile);
+        importStock.readFromFile();
+        importStock.showPriceAndDate();
 
-        // for testing purposes only
-        
         DisplayMenu newMenu = new DisplayMenu();
 
         if (newMenu.hasIncorrectLists()) {
@@ -17,6 +19,5 @@ public class App
         }
 
         newMenu.menuControl();
-
-    } // end of method main
-} // end of class App
+    }
+}
