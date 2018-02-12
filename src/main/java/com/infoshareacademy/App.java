@@ -1,6 +1,7 @@
 package com.infoshareacademy;
 
 import com.infoshareacademy.model.ImportStock;
+import com.infoshareacademy.view.DisplayMenu;
 
 public class App
 {
@@ -10,5 +11,13 @@ public class App
         ImportStock importStock = new ImportStock(pathToFile);
         importStock.readFromFile();
         importStock.showPriceAndDate();
+
+        DisplayMenu newMenu = new DisplayMenu();
+
+        if (newMenu.hasIncorrectLists()) {
+            return;
+        }
+
+        newMenu.menuControl();
     }
 }
