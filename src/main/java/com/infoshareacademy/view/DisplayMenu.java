@@ -298,7 +298,8 @@ public class DisplayMenu {
         clearScreen();
         System.out.println("\n Thank you for using our application. We hope you appreciated it."
                 + "\n\n              "
-                + getTeamName());
+                + getTeamName()
+                + "\n");
         System.exit(0);
     }
 }
