@@ -7,20 +7,20 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class DataControlerTest  {
+public class DateServiceTest {
 
-//    private DataControler subject;
+//    private DateService subject;
 //
 //    @Before
 //    public void setup() {
-//        subject = new DataControler();
+//        subject = new DateService();
 //    }
 //
 //    @Test
 //    public void shouldParseDate() {
 //        // given
 //        LocalDate expected = LocalDate.of(2017, 12, 24);
-//        DataControler subject = new DataControler();
+//        DateService subject = new DateService();
 //        // when
 //        LocalDate actual = subject.getDate("2017-12-24");
 //        // then
@@ -43,11 +43,4 @@ public class DataControlerTest  {
 //
 //    }
 
-    @Test
-    public void getDate(){
-        String s = "2017-12-40";
-        LocalDate now = LocalDate.parse(null);
-        System.out.println(now);
-        System.out.println(now.toString());
     }
-}
