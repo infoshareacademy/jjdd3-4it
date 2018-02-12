@@ -8,21 +8,25 @@ public class DateService {
 
     public static final String DATE_FORRMAT = "yyyy-MM-dd";
 
-    LocalDate dateCorrectFormat(String input) throws DateTimeParseException {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DATE_FORRMAT);
-        return LocalDate.parse(input, dtf);
+    static LocalDate dateInRange(String input) throws DateTimeParseException {
+        return LocalDate.parse(input);
     }
 
-    public LocalDate getDateFromUser() {
+    static LocalDate dateCorrectFormat(LocalDate date) throws  DateTimeParseException{
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DATE_FORRMAT);
+        String formattedDate = date.format(dtf);
+        return LocalDate.parse(formattedDate);
+    }
+
+    public static LocalDate getDateFromUser() {
         LocalDate result = null;
         boolean flag = false;
         do {
             try {
-                result = dateCorrectFormat(InputReaderTool.read());
-                System.out.println(result);
+                result = dateCorrectFormat(dateInRange(InputReaderTool.read()));
                 flag = true;
             } catch (DateTimeParseException e) {
-                System.out.println("plese write correct format " + DATE_FORRMAT);
+                System.out.print("  please write correct format " + DATE_FORRMAT + ": ");
             }
         } while (flag == false);
         return result;
