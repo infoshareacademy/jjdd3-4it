@@ -1,151 +1,100 @@
 package com.infoshareacademy.controller;
 
-//import com.sun.java.util.jar.pack.ConstantPool;
-
 import com.infoshareacademy.model.ImportStock;
 import com.infoshareacademy.model.InputData;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class SortStock {
 
-    private int dateFrom = 2;
-    private int dateFor = 7;
-    private boolean isMax;
+    private int dateFrom = 362;
+    private int dateFor = 365;
 
     private double priceMax;
     private double priceMin;
-    private double avveragePrice;
-
-    private double varPriceforMinMaxLoop;
-    private int startDateForMinMaxLoop;
-    private int endDateForMinMaxLoop;
-
-
+    private double averagePrice;
     private double medianPrice;
 
-
-    ArrayList<Double> list = new ArrayList<Double>();
     ArrayList<Double> listHelp = new ArrayList<Double>();
 
-    ImportStock importStock=new ImportStock("src/main/resources/bitCoin.csv");
-    //InputData inputData=InputData();
-   // ArrayList<Double> listacsv=new ArrayList<>();
-//    public void method() {
-//        String pathToFile = "src/main/resources/bitCoin.csv";
-//        ImportStock importStock = new ImportStock(pathToFile);
-//        importStock.readFromFile();
-//        importStock.getResources();
-//    }
-//
-//    public void listavar() {
-//        list.add(2.6);
-//        list.add(5.0);
-//        list.add(2.3);
-//        list.add(9.0);
-//        list.add(7.6);
-//        list.add(0.1);
-//        list.add(4.1);
-//        list.add(8.3);
-//        list.add(5.4);
-//        list.add(8.9);
-//    }
-//list.get(i)
+    static ImportStock importStock = new ImportStock("src/main/resources/bitCoin.csv");
+    static InputData inputData;
 
-    private double minMaxLoop() {
-
-        for (int i = startDateForMinMaxLoop; i < endDateForMinMaxLoop; i++) {
-            InputData inputData = importStock.getResources().get(i);
-            double price = inputData.getPrice();
-
-            if (isMax) {
-
-                while (price > varPriceforMinMaxLoop) {
-                    varPriceforMinMaxLoop = price;
-                }
+    public double priceMinForRange(List<InputData> resources) {
+        priceMin = Double.MAX_VALUE;
+        for (int i = dateFrom; i < dateFor; i++) {
+            if (priceMin > resources.get(i).getPrice()) {
+                priceMin = resources.get(i).getPrice();
             }
-
-            else {
-                while (price < varPriceforMinMaxLoop) {
-                    varPriceforMinMaxLoop = price;
-                }
-            }
-
         }
-        return varPriceforMinMaxLoop;
-
-    }
-
-    public double maxPrice() {
-        varPriceforMinMaxLoop = minPriceFullRange();
-        isMax = true;
-        startDateForMinMaxLoop = dateFrom;
-        endDateForMinMaxLoop = dateFor;
-        priceMax = minMaxLoop();
-        return priceMax;
-    }
-
-
-    public double minPriceFullRange() {
-        isMax = false;
-        startDateForMinMaxLoop = 0;
-        endDateForMinMaxLoop = importStock.getResources().size();
-        return minMaxLoop();
-    }
-//list.size()
-
-    public double minPrice() {
-        varPriceforMinMaxLoop = maxPriceFullRange();
-        isMax = false;
-        startDateForMinMaxLoop = dateFrom;
-        endDateForMinMaxLoop = dateFor;
-        priceMin = minMaxLoop();
         return priceMin;
     }
 
-
-    public double maxPriceFullRange() {
-        isMax = true;
-        startDateForMinMaxLoop = 0;
-        endDateForMinMaxLoop = importStock.getResources().size();
-        return minMaxLoop();
-    }
-
-
-    public double averragePriceFromRage() {
+    public double priceMaxForRange(List<InputData> resources) {
+        priceMax = Double.MIN_VALUE;
         for (int i = dateFrom; i < dateFor; i++) {
-            avveragePrice = avveragePrice + list.get(i);
+            if (priceMax < resources.get(i).getPrice()) {
+                priceMax = resources.get(i).getPrice();
+            }
         }
-        avveragePrice = avveragePrice / (dateFor - dateFrom);
-        return avveragePrice;
+        return priceMax;
+
     }
 
 
-    public void gettingRemovesSortAndExportElementsFromListToListHelpForFindMedian() {
+    public double averragePriceForRange(List<InputData> resources) {
+        for (int i = dateFrom; i < dateFor; i++) {
+            averagePrice += resources.get(i).getPrice();
+        }
+        averagePrice /= (dateFor - dateFrom);
+
+        return averagePrice;
+    }
+
+
+    public double medianPriceForRange(List<InputData> resources) {
 
         for (int i = dateFrom; i < dateFor; i++) {
-            listHelp.add(list.get(i));
-            System.out.println(list.get(i));
+            listHelp.add(resources.get(i).getPrice());
+
         }
         Collections.sort(listHelp);
-
-        System.out.println("***************");
-        System.out.println(listHelp);
-
         int medianRange = dateFor - dateFrom;
         if (medianRange % 2 != 0) {
             medianRange = (medianRange - 1) / 2;
             medianPrice = listHelp.get(medianRange);
-            System.out.println(medianPrice);
+            return medianPrice;
 
         } else {
             medianRange = medianRange / 2;
             medianPrice = (listHelp.get(medianRange) + listHelp.get(medianRange - 1)) / 2;
-            System.out.println(medianPrice);
+            return medianPrice;
         }
 
     }
+
+
+    //-------------------------------------------------------------------------->Stream
+//    public double priceMinForRange(List<InputData> resources) {
+//        priceMin = Double.MAX_VALUE;
+//        for (int i = dateFrom; i < dateFor; i++) {
+//            if (priceMin > resources.get(i).getPrice()) {
+//                priceMin = resources.get(i).getPrice();
+//            }
+//        }
+//        return priceMin;
+//    }
+//    public void priceMinForRangeStream(List<InputData> resources){
+//
+//        resources.stream().
+//
+//
+//
+//    }
 
 
 }

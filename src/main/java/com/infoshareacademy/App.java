@@ -9,21 +9,17 @@ public class App
        String pathToFile = "src/main/resources/bitCoin.csv";
       ImportStock importStock = new ImportStock(pathToFile);
        importStock.readFromFile();
-//        importStock.showPriceAndDate();
+//       importStock.showPriceAndDate();
 //    }
         SortStock sortStock=new SortStock();
 
-
+        System.out.println(sortStock.priceMinForRange(importStock.getResources()));
         System.out.println("*************************************************");
-        System.out.println(sortStock.maxPrice());
+     System.out.println(sortStock.priceMaxForRange(importStock.getResources()));
         System.out.println("*************************************************");
-        System.out.println(sortStock.minPrice());
+        System.out.println(sortStock.averragePriceForRange(importStock.getResources()));
         System.out.println("*************************************************");
-
-        System.out.println("*************************************************");
-
-        System.out.println("*************************************************");
-
+        System.out.println(sortStock.medianPriceForRange(importStock.getResources()));
         System.out.println("*************************************************");
 
     }
