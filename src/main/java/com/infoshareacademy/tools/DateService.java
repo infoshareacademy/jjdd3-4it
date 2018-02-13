@@ -8,11 +8,11 @@ public class DateService {
 
     public static final String DATE_FORRMAT = "yyyy-MM-dd";
 
-    static LocalDate dateInRange(String input) throws DateTimeParseException {
+    private static LocalDate dateInRange(String input) throws DateTimeParseException {
         return LocalDate.parse(input);
     }
 
-    static LocalDate dateCorrectFormat(LocalDate date) throws  DateTimeParseException{
+    private static LocalDate dateCorrectFormat(LocalDate date) throws DateTimeParseException {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DATE_FORRMAT);
         String formattedDate = date.format(dtf);
         return LocalDate.parse(formattedDate);
@@ -32,10 +32,4 @@ public class DateService {
         return result;
     }
 
-
 }
-
-
-
-
-
