@@ -31,7 +31,7 @@ public class DateServiceTest {
     }
 
     @Test
-    void shouldGetDateWhenForrmatIsCorrect() {
+    void shouldGetDateWhenFormatIsCorrect() {
         // Given
         LocalDate expected = LocalDate.of(2018, 1, 1);
 
@@ -43,7 +43,7 @@ public class DateServiceTest {
     }
 
     @Test
-    void shouldThrowsWhenForrmatWrong() {
+    void shouldThrowsWhenFormatWrong() {
         // Then
         assertThrows(DateTimeException.class, ()->DateService.dateCorrectFormat(LocalDate.parse("2018/02/02")));
     }
