@@ -1,5 +1,8 @@
 package com.infoshareacademy.view;
 
+import com.infoshareacademy.tools.DateService;
+import com.infoshareacademy.tools.InputReaderTool;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -10,7 +13,7 @@ import java.util.Scanner;
 /**
  * Generics:
  * The Class DisplayMenu provides the user a text console menu the user can navigate
-**/
+ **/
 
 public class DisplayMenu {
     // Fields
@@ -69,8 +72,7 @@ public class DisplayMenu {
         return teamName;
     }
 
-
-    public void menuHeading(){
+    public void menuHeading() {
         System.out.println("-----------------------------------------------------------------------------------------------------");
         System.out.println("    " + getTeamName());
     }
@@ -88,16 +90,16 @@ public class DisplayMenu {
         menuCurrencySubTitle();
         printOutList(currencyList);
         menuChoice();
-        int input = getChoice();
-        setUserChoice(input);
+        int input = InputReaderTool.readInt();
         menuCurrencyControl(input);
+        setUserChoice(input);
     }
 
     public void menuCurrencyTitle() {
         System.out.println("                                          Crypto Currency Menu");
     }
 
-    public void menuCurrencySubTitle(){
+    public void menuCurrencySubTitle() {
         System.out.println("    " + "Select a Crypto Currency from the list below by typing the related number at the left of the currency:");
         System.out.println();
     }
@@ -111,14 +113,14 @@ public class DisplayMenu {
         menuOperationsSubTitle();
         printOutList(operationsList);
         menuChoice();
-        menuOperationsControl(getChoice());
+        menuOperationsControl(InputReaderTool.readInt());
     }
 
-    public void menuOperationsTitle(){
+    public void menuOperationsTitle() {
         System.out.println("                                            Operations Menu");
     }
 
-    public void menuOperationsDisplayCurrency(){
+    public void menuOperationsDisplayCurrency() {
         System.out.println("    "
                 + "Your choice of Crypto Currency is: "
                 + extractCurrency());
@@ -132,23 +134,14 @@ public class DisplayMenu {
         return tab[0].trim();
     }
 
-    public void menuOperationsSubTitle(){
+    public void menuOperationsSubTitle() {
         System.out.println("    " + "Select an option from the below list to be performed by typing the related number at the left of the screen:");
         System.out.println();
     }
 
-    public void menuChoice(){
+    public void menuChoice() {
         System.out.println();
         System.out.print("  " + "Type here your selection: ");
-    }
-
-    // for testing purposes only
-    public int getChoice(){
-
-            Scanner newScanner = new Scanner(System.in);
-            int choice = newScanner.nextInt();
-
-        return choice;
     }
 
     public static void clearScreen() {
@@ -156,7 +149,7 @@ public class DisplayMenu {
         System.out.flush();
     }
 
-    public List getFromFile(String pathCurrency){
+    public List getFromFile(String pathCurrency) {
 
         Scanner newScanner = null;
 
@@ -190,7 +183,8 @@ public class DisplayMenu {
     public void menuControl() {
 
         switch (getMenuStatus()) {
-            case 1:menuGreeting();
+            case 1:
+                menuGreeting();
                 break;
             case 2:
                 menuCurrency();
@@ -216,54 +210,54 @@ public class DisplayMenu {
         menuControl();
     }
 
-    public void menuOperationsControl(int a){
-        if (a == 0){
+    public void menuOperationsControl(int a) {
+        if (a == 0) {
             setMenuStatus(2);
-        }else{
+        } else {
             setMenuStatus(4);
         }
         menuControl();
     }
 
-    public void menuDataStartControl(){
+    public void menuDataStartControl() {
         setMenuStatus(5);
         menuControl();
     }
 
-    public void menuDataEndControl(){
+    public void menuDataEndControl() {
         setMenuStatus(3);
         menuControl();
     }
 
-    public void menuDataStart(){
+    public void menuDataStart() {
         clearScreen();
         menuHeading();
         menuDataStartTitle();
         menuFooting();
         menuChoice();
-        getChoice();
+        DateService.getDateFromUser();
         menuDataStartControl();
     }
 
-    public void menuDataStartTitle(){
+    public void menuDataStartTitle() {
         System.out.println("                                            Start Date Selection Menu");
     }
 
-    public void menuDataEnd(){
+    public void menuDataEnd() {
         clearScreen();
         menuHeading();
         menuDataEndTitle();
         menuFooting();
         menuChoice();
-        getChoice();
+        DateService.getDateFromUser();
         menuDataEndControl();
     }
 
-    public void menuDataEndTitle(){
+    public void menuDataEndTitle() {
         System.out.println("                                            End Date Selection Menu");
     }
 
-    public void menuGreeting(){
+    public void menuGreeting() {
         clearScreen();
         menuHeading();
         menuGreetingTitle();
@@ -271,19 +265,19 @@ public class DisplayMenu {
         menuGreetingSubTitle();
         printOutList(greetingList);
         menuChoice();
-        menuGreetingControl(getChoice());
+        menuGreetingControl(InputReaderTool.readInt());
     }
 
-    public void menuGreetingTitle(){
+    public void menuGreetingTitle() {
         System.out.println("                                            Start Menu");
     }
 
-    public void menuGreetingSubTitle(){
+    public void menuGreetingSubTitle() {
         System.out.println("    " + "Welcome to our application." + "\n");
     }
 
-    public void menuGreetingControl(int input){
-        switch(input){
+    public void menuGreetingControl(int input) {
+        switch (input) {
             case 0:
                 setMenuStatus(2);
                 menuControl();
@@ -294,7 +288,7 @@ public class DisplayMenu {
         }
     }
 
-    public void exitApp(){
+    public void exitApp() {
         clearScreen();
         System.out.println("\n Thank you for using our application. We hope you appreciated it."
                 + "\n\n              "
