@@ -1,6 +1,7 @@
 package com.infoshareacademy;
 import com.infoshareacademy.controller.SortStock;
 import com.infoshareacademy.model.ImportStock;
+import com.infoshareacademy.model.InputData;
 import com.infoshareacademy.view.DisplayMenu;
 
 public class App
@@ -12,12 +13,12 @@ public class App
         //  importStock.showPriceAndDate();
 
         DisplayMenu newMenu = new DisplayMenu();
-
-
-        if (newMenu.hasIncorrectLists()) {
-            return;
-        }
-        newMenu.menuControl();
+//
+//
+//        if (newMenu.hasIncorrectLists()) {
+//            return;
+//        }
+//        newMenu.menuControl();
 
 
 
@@ -34,6 +35,10 @@ public class App
         System.out.println("*************************************************");
 
 
+sortStock.priceMinForRangeStream(importStock.getResources());
+
+        System.out.println("*************************************************");
+//sortStock.met(importStock.getResources());
 
 
 
