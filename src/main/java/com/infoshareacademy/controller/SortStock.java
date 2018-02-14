@@ -16,9 +16,11 @@ import java.util.stream.Stream;
 
 public class SortStock {
 
-    private int dateFrom = 0;
-    private int dateFor = 150;
+    private int dateFrom = 31;
+    private int dateFor = 365;
 
+    LocalDate def1 = LocalDate.of(2017, Month.JANUARY, 1);
+    LocalDate def2 = LocalDate.of(2017, Month.DECEMBER, 31);
 
     private double priceMax;
     private double priceMin;
@@ -27,7 +29,7 @@ public class SortStock {
 
     ArrayList<Double> listHelp = new ArrayList<Double>();
 
-   List<Double> listForHelp = new ArrayList<Double>();
+    List<Double> listForHelp = new ArrayList<Double>();
 
     static ImportStock importStock = new ImportStock("src/main/resources/bitCoin.csv");
     static InputData inputData;
@@ -87,44 +89,20 @@ public class SortStock {
 
 
     //-------------------------------------------------------------------------->Stream
-//    public double priceMinForRange(List<InputData> resources) {
-//        priceMin = Double.MAX_VALUE;
-//        for (int i = dateFrom; i < dateFor; i++) {
-//            if (priceMin > resources.get(i).getPrice()) {
-//                priceMin = resources.get(i).getPrice();
-//            }
-//        }
-//        return priceMin;
-//    }
     public void priceMinForRangeStream(List<InputData> resources) {
 
-//        final List <Integer> listForHelp
-//                = IntStream.range(dateFrom, dateFor).boxed().collect(Collectors.toList());
-//
 
-        LocalDate def1=LocalDate.of(2017, Month.JANUARY,1);
-        LocalDate def2=LocalDate.of(2017, Month.MARCH,31);
-
-
-        LocalDate start = LocalDate.now();
-        LocalDate end = LocalDate.now().plusDays(9);
-
-
-        List<InputData> listHelp = resources.stream().filter(p ->  p.getDate().isAfter(def1) && p.getDate().isBefore(def2)).collect(Collectors.toList());
-
+        List<InputData> listHelp = resources.stream()
+                .filter(p -> p.getDate()
+                        .isAfter(def1) && p.getDate()
+                        .isBefore(def2))
+                .collect(Collectors.toList());
 
         Comparator<InputData> comp = (p1, p2) -> Double.compare(p1.getPrice(), p2.getPrice());
-            System.out.println(listHelp.stream().max(comp).get().getPrice());
-            System.out.println(listHelp.stream().min(comp).get().getPrice());
 
-
-//        IntStream intStream = IntStream.range(dateFrom, dateFor);
-//resources.stream()                    p1.getPrice(), p2.getPrice()
-
-
-
+        System.out.println(listHelp.stream().min(comp).get().getPrice());
+        System.out.println(listHelp.stream().max(comp).get().getPrice());
     }
-
 
 
 }
