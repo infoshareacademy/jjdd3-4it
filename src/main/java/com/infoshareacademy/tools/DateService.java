@@ -20,15 +20,14 @@ public class DateService {
 
     public static LocalDate getDateFromUser() {
         LocalDate result = null;
-        boolean flag = false;
         do {
             try {
                 result = dateCorrectFormat(dateInRange(InputReaderTool.read()));
-                flag = true;
+                break;
             } catch (DateTimeParseException e) {
                 System.out.print("  please write correct format " + DATE_FORMAT + ": ");
             }
-        } while (flag == false);
+        } while (true);
         return result;
     }
 
