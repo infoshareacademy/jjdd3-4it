@@ -6,14 +6,14 @@ import java.time.format.DateTimeParseException;
 
 public class DateService {
 
-    public static final String DATE_FORRMAT = "yyyy-MM-dd";
+    public static final String DATE_FORMAT = "yyyy-MM-dd";
 
-    private static LocalDate dateInRange(String input) throws DateTimeParseException {
+    static LocalDate dateInRange(String input) throws DateTimeParseException {
         return LocalDate.parse(input);
     }
 
-    private static LocalDate dateCorrectFormat(LocalDate date) throws DateTimeParseException {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DATE_FORRMAT);
+    static LocalDate dateCorrectFormat(LocalDate date) throws DateTimeParseException {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DATE_FORMAT);
         String formattedDate = date.format(dtf);
         return LocalDate.parse(formattedDate);
     }
@@ -26,7 +26,7 @@ public class DateService {
                 result = dateCorrectFormat(dateInRange(InputReaderTool.read()));
                 flag = true;
             } catch (DateTimeParseException e) {
-                System.out.print("  please write correct format " + DATE_FORRMAT + ": ");
+                System.out.print("  please write correct format " + DATE_FORMAT + ": ");
             }
         } while (flag == false);
         return result;
