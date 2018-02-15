@@ -20,7 +20,8 @@ public class MenuDataService {
         int input;
         do {
             System.out.print("  please give number in range [" + 0 + "-" + (list.size() - 1) + "]: ");
-            return input = checkNumerCorrectFormat();
+            input = checkNumerCorrectFormat();
         } while (input < 0 || input > (list.size() - 1));
+        return input;
     }
 }
