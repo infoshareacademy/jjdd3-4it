@@ -1,8 +1,6 @@
 package com.infoshareacademy;
 
-import com.infoshareacademy.model.ImportStock;
 import com.infoshareacademy.tools.PropertyService;
-import com.infoshareacademy.view.DisplayMenu;
 
 public class App
 {
@@ -21,6 +19,11 @@ public class App
 //
 //        newMenu.menuControl();
         PropertyService propertyService = new PropertyService();
-        propertyService.printProperties();
+        //propertyService.printProperties();
+        String s = propertyService.getPropertiesSet().first();
+        System.out.println(s);
+//        for (String s :propertyService.getPropertiesSet()) {
+//            System.out.println(s);
+//        }
     }
 }
