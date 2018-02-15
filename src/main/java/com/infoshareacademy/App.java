@@ -14,11 +14,16 @@ public class App {
         DisplayMenu newMenu = new DisplayMenu();
 
 
-        if (newMenu.hasIncorrectLists()) {
-            return;
-        }
-        newMenu.menuControl();
+//        if (newMenu.hasIncorrectLists()) {
+//            return;
+//        }
+//        newMenu.menuControl();
+//
+SortStock sortStock=new SortStock();
 
-
+sortStock.printPriceMax(importStock.getResources());
+//sortStock.priceMinStream(importStock.getResources());
+      //  sortStock.priceMinStream(importStock.getResources());
     }
+
 }
