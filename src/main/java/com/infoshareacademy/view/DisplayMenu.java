@@ -1,7 +1,7 @@
 package com.infoshareacademy.view;
 
 import com.infoshareacademy.tools.DateService;
-import com.infoshareacademy.tools.InputReaderTool;
+import com.infoshareacademy.tools.MenuDataService;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -90,9 +90,9 @@ public class DisplayMenu {
         menuCurrencySubTitle();
         printOutList(currencyList);
         menuChoice();
-        int input = InputReaderTool.readInt();
-        menuCurrencyControl(input);
-        setUserChoice(input);
+        int inputSet = MenuDataService.getMenuValue(currencyList);
+        menuCurrencyControl(inputSet);
+        setUserChoice(inputSet);
     }
 
     public void menuCurrencyTitle() {
@@ -113,7 +113,7 @@ public class DisplayMenu {
         menuOperationsSubTitle();
         printOutList(operationsList);
         menuChoice();
-        menuOperationsControl(InputReaderTool.readInt());
+        menuOperationsControl(MenuDataService.getMenuValue(operationsList));
     }
 
     public void menuOperationsTitle() {
@@ -265,7 +265,7 @@ public class DisplayMenu {
         menuGreetingSubTitle();
         printOutList(greetingList);
         menuChoice();
-        menuGreetingControl(InputReaderTool.readInt());
+        menuGreetingControl(MenuDataService.getMenuValue(greetingList));
     }
 
     public void menuGreetingTitle() {
@@ -285,6 +285,8 @@ public class DisplayMenu {
             case 1:
                 exitApp();
                 break;
+            default:
+                menuGreeting();
         }
     }
 
