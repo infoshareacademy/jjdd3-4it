@@ -1,5 +1,6 @@
 package com.infoshareacademy.view;
 
+import com.infoshareacademy.controller.SortStock;
 import com.infoshareacademy.tools.DateService;
 import com.infoshareacademy.tools.MenuDataService;
 
@@ -18,7 +19,8 @@ import java.util.Scanner;
 public class DisplayMenu {
     // Fields
     private int menuStatus = 1;
-    private int userChoice = 0;
+    private int userCurrency = 0;
+    private int userOperation = 0;
     private final String teamName = "JJDD3_4 IT: Development TEAM";
     private final String pathCurrency = "currencies";
     private final String pathOperations = "operations";
@@ -48,16 +50,16 @@ public class DisplayMenu {
         this.menuStatus = menuStatus;
     }
 
-    public void setUserChoice(int userChoice) {
-        this.userChoice = userChoice;
+    public void setUserCurrency(int userChoice) {
+        this.userCurrency = userChoice;
     }
 
     public int getMenuStatus() {
         return menuStatus;
     }
 
-    public int getUserChoice() {
-        return userChoice;
+    public int getUserCurrency() {
+        return userCurrency;
     }
 
     public String getPathCurrency() {
@@ -70,6 +72,14 @@ public class DisplayMenu {
 
     public String getTeamName() {
         return teamName;
+    }
+
+    public int getUserOperation() {
+        return userOperation;
+    }
+
+    public void setUserOperation(int userOperation) {
+        this.userOperation = userOperation;
     }
 
     public void menuHeading() {
@@ -89,10 +99,8 @@ public class DisplayMenu {
         menuFooting();
         menuCurrencySubTitle();
         printOutList(currencyList);
-        menuChoice();
         int inputSet = MenuDataService.getMenuValue(currencyList);
         menuCurrencyControl(inputSet);
-        setUserChoice(inputSet);
     }
 
     public void menuCurrencyTitle() {
@@ -112,8 +120,8 @@ public class DisplayMenu {
         menuOperationsDisplayCurrency();
         menuOperationsSubTitle();
         printOutList(operationsList);
-        menuChoice();
-        menuOperationsControl(MenuDataService.getMenuValue(operationsList));
+        int input = MenuDataService.getMenuValue(operationsList);
+        menuOperationsControl(input);
     }
 
     public void menuOperationsTitle() {
@@ -128,7 +136,7 @@ public class DisplayMenu {
     }
 
     private String extractCurrency() {
-        String s = currencyList.get(getUserChoice());
+        String s = currencyList.get(getUserCurrency());
         String[] tab = s.split("-");
 
         return tab[0].trim();
@@ -174,6 +182,7 @@ public class DisplayMenu {
         for (int i = 0; i < ArrayList.size(); i++) {
             System.out.println("    " + "   " + i + ".  " + ArrayList.get(i));
         }
+        System.out.println();
     }
 
     public boolean hasIncorrectLists() {
@@ -206,6 +215,7 @@ public class DisplayMenu {
             setMenuStatus(1);
         } else {
             setMenuStatus(3);
+            setUserCurrency(a);
         }
         menuControl();
     }
@@ -215,6 +225,7 @@ public class DisplayMenu {
             setMenuStatus(2);
         } else {
             setMenuStatus(4);
+            setUserOperation(a);
         }
         menuControl();
     }
@@ -264,7 +275,6 @@ public class DisplayMenu {
         menuFooting();
         menuGreetingSubTitle();
         printOutList(greetingList);
-        menuChoice();
         menuGreetingControl(MenuDataService.getMenuValue(greetingList));
     }
 
@@ -298,4 +308,33 @@ public class DisplayMenu {
                 + "\n");
         System.exit(0);
     }
+
+    // waiting for Jacek method to be merged
+    public void runOperations(){
+        int userOperation = getUserOperation();
+        SortStock newOperation = new SortStock();
+        switch(userOperation){
+            case 1:
+//                newOperation.priceMinForRange();
+                break;
+            case 2:
+//                newOperation.priceMaxForRange();
+                break;
+            case 3:
+//                newOperation.averragePriceForRange();
+                break;
+            case 4:
+//                newOperation.medianPriceForRange();
+                break;
+            case 5:
+//                newOperation.
+        }
+    }
+
+    public void pressToProceed(){
+        System.out.println("Press Enter to get back to -> Operations Menu");
+        Scanner newScanner = new Scanner(System.in);
+        newScanner.nextLine();
+    }
+
 }

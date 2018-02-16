@@ -13,12 +13,11 @@ public class App {
 
         DisplayMenu newMenu = new DisplayMenu();
 
-
         if (newMenu.hasIncorrectLists()) {
             return;
         }
-        newMenu.menuControl();
 
+        newMenu.menuControl();
 
     }
 }
