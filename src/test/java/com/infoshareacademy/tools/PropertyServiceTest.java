@@ -11,8 +11,8 @@ public class PropertyServiceTest {
         PropertyService propertyService = new PropertyService();
 
         // When
-        String currency = propertyService.getValue("currency");
-        String dateFormat = propertyService.getValue("dateFormat");
+        String currency = propertyService.getCurrency();
+        String dateFormat = propertyService.getDateFormat();
 
         // Then
         assertEquals("Dollar", currency);

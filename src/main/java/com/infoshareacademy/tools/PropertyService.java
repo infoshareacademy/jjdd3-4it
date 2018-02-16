@@ -2,15 +2,14 @@ package com.infoshareacademy.tools;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Optional;
-import java.util.SortedMap;
 import java.util.Properties;
-import java.util.TreeMap;
 
 public class PropertyService {
+    private static final String CURRENCY = "currency";
+    private static final String DATE_FORMAT = "dateFormat";
     private final String FILE;
+
     private Properties properties = new Properties();
-    private SortedMap<String, String> propertiesMap = new TreeMap<>();
 
     public PropertyService() {
         FILE = "fourIt.properties";
@@ -21,26 +20,20 @@ public class PropertyService {
         }
     }
 
-    public SortedMap<String, String> getPropertiesMap() {
-        return propertiesMap;
-    }
-
-    public String getValue(String value) {
+    private String getValue(String value) {
         return properties.getProperty(value);
     }
 
+    public String getCurrency() {
+        return getValue(CURRENCY);
+    }
+
+    public String getDateFormat() {
+        return getValue(DATE_FORMAT);
+    }
+
     private void loadProperties() throws IOException {
-        Optional<InputStream> read = Optional.ofNullable(
-                Thread.currentThread().getContextClassLoader().getResourceAsStream(FILE));
-        if (read.isPresent()) {
-            properties.load(read.get());
-            for(String key : properties.stringPropertyNames()) {
-                String value = getValue(key);
-                propertiesMap.put(key, value);
-            }
-        } else {
-            propertiesMap.put("currency", "Dollar");
-            propertiesMap.put("dateFormat", "yyyy-MM-dd");
-        }
+        InputStream read = Thread.currentThread().getContextClassLoader().getResourceAsStream(FILE);
+        properties.load(read);
     }
 }

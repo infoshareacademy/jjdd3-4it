@@ -7,7 +7,6 @@ import com.infoshareacademy.tools.PropertyService;
 import com.infoshareacademy.view.DisplayMenu;
 
 public class App {
-    private static final String CURRENCY = "currency";
     public static void main(String[] args) {
 //        String pathToFile = "src/main/resources/bitCoin.csv";
 //        ImportStock importStock = new ImportStock(pathToFile);
@@ -22,8 +21,6 @@ public class App {
 //        newMenu.menuControl();
 
         PropertyService propertyService = new PropertyService();
-        System.out.println(propertyService.getPropertiesMap().get("currency"));
-        System.out.println(propertyService.getValue(CURRENCY));
 
     }
 }
