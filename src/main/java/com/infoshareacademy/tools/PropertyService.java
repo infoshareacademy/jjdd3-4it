@@ -2,38 +2,45 @@ package com.infoshareacademy.tools;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.*;
+import java.util.Optional;
+import java.util.SortedMap;
+import java.util.Properties;
+import java.util.TreeMap;
 
 public class PropertyService {
-    private final ClassLoader PROPERTIES_FILE = Thread.currentThread().getContextClassLoader();
     private final String FILE;
     private Properties properties = new Properties();
-    private SortedSet<String> propertiesSet = new TreeSet<>();
+    private SortedMap<String, String> propertiesMap = new TreeMap<>();
 
     public PropertyService() {
         FILE = "fourIt.properties";
         try {
             loadProperties();
         }catch (IOException ioe){
-            System.out.println("Where's the file?");
+            System.out.println("File not found!");
         }
     }
 
-    public SortedSet<String> getPropertiesSet() {
-        return propertiesSet;
+    public SortedMap<String, String> getPropertiesMap() {
+        return propertiesMap;
+    }
+
+    public String getValue(String value) {
+        return properties.getProperty(value);
     }
 
     private void loadProperties() throws IOException {
-        Optional<InputStream> read = Optional.ofNullable(PROPERTIES_FILE.getResourceAsStream(FILE));
+        Optional<InputStream> read = Optional.ofNullable(
+                Thread.currentThread().getContextClassLoader().getResourceAsStream(FILE));
         if (read.isPresent()) {
             properties.load(read.get());
-            Iterator<String> it = properties.stringPropertyNames().iterator();
-            while(it.hasNext()) {
-                propertiesSet.add(properties.getProperty(it.next()));
+            for(String key : properties.stringPropertyNames()) {
+                String value = getValue(key);
+                propertiesMap.put(key, value);
             }
         } else {
-            propertiesSet.add("Dollar");
-            propertiesSet.add("yyyy-MM-dd");
+            propertiesMap.put("currency", "Dollar");
+            propertiesMap.put("dateFormat", "yyyy-MM-dd");
         }
     }
 }
