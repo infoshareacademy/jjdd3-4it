@@ -8,7 +8,7 @@ public class MenuDataService {
 
         do {
             try {
-                int result = InputReaderTool.readInt();
+                int result = InputReaderService.readInt();
                 return result;
             } catch (NumberFormatException e) {
                 System.out.print("  please write correct numeric format: ");
@@ -20,7 +20,8 @@ public class MenuDataService {
         int input;
         do {
             System.out.print("  please give number in range [" + 0 + "-" + (list.size() - 1) + "]: ");
-            return input = checkNumerCorrectFormat();
+            input = checkNumerCorrectFormat();
         } while (input < 0 || input > (list.size() - 1));
+        return input;
     }
 }

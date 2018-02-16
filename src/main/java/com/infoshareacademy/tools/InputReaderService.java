@@ -2,7 +2,7 @@ package com.infoshareacademy.tools;
 
 import java.util.Scanner;
 
-public class InputReaderTool {
+public class InputReaderService {
 
     public static String read() {
         Scanner scanner = new Scanner(System.in);

@@ -22,7 +22,7 @@ public class DateService {
         LocalDate result = null;
         do {
             try {
-                result = dateCorrectFormat(dateInRange(InputReaderTool.read()));
+                result = dateCorrectFormat(dateInRange(InputReaderService.read()));
                 break;
             } catch (DateTimeParseException e) {
                 System.out.print("  please write correct format " + DATE_FORMAT + ": ");
