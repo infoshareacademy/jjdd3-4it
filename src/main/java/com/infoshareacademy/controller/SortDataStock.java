@@ -9,6 +9,9 @@ import java.util.stream.Collectors;
 
 public class SortDataStock {
 
+    public static final Comparator<InputData> byPrice = (d1, d2) -> Double.compare(d1.getPrice(), d2.getPrice());
+    public static final Comparator<InputData> byDate = (l1, l2) -> l2.getDate().compareTo(l1.getDate());
+
     public List<InputData> readFile() {
         String pathToFile = "src/main/resources/bitCoin.csv";
         ImportStock importStock = new ImportStock(pathToFile);
@@ -17,19 +20,15 @@ public class SortDataStock {
     }
 
 
-    public List<InputData> sortDataBy(List<InputData> list, int count) {
-
-        Comparator<InputData> byPrice = (d1, d2) -> Double.compare(d1.getPrice(), d2.getPrice());
-        Comparator<InputData> byDate = (l1, l2) -> l2.getDate().compareTo(l1.getDate());
-
+    public List<InputData> sortDataBy(List<InputData> list, Comparator<InputData> inputData) {
         return list.stream()
-                .sorted(count == 0 ? byPrice : byDate)
+                .sorted(inputData)
                 .limit(10)
                 .collect(Collectors.toList());
     }
 
-    public void printSortData() {
-        List<InputData> price = sortDataBy(readFile(),1);
+    public void printSortData(Comparator<InputData> inputData) {
+        List<InputData> price = sortDataBy(readFile(),inputData);
         price.forEach(each -> {
             System.out.println(each.getDate() + "  " + each.getPrice());
         });
