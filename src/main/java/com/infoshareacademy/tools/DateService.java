@@ -5,8 +5,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class DateService {
-
-    public static final String DATE_FORMAT = "yyyy-MM-dd";
+    private static final PropertyService propertyService = new PropertyService();
+    private static final String DATE_FORMAT = propertyService.getDateFormat();
 
     static LocalDate dateInRange(String input) throws DateTimeParseException {
         return LocalDate.parse(input);
