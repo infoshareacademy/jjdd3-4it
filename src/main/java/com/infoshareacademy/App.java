@@ -8,19 +8,17 @@ import com.infoshareacademy.view.DisplayMenu;
 
 public class App {
     public static void main(String[] args) {
-//        String pathToFile = "src/main/resources/bitCoin.csv";
-//        ImportStock importStock = new ImportStock(pathToFile);
-//        importStock.readFromFile();
-//
-//        DisplayMenu newMenu = new DisplayMenu();
-//
-//
-//        if (newMenu.hasIncorrectLists()) {
-//            return;
-//        }
-//        newMenu.menuControl();
+        String pathToFile = "src/main/resources/bitCoin.csv";
+        ImportStock importStock = new ImportStock(pathToFile);
+        importStock.readFromFile();
 
-        PropertyService propertyService = new PropertyService();
+        DisplayMenu newMenu = new DisplayMenu();
+
+
+        if (newMenu.hasIncorrectLists()) {
+            return;
+        }
+        newMenu.menuControl();
 
     }
 }
