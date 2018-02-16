@@ -1,23 +1,15 @@
 package com.infoshareacademy.controller;
 
-import com.infoshareacademy.model.ImportStock;
 import com.infoshareacademy.model.InputData;
 
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.DoubleStream;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
+
 
 public class MathStock {
-
-    private ImportStock importStock = new ImportStock("src/main/resources/bitCoin.csv");
-    private InputData inputData;
 
     private double averagePrice;
     private double medianPrice;
@@ -58,26 +50,4 @@ public class MathStock {
     }
 
 
-    public List<InputData> streamList(List<InputData> resources, LocalDate start, LocalDate end) {
-
-        return resources.stream()
-                .filter(p -> p.getDate()
-                        .isAfter(start) && p.getDate()
-                        .isBefore(end))
-                .collect(Collectors.toList());
-    }
-
-
-    public void printPriceMax(List<InputData> resources) {
-
-        System.out.println(resources.stream().max((p1, p2) -> Double.compare(p1.getPrice(), p2.getPrice())).get().getPrice());
-    }
-
-    public void printPriceMin(List<InputData> resources) {
-
-        System.out.println(resources.stream().min((p1, p2) -> Double.compare(p1.getPrice(), p2.getPrice())).get().getPrice());
-    }
-
-
 }
-
