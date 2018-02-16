@@ -8,7 +8,7 @@ public class MenuDataService {
 
         do {
             try {
-                int result = InputReaderTool.readInt();
+                int result = InputReaderService.readInt();
                 return result;
             } catch (NumberFormatException e) {
                 System.out.print("  please write correct numeric format: ");

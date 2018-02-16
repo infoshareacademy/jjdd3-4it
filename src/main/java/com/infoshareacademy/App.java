@@ -1,8 +1,7 @@
 package com.infoshareacademy;
 
-import com.infoshareacademy.controller.SortDataStock;
+import com.infoshareacademy.controller.StockSorter;
 import com.infoshareacademy.view.DisplayMenu;
-
 
 
 public class App {
