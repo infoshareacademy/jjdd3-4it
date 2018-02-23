@@ -398,7 +398,7 @@ public class DisplayMenu {
                 pressToProceed();
                 break;
             case 6:
-                List<InputData> selValueByPrice = newStockSorter.sortDataBy(StockFileReaderService.readFile(), StockSorter.byPrice);
+                List<InputData> selValueByPrice = newStockSorter.sortDataBy(StockFileReaderService.readFile(), StockSorter.byPrice, startDate, endDate);
                 System.out.println("The list of values of the Cryptovalue "
                         + extractCurrency()
                         + " from the selected start date "
@@ -412,15 +412,30 @@ public class DisplayMenu {
                 }
                 pressToProceed();
                 break;
-        } // end switch condition
-    } // end runOperations method
+            case 7:
+                List<InputData> selValueByDate = newStockSorter.sortDataBy(StockFileReaderService.readFile(), StockSorter.byDate, startDate, endDate);
+                System.out.println("The list of values of the Cryptovalue "
+                        + extractCurrency()
+                        + " from the selected start date "
+                        + startDate
+                        + " to the selected end date "
+                        + endDate
+                        + " sorted by price value are listed below:\n");
+                for (InputData i : selValueByDate) {
+                    System.out.print(i.getDate());
+                    System.out.println(" " + i.getPrice());
+                }
+                pressToProceed();
+                break;
+        }
+    }
 
-    private void pressToProceed(){
+    private void pressToProceed() {
         System.out.println("\nPress Enter to get back to -> Operations Menu");
         Scanner newScanner = new Scanner(System.in);
         newScanner.nextLine();
         menuControl();
-    } // end pressToProceed method
+    }
 
-} // end DisplayMenu class
+}
 
