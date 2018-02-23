@@ -1,11 +1,16 @@
 package com.infoshareacademy.view;
 
-import com.infoshareacademy.controller.SortStock;
+import com.infoshareacademy.controller.MathStock;
+import com.infoshareacademy.controller.SearchStock;
+import com.infoshareacademy.controller.StockSorter;
+import com.infoshareacademy.model.InputData;
 import com.infoshareacademy.tools.DateService;
 import com.infoshareacademy.tools.MenuDataService;
+import com.infoshareacademy.tools.StockFileReaderService;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -21,6 +26,8 @@ public class DisplayMenu {
     private int menuStatus = 1;
     private int userCurrency = 0;
     private int userOperation = 0;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private final String teamName = "JJDD3_4 IT: Development TEAM";
     private final String pathCurrency = "currencies";
     private final String pathOperations = "operations";
@@ -237,7 +244,7 @@ public class DisplayMenu {
 
     public void menuDataEndControl() {
         setMenuStatus(3);
-        menuControl();
+        runOperations();
     }
 
     public void menuDataStart() {
@@ -246,7 +253,7 @@ public class DisplayMenu {
         menuDataStartTitle();
         menuFooting();
         menuChoice();
-        DateService.getDateFromUser();
+        startDate = DateService.getDateFromUser();
         menuDataStartControl();
     }
 
@@ -260,7 +267,7 @@ public class DisplayMenu {
         menuDataEndTitle();
         menuFooting();
         menuChoice();
-        DateService.getDateFromUser();
+        endDate = DateService.getDateFromUser();
         menuDataEndControl();
     }
 
@@ -309,32 +316,111 @@ public class DisplayMenu {
         System.exit(0);
     }
 
-    // waiting for Jacek method to be merged
-    public void runOperations(){
+    public void runOperations() {
         int userOperation = getUserOperation();
-        SortStock newOperation = new SortStock();
-        switch(userOperation){
+        MathStock newMath = new MathStock();
+        SearchStock newSearchStock = new SearchStock();
+        StockSorter newStockSorter = new StockSorter();
+        switch (userOperation) {
             case 1:
-//                newOperation.priceMinForRange();
+                clearScreen();
+                menuHeading();
+                menuFooting();
+                double minimum = newSearchStock.printPriceMin(newSearchStock.streamList(StockFileReaderService.readFile(), startDate, endDate));
+                System.out.println("The minimum value of the Cryptovalue "
+                        + extractCurrency()
+                        + " from the selected start date "
+                        + startDate
+                        + " to the selected end date "
+                        + endDate
+                        + " is:\n"
+                        + String.format("%.2f", minimum));
+                pressToProceed();
                 break;
             case 2:
-//                newOperation.priceMaxForRange();
+                clearScreen();
+                menuHeading();
+                menuFooting();
+                double maximum = newSearchStock.printPriceMax(newSearchStock.streamList(StockFileReaderService.readFile(), startDate, endDate));
+                System.out.println("The maximum value of the Cryptovalue "
+                        + extractCurrency()
+                        + " from the selected start date "
+                        + startDate
+                        + " to the selected end date "
+                        + endDate
+                        + " is:\n"
+                        + String.format("%.2f", maximum));
+                pressToProceed();
                 break;
             case 3:
-//                newOperation.averragePriceForRange();
+                double average = newMath.averragePriceForRange(newSearchStock.streamList(StockFileReaderService.readFile(), startDate, endDate));
+                clearScreen();
+                menuHeading();
+                menuFooting();
+                System.out.println("The average value of the Cryptovalue "
+                        + extractCurrency()
+                        + " from the selected start date "
+                        + startDate
+                        + " to the selected end date "
+                        + endDate
+                        + " is:\n"
+                        + String.format("%.2f", average));
+                pressToProceed();
                 break;
             case 4:
-//                newOperation.medianPriceForRange();
+                double median = newMath.medianPriceForRange(newSearchStock.streamList(StockFileReaderService.readFile(), startDate, endDate));
+                clearScreen();
+                menuHeading();
+                menuFooting();
+                System.out.println("The median value of the Cryptovalue "
+                        + extractCurrency()
+                        + " from the selected start date "
+                        + startDate
+                        + " to the selected end date "
+                        + endDate
+                        + " is:\n"
+                        + String.format("%.2f", median));
+                pressToProceed();
                 break;
             case 5:
-//                newOperation.
-        }
-    }
+                List<InputData> selValue = newSearchStock.streamList(StockFileReaderService.readFile(), startDate, endDate);
+                System.out.println("The list of values of the Cryptovalue "
+                        + extractCurrency()
+                        + " from the selected start date "
+                        + startDate
+                        + " to the selected end date "
+                        + endDate
+                        + " are listed below:\n");
+                for (InputData i : selValue) {
+                    System.out.print(i.getDate());
+                    System.out.println(" " + i.getPrice());
+                }
+                pressToProceed();
+                break;
+            case 6:
+                List<InputData> selValueByPrice = newStockSorter.sortDataBy(StockFileReaderService.readFile(), StockSorter.byPrice);
+                System.out.println("The list of values of the Cryptovalue "
+                        + extractCurrency()
+                        + " from the selected start date "
+                        + startDate
+                        + " to the selected end date "
+                        + endDate
+                        + " sorted by price value are listed below:\n");
+                for (InputData i : selValueByPrice) {
+                    System.out.print(i.getDate());
+                    System.out.println(" " + i.getPrice());
+                }
+                pressToProceed();
+                break;
+        } // end switch condition
+    } // end runOperations method
 
-    public void pressToProceed(){
-        System.out.println("Press Enter to get back to -> Operations Menu");
+    private void pressToProceed(){
+        System.out.println("\nPress Enter to get back to -> Operations Menu");
         Scanner newScanner = new Scanner(System.in);
         newScanner.nextLine();
-    }
+        menuControl();
+    } // end pressToProceed method
 
-}
+} // end DisplayMenu class
+
