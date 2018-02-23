@@ -12,19 +12,21 @@ public class SearchStock {
     public List<InputData> streamList(List<InputData> resources, LocalDate start, LocalDate end) {
 
         return resources.stream()
-                .filter(p -> p.getDate()
-                        .isAfter(start) && p.getDate()
-                        .isBefore(end))
+                .filter(p ->
+                        p.getDate().isEqual(start) ||
+                        p.getDate().isEqual(end) ||
+                        p.getDate().isAfter(start) &&
+                        p.getDate().isBefore(end))
                 .collect(Collectors.toList());
     }
 
-    public void printPriceMax(List<InputData> resources) {
+    public double printPriceMax(List<InputData> resources) {
 
-        System.out.println(resources.stream().max((p1, p2) -> Double.compare(p1.getPrice(), p2.getPrice())).get().getPrice());
+        return resources.stream().max((p1, p2) -> Double.compare(p1.getPrice(), p2.getPrice())).get().getPrice();
     }
 
-    public void printPriceMin(List<InputData> resources) {
+    public double printPriceMin(List<InputData> resources) {
 
-        System.out.println(resources.stream().min((p1, p2) -> Double.compare(p1.getPrice(), p2.getPrice())).get().getPrice());
+        return resources.stream().min((p1, p2) -> Double.compare(p1.getPrice(), p2.getPrice())).get().getPrice();
     }
 }

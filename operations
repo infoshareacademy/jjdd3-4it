@@ -3,5 +3,6 @@ Print to the screen the minimum value of the currency in between the dates defin
 Print to the screen the maximum value of the currency in between the dates defined.
 Print to the screen the average value of the currency in between the dates defined.
 Print to the screen the median value of the currency in between the dates defined.
-Print to the screen the moving average value of the currency in between the dates defined.
 Print to the screen all the Crypto Currency daily value in between the dates defined.
+Print to the screen all the Crypto Currency daily value in between the dates defined sorted by price value.
+Print to the screen all the Crypto Currency daily value in between the dates defined sorted by date value.

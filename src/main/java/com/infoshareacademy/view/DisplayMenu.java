@@ -1,10 +1,16 @@
 package com.infoshareacademy.view;
 
+import com.infoshareacademy.controller.MathStock;
+import com.infoshareacademy.controller.SearchStock;
+import com.infoshareacademy.controller.StockSorter;
+import com.infoshareacademy.model.InputData;
 import com.infoshareacademy.tools.DateService;
 import com.infoshareacademy.tools.MenuDataService;
+import com.infoshareacademy.tools.StockFileReaderService;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -18,7 +24,10 @@ import java.util.Scanner;
 public class DisplayMenu {
     // Fields
     private int menuStatus = 1;
-    private int userChoice = 0;
+    private int userCurrency = 0;
+    private int userOperation = 0;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private final String teamName = "JJDD3_4 IT: Development TEAM";
     private final String pathCurrency = "currencies";
     private final String pathOperations = "operations";
@@ -48,16 +57,16 @@ public class DisplayMenu {
         this.menuStatus = menuStatus;
     }
 
-    public void setUserChoice(int userChoice) {
-        this.userChoice = userChoice;
+    public void setUserCurrency(int userChoice) {
+        this.userCurrency = userChoice;
     }
 
     public int getMenuStatus() {
         return menuStatus;
     }
 
-    public int getUserChoice() {
-        return userChoice;
+    public int getUserCurrency() {
+        return userCurrency;
     }
 
     public String getPathCurrency() {
@@ -70,6 +79,14 @@ public class DisplayMenu {
 
     public String getTeamName() {
         return teamName;
+    }
+
+    public int getUserOperation() {
+        return userOperation;
+    }
+
+    public void setUserOperation(int userOperation) {
+        this.userOperation = userOperation;
     }
 
     public void menuHeading() {
@@ -89,10 +106,8 @@ public class DisplayMenu {
         menuFooting();
         menuCurrencySubTitle();
         printOutList(currencyList);
-        menuChoice();
         int inputSet = MenuDataService.getMenuValue(currencyList);
         menuCurrencyControl(inputSet);
-        setUserChoice(inputSet);
     }
 
     public void menuCurrencyTitle() {
@@ -112,8 +127,8 @@ public class DisplayMenu {
         menuOperationsDisplayCurrency();
         menuOperationsSubTitle();
         printOutList(operationsList);
-        menuChoice();
-        menuOperationsControl(MenuDataService.getMenuValue(operationsList));
+        int input = MenuDataService.getMenuValue(operationsList);
+        menuOperationsControl(input);
     }
 
     public void menuOperationsTitle() {
@@ -128,7 +143,7 @@ public class DisplayMenu {
     }
 
     private String extractCurrency() {
-        String s = currencyList.get(getUserChoice());
+        String s = currencyList.get(getUserCurrency());
         String[] tab = s.split("-");
 
         return tab[0].trim();
@@ -174,6 +189,7 @@ public class DisplayMenu {
         for (int i = 0; i < ArrayList.size(); i++) {
             System.out.println("    " + "   " + i + ".  " + ArrayList.get(i));
         }
+        System.out.println();
     }
 
     public boolean hasIncorrectLists() {
@@ -206,6 +222,7 @@ public class DisplayMenu {
             setMenuStatus(1);
         } else {
             setMenuStatus(3);
+            setUserCurrency(a);
         }
         menuControl();
     }
@@ -215,6 +232,7 @@ public class DisplayMenu {
             setMenuStatus(2);
         } else {
             setMenuStatus(4);
+            setUserOperation(a);
         }
         menuControl();
     }
@@ -226,7 +244,7 @@ public class DisplayMenu {
 
     public void menuDataEndControl() {
         setMenuStatus(3);
-        menuControl();
+        runOperations();
     }
 
     public void menuDataStart() {
@@ -235,7 +253,7 @@ public class DisplayMenu {
         menuDataStartTitle();
         menuFooting();
         menuChoice();
-        DateService.getDateFromUser();
+        startDate = DateService.getDateFromUser();
         menuDataStartControl();
     }
 
@@ -249,7 +267,7 @@ public class DisplayMenu {
         menuDataEndTitle();
         menuFooting();
         menuChoice();
-        DateService.getDateFromUser();
+        endDate = DateService.getDateFromUser();
         menuDataEndControl();
     }
 
@@ -264,7 +282,6 @@ public class DisplayMenu {
         menuFooting();
         menuGreetingSubTitle();
         printOutList(greetingList);
-        menuChoice();
         menuGreetingControl(MenuDataService.getMenuValue(greetingList));
     }
 
@@ -298,4 +315,127 @@ public class DisplayMenu {
                 + "\n");
         System.exit(0);
     }
+
+    public void runOperations() {
+        int userOperation = getUserOperation();
+        MathStock newMath = new MathStock();
+        SearchStock newSearchStock = new SearchStock();
+        StockSorter newStockSorter = new StockSorter();
+        switch (userOperation) {
+            case 1:
+                clearScreen();
+                menuHeading();
+                menuFooting();
+                double minimum = newSearchStock.printPriceMin(newSearchStock.streamList(StockFileReaderService.readFile(), startDate, endDate));
+                System.out.println("The minimum value of the Cryptovalue "
+                        + extractCurrency()
+                        + " from the selected start date "
+                        + startDate
+                        + " to the selected end date "
+                        + endDate
+                        + " is:\n"
+                        + String.format("%.2f", minimum));
+                pressToProceed();
+                break;
+            case 2:
+                clearScreen();
+                menuHeading();
+                menuFooting();
+                double maximum = newSearchStock.printPriceMax(newSearchStock.streamList(StockFileReaderService.readFile(), startDate, endDate));
+                System.out.println("The maximum value of the Cryptovalue "
+                        + extractCurrency()
+                        + " from the selected start date "
+                        + startDate
+                        + " to the selected end date "
+                        + endDate
+                        + " is:\n"
+                        + String.format("%.2f", maximum));
+                pressToProceed();
+                break;
+            case 3:
+                double average = newMath.averragePriceForRange(newSearchStock.streamList(StockFileReaderService.readFile(), startDate, endDate));
+                clearScreen();
+                menuHeading();
+                menuFooting();
+                System.out.println("The average value of the Cryptovalue "
+                        + extractCurrency()
+                        + " from the selected start date "
+                        + startDate
+                        + " to the selected end date "
+                        + endDate
+                        + " is:\n"
+                        + String.format("%.2f", average));
+                pressToProceed();
+                break;
+            case 4:
+                double median = newMath.medianPriceForRange(newSearchStock.streamList(StockFileReaderService.readFile(), startDate, endDate));
+                clearScreen();
+                menuHeading();
+                menuFooting();
+                System.out.println("The median value of the Cryptovalue "
+                        + extractCurrency()
+                        + " from the selected start date "
+                        + startDate
+                        + " to the selected end date "
+                        + endDate
+                        + " is:\n"
+                        + String.format("%.2f", median));
+                pressToProceed();
+                break;
+            case 5:
+                List<InputData> selValue = newSearchStock.streamList(StockFileReaderService.readFile(), startDate, endDate);
+                System.out.println("The list of values of the Cryptovalue "
+                        + extractCurrency()
+                        + " from the selected start date "
+                        + startDate
+                        + " to the selected end date "
+                        + endDate
+                        + " are listed below:\n");
+                for (InputData i : selValue) {
+                    System.out.print(i.getDate());
+                    System.out.println(" " + i.getPrice());
+                }
+                pressToProceed();
+                break;
+            case 6:
+                List<InputData> selValueByPrice = newStockSorter.sortDataBy(StockFileReaderService.readFile(), StockSorter.byPrice, startDate, endDate);
+                System.out.println("The list of values of the Cryptovalue "
+                        + extractCurrency()
+                        + " from the selected start date "
+                        + startDate
+                        + " to the selected end date "
+                        + endDate
+                        + " sorted by price value are listed below:\n");
+                for (InputData i : selValueByPrice) {
+                    System.out.print(i.getDate());
+                    System.out.println(" " + i.getPrice());
+                }
+                pressToProceed();
+                break;
+            case 7:
+                List<InputData> selValueByDate = newStockSorter.sortDataBy(StockFileReaderService.readFile(), StockSorter.byDate, startDate, endDate);
+                System.out.println("The list of values of the Cryptovalue "
+                        + extractCurrency()
+                        + " from the selected start date "
+                        + startDate
+                        + " to the selected end date "
+                        + endDate
+                        + " sorted by price value are listed below:\n");
+                for (InputData i : selValueByDate) {
+                    System.out.print(i.getDate());
+                    System.out.println(" " + i.getPrice());
+                }
+                pressToProceed();
+                break;
+        }
+    }
+
+    private void pressToProceed() {
+        System.out.println("\nPress Enter to get back to -> Operations Menu");
+        Scanner newScanner = new Scanner(System.in);
+        newScanner.nextLine();
+        menuControl();
+    }
+
 }
+
