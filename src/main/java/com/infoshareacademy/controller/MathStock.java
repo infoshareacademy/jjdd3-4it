@@ -2,11 +2,10 @@ package com.infoshareacademy.controller;
 
 import com.infoshareacademy.model.InputData;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 
 public class MathStock {
@@ -20,7 +19,7 @@ public class MathStock {
     List<Double> listForAveragePrice = new ArrayList<Double>();
 
 
-    public double averragePriceForRange(List<InputData> resources) {
+    public double averagePriceForRange(List<InputData> resources) {
 
 
         for (int i = 0; i < resources.size(); i++) {
