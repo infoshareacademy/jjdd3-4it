@@ -15,6 +15,9 @@ public class MathStock {
     private double medianPrice;
 
     List<Double> listHelp = new ArrayList<Double>();
+    private int cycle = 10;//to zarkres naszej średniej. użytkownik musi przypisywać tą wart np z zakresu 10-45
+    private double movingAveragePrice;
+    List<Double> listForAverragePrice = new ArrayList<Double>();
 
 
     public double averragePriceForRange(List<InputData> resources) {
@@ -47,6 +50,20 @@ public class MathStock {
             return medianPrice;
         }
 
+    }
+
+    public List<Double> movingAverragePriceForRange(List<InputData> resources) {
+        int r = 0;
+        for (int i = cycle; i <= resources.size(); i++) {
+            movingAveragePrice = 0;
+            for (int j = 0 + r; j < cycle + r; j++) {
+                movingAveragePrice += resources.get(j).getPrice();
+            }
+            movingAveragePrice /= cycle;
+            listForAverragePrice.add(r, movingAveragePrice);
+            r++;
+        }
+        return listForAverragePrice;
     }
 
 
