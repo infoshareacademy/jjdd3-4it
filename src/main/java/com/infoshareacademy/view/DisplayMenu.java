@@ -353,7 +353,7 @@ public class DisplayMenu {
                 pressToProceed();
                 break;
             case 3:
-                double average = newMath.averragePriceForRange(newSearchStock.streamList(StockFileReaderService.readFile(), startDate, endDate));
+                double average = newMath.averagePriceForRange(newSearchStock.streamList(StockFileReaderService.readFile(), startDate, endDate));
                 clearScreen();
                 menuHeading();
                 menuFooting();
