@@ -2,11 +2,10 @@ package com.infoshareacademy.controller;
 
 import com.infoshareacademy.model.InputData;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 
 public class MathStock {
@@ -15,12 +14,12 @@ public class MathStock {
     private double medianPrice;
 
     List<Double> listHelp = new ArrayList<Double>();
-    private int cycle = 10;//to zarkres naszej średniej. użytkownik musi przypisywać tą wart np z zakresu 10-45
+    private int cycle = 10;
     private double movingAveragePrice;
-    List<Double> listForAverragePrice = new ArrayList<Double>();
+    List<Double> listForAveragePrice = new ArrayList<Double>();
 
 
-    public double averragePriceForRange(List<InputData> resources) {
+    public double averagePriceForRange(List<InputData> resources) {
 
 
         for (int i = 0; i < resources.size(); i++) {
@@ -52,7 +51,7 @@ public class MathStock {
 
     }
 
-    public List<Double> movingAverragePriceForRange(List<InputData> resources) {
+    public List<Double> movingAveragePriceForRange(List<InputData> resources) {
         int r = 0;
         for (int i = cycle; i <= resources.size(); i++) {
             movingAveragePrice = 0;
@@ -60,10 +59,10 @@ public class MathStock {
                 movingAveragePrice += resources.get(j).getPrice();
             }
             movingAveragePrice /= cycle;
-            listForAverragePrice.add(r, movingAveragePrice);
+            listForAveragePrice.add(r, movingAveragePrice);
             r++;
         }
-        return listForAverragePrice;
+        return listForAveragePrice;
     }
 
 
