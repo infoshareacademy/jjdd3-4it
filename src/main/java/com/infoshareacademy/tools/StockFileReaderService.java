@@ -7,8 +7,8 @@ import java.util.List;
 
 public class StockFileReaderService {
 
-    public static List<InputData> readFile() {
-        String pathToFile = "src/main/resources/bitCoin.csv";
+    public static List<InputData> readFile(String cryptoFile) {
+        String pathToFile = "src/main/resources/" + cryptoFile;
         ImportStock importStock = new ImportStock(pathToFile);
         importStock.readFromFile();
         return importStock.getResources();
