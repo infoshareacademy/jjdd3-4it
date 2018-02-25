@@ -28,6 +28,7 @@ public class DisplayMenu {
     private int userOperation = 0;
     private LocalDate startDate;
     private LocalDate endDate;
+    private String pathToCrypto = "bitCoin.csv";
     private final String teamName = "JJDD3_4 IT: Development TEAM";
     private final String pathCurrency = "currencies";
     private final String pathOperations = "operations";
@@ -37,6 +38,11 @@ public class DisplayMenu {
     private List<String> greetingList = getFromFile(getPathGreeting());
 
     // Getter and Setter
+
+    public String getPathToCrypto() {
+        return pathToCrypto;
+    }
+
     public String getPathGreeting() {
         return pathGreeting;
     }
@@ -51,6 +57,10 @@ public class DisplayMenu {
 
     public List<String> getGreetingList() {
         return greetingList;
+    }
+
+    public void setPathToCrypto(String pathToCrypto) {
+        this.pathToCrypto = pathToCrypto;
     }
 
     public void setMenuStatus(int menuStatus) {
@@ -99,6 +109,30 @@ public class DisplayMenu {
         System.out.println();
     }
 
+    private String chosenCrypto(int inputSet) {
+        String result;
+        switch (inputSet) {
+            case 1:
+                result = "bitCoin.csv";
+                break;
+            case 2:
+                result = "dogeCoin.csv";
+                break;
+            case 3:
+                result = "ethereum.csv";
+                break;
+            case 4:
+                result = "liteCoin.csv";
+                break;
+            case 5:
+                result = "monero.csv";
+                break;
+            default:
+                result = "bitCoin.csv";
+        }
+        return result;
+    }
+
     public void menuCurrency() {
         clearScreen();
         menuHeading();
@@ -107,6 +141,7 @@ public class DisplayMenu {
         menuCurrencySubTitle();
         printOutList(currencyList);
         int inputSet = MenuDataService.getMenuValue(currencyList);
+        setPathToCrypto(chosenCrypto(inputSet));
         menuCurrencyControl(inputSet);
     }
 
@@ -326,7 +361,8 @@ public class DisplayMenu {
                 clearScreen();
                 menuHeading();
                 menuFooting();
-                double minimum = newSearchStock.printPriceMin(newSearchStock.streamList(StockFileReaderService.readFile(), startDate, endDate));
+                double minimum = newSearchStock.printPriceMin(newSearchStock.streamList(
+                        StockFileReaderService.readFile(getPathToCrypto()), startDate, endDate));
                 System.out.println("The minimum value of the Cryptovalue "
                         + extractCurrency()
                         + " from the selected start date "
@@ -341,7 +377,8 @@ public class DisplayMenu {
                 clearScreen();
                 menuHeading();
                 menuFooting();
-                double maximum = newSearchStock.printPriceMax(newSearchStock.streamList(StockFileReaderService.readFile(), startDate, endDate));
+                double maximum = newSearchStock.printPriceMax(newSearchStock.streamList(
+                        StockFileReaderService.readFile(getPathToCrypto()), startDate, endDate));
                 System.out.println("The maximum value of the Cryptovalue "
                         + extractCurrency()
                         + " from the selected start date "
@@ -353,7 +390,9 @@ public class DisplayMenu {
                 pressToProceed();
                 break;
             case 3:
-                double average = newMath.averagePriceForRange(newSearchStock.streamList(StockFileReaderService.readFile(), startDate, endDate));
+                double average = newMath.averagePriceForRange(
+                        newSearchStock.streamList(StockFileReaderService.readFile(getPathToCrypto()),
+                                startDate, endDate));
                 clearScreen();
                 menuHeading();
                 menuFooting();
@@ -368,7 +407,9 @@ public class DisplayMenu {
                 pressToProceed();
                 break;
             case 4:
-                double median = newMath.medianPriceForRange(newSearchStock.streamList(StockFileReaderService.readFile(), startDate, endDate));
+                double median = newMath.medianPriceForRange(
+                        newSearchStock.streamList(StockFileReaderService.readFile(getPathToCrypto()),
+                                startDate, endDate));
                 clearScreen();
                 menuHeading();
                 menuFooting();
@@ -383,7 +424,8 @@ public class DisplayMenu {
                 pressToProceed();
                 break;
             case 5:
-                List<InputData> selValue = newSearchStock.streamList(StockFileReaderService.readFile(), startDate, endDate);
+                List<InputData> selValue = newSearchStock.streamList(
+                        StockFileReaderService.readFile(getPathToCrypto()), startDate, endDate);
                 System.out.println("The list of values of the Cryptovalue "
                         + extractCurrency()
                         + " from the selected start date "
@@ -398,7 +440,8 @@ public class DisplayMenu {
                 pressToProceed();
                 break;
             case 6:
-                List<InputData> selValueByPrice = newStockSorter.sortDataBy(StockFileReaderService.readFile(), StockSorter.byPrice, startDate, endDate);
+                List<InputData> selValueByPrice = newStockSorter.sortDataBy(
+                        StockFileReaderService.readFile(getPathToCrypto()), StockSorter.byPrice, startDate, endDate);
                 System.out.println("The list of values of the Cryptovalue "
                         + extractCurrency()
                         + " from the selected start date "
@@ -413,7 +456,8 @@ public class DisplayMenu {
                 pressToProceed();
                 break;
             case 7:
-                List<InputData> selValueByDate = newStockSorter.sortDataBy(StockFileReaderService.readFile(), StockSorter.byDate, startDate, endDate);
+                List<InputData> selValueByDate = newStockSorter.sortDataBy(
+                        StockFileReaderService.readFile(getPathToCrypto()), StockSorter.byDate, startDate, endDate);
                 System.out.println("The list of values of the Cryptovalue "
                         + extractCurrency()
                         + " from the selected start date "
