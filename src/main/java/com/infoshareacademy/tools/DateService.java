@@ -23,7 +23,9 @@ public class DateService {
         do {
             try {
                 result = dateCorrectFormat(dateInRange(InputReaderService.read()));
-                break;
+                if (result != null && result.getYear() == 2017) {
+                    break;
+                }
             } catch (DateTimeParseException e) {
                 System.out.print("  please write correct format " + DATE_FORMAT + ": ");
             }

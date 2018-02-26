@@ -303,7 +303,11 @@ public class DisplayMenu {
         menuFooting();
         menuChoice();
         endDate = DateService.getDateFromUser();
-        menuDataEndControl();
+        if(startDate.isBefore(endDate)) {
+            menuDataEndControl();
+        } else {
+            menuDataEnd();
+        }
     }
 
     public void menuDataEndTitle() {
