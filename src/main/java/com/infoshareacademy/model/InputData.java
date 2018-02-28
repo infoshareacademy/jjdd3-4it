@@ -1,9 +1,6 @@
 package com.infoshareacademy.model;
 
-import com.infoshareacademy.controller.SortStock;
-
 import java.time.LocalDate;
-import java.util.Comparator;
 
 public class InputData  {
 
@@ -22,8 +19,5 @@ public class InputData  {
     public LocalDate getDate() {
         return date;
     }
-
-
-
 
 }

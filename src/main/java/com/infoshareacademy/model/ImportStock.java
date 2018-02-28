@@ -29,7 +29,7 @@ public class ImportStock {
                 String[] stringsArray = inputData.split(",");
 
                 InputData r = new InputData(LocalDate.parse(stringsArray[0]),
-                        Double.parseDouble(stringsArray[4]));
+                        Double.parseDouble(stringsArray[1]));
                 resources.add(r);
             }
         } catch (FileNotFoundException fnfExc) {
