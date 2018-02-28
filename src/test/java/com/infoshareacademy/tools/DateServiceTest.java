@@ -21,7 +21,7 @@ public class DateServiceTest {
         LocalDate actual = DateService.dateInRange("2018-01-01");
 
         // Then
-        assertEquals(actual, expected);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -39,7 +39,7 @@ public class DateServiceTest {
         LocalDate actual = DateService.dateCorrectFormat(LocalDate.parse("2018-01-01"));
 
         // Then
-        assertEquals(actual, expected);
+        assertEquals(expected,actual);
     }
 
     @Test
