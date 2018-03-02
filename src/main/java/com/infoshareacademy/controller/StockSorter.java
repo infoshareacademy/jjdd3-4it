@@ -1,7 +1,6 @@
 package com.infoshareacademy.controller;
 
 import com.infoshareacademy.model.InputData;
-import com.infoshareacademy.tools.StockFileReaderService;
 
 import java.time.LocalDate;
 import java.util.Comparator;

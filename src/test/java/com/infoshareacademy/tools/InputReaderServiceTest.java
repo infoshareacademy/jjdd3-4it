@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
-import java.util.concurrent.ThreadPoolExecutor;
 
 public class InputReaderServiceTest {
 

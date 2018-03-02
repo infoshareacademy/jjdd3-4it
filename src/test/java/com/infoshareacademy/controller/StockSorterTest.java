@@ -2,11 +2,7 @@ package com.infoshareacademy.controller;
 
 import com.infoshareacademy.model.ImportStock;
 import com.infoshareacademy.model.InputData;
-import com.infoshareacademy.tools.StockFileReaderService;
-import com.sun.xml.internal.ws.wsdl.writer.document.Import;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvFileSource;
 
 import java.time.LocalDate;
 import java.util.List;
