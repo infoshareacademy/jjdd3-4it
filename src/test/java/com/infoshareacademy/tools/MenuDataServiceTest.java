@@ -11,22 +11,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class MenuDataServiceTest {
 
-//    @Test
-//    public void shouldThrowExeptionWhenValueIsNotInteger() {
-//        //Given
-//        System.setIn(new ByteArrayInputStream(("test\n").getBytes()));
-//
-//        //When
-//        Throwable exeption = assertThrows(NumberFormatException.class, () -> {
-//            MenuDataService.checkNumerCorrectFormat();
-//        });
-//        System.setIn(new ByteArrayInputStream(("10.0\n").getBytes()));
-//
-//        //Then
-//        assertTrue(exeption instanceof NumberFormatException);
-//
-//    }
-
     @Test
     void shouldReadIntegerValue() {
         //Given
@@ -42,7 +26,7 @@ public class MenuDataServiceTest {
     @Test
     void shouldReadIntegerValueInRange() {
         //Given
-        List<String> list = Arrays.asList("one","two","three");
+        List<String> list = Arrays.asList("one", "two", "three");
         System.setIn(new ByteArrayInputStream("2\n".getBytes()));
 
         //When

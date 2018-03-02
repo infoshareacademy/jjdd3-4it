@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class StockSorterTest {
 
     @Test
-    public void shouldSortDateByPrice(){
+    public void shouldSortDateByPrice() {
         //Given
         String pathToFile = "src/test/resources/bitCoin.csv";
         ImportStock importStock = new ImportStock(pathToFile);
@@ -22,11 +22,11 @@ public class StockSorterTest {
         importStock.readFromFile();
         StockSorter stockSorter = new StockSorter();
         List<InputData> list = importStock.getResources();
-        list = stockSorter.sortDataBy(list,StockSorter.byPrice, LocalDate.parse("2017-01-01"),LocalDate.parse("2017-01-06"));
+        list = stockSorter.sortDataBy(list, StockSorter.byPrice, LocalDate.parse("2017-01-01"), LocalDate.parse("2017-01-06"));
         Double actual = list.get(5).getPrice();
 
         //Then
-        assertEquals(1156.73,(double) actual);
+        assertEquals(1156.73, (double) actual);
 
     }
 
