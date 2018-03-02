@@ -14,7 +14,7 @@ public class MathStock {
     private double medianPrice;
 
     List<Double> listHelp = new ArrayList<Double>();
-    private int cycle = 10;
+    private int cycle = 4;
     private double movingAveragePrice;
     List<Double> listForAveragePrice = new ArrayList<Double>();
 
