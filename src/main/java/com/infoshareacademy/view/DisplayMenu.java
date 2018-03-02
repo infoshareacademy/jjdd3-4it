@@ -6,7 +6,9 @@ import com.infoshareacademy.controller.StockSorter;
 import com.infoshareacademy.model.InputData;
 import com.infoshareacademy.tools.DateService;
 import com.infoshareacademy.tools.MenuDataService;
+import com.infoshareacademy.tools.PropertyService;
 import com.infoshareacademy.tools.StockFileReaderService;
+import java.text.DecimalFormat;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -33,6 +35,7 @@ public class DisplayMenu {
     private final String pathCurrency = "currencies";
     private final String pathOperations = "operations";
     private final String pathGreeting = "greetingmenu";
+    private static DecimalFormat df2 = new DecimalFormat(".##");
     private List<String> operationsList = getFromFile(getPathOperations());
     private List<String> currencyList = getFromFile(getPathCurrency());
     private List<String> greetingList = getFromFile(getPathGreeting());
@@ -99,6 +102,10 @@ public class DisplayMenu {
         this.userOperation = userOperation;
     }
 
+    private static final PropertyService propertyService = new PropertyService();
+    private static final String DATE_FORMAT = propertyService.getDateFormat();
+    private static final String CURRENCY = propertyService.getCurrency();
+
     public void menuHeading() {
         System.out.println("-----------------------------------------------------------------------------------------------------");
         System.out.println("    " + getTeamName());
@@ -160,6 +167,7 @@ public class DisplayMenu {
         menuOperationsTitle();
         menuFooting();
         menuOperationsDisplayCurrency();
+        menuFooting();
         menuOperationsSubTitle();
         printOutList(operationsList);
         int input = MenuDataService.getMenuValue(operationsList);
@@ -189,9 +197,9 @@ public class DisplayMenu {
         System.out.println();
     }
 
-    public void menuChoice() {
+    public void menuDataChoice() {
         System.out.println();
-        System.out.print("  " + "Type here your selection: ");
+        System.out.print("  " + "Type here the selected date in the format " + DATE_FORMAT + " : ");
     }
 
     public static void clearScreen() {
@@ -287,7 +295,7 @@ public class DisplayMenu {
         menuHeading();
         menuDataStartTitle();
         menuFooting();
-        menuChoice();
+        menuDataChoice();
         startDate = DateService.getDateFromUser();
         menuDataStartControl();
     }
@@ -296,16 +304,27 @@ public class DisplayMenu {
         System.out.println("                                            Start Date Selection Menu");
     }
 
+    public void menuDataEndShowStartDate(){
+        System.out.println("    "
+                + "The chosen start date is: "
+                + startDate);
+        System.out.println();
+    }
+
     public void menuDataEnd() {
         clearScreen();
         menuHeading();
         menuDataEndTitle();
         menuFooting();
-        menuChoice();
+        menuDataEndShowStartDate();
+        menuFooting();
+        menuDataChoice();
         endDate = DateService.getDateFromUser();
         if(startDate.isBefore(endDate)) {
             menuDataEndControl();
         } else {
+            System.out.println("End date MUST be chronologically latter than start date (at least one day more)!!");
+            pressToProceed();
             menuDataEnd();
         }
     }
@@ -374,7 +393,9 @@ public class DisplayMenu {
                         + " to the selected end date "
                         + endDate
                         + " is:\n"
-                        + String.format("%.2f", minimum));
+                        + df2.format(minimum)
+                        + " "
+                        + CURRENCY);
                 pressToProceed();
                 break;
             case 2:
@@ -390,7 +411,9 @@ public class DisplayMenu {
                         + " to the selected end date "
                         + endDate
                         + " is:\n"
-                        + String.format("%.2f", maximum));
+                        + df2.format(maximum)
+                        + " "
+                        + CURRENCY);
                 pressToProceed();
                 break;
             case 3:
@@ -407,7 +430,9 @@ public class DisplayMenu {
                         + " to the selected end date "
                         + endDate
                         + " is:\n"
-                        + String.format("%.2f", average));
+                        + df2.format(average)
+                        + " "
+                        + CURRENCY);
                 pressToProceed();
                 break;
             case 4:
@@ -424,12 +449,17 @@ public class DisplayMenu {
                         + " to the selected end date "
                         + endDate
                         + " is:\n"
-                        + String.format("%.2f", median));
+                        + df2.format(median)
+                        + " "
+                        + CURRENCY);
                 pressToProceed();
                 break;
             case 5:
-                List<InputData> selValue = newSearchStock.streamList(
-                        StockFileReaderService.readFile(getPathToCrypto()), startDate, endDate);
+                List<Double> movingAverage = newMath.movingAveragePriceForRange(
+                        newSearchStock.streamList(StockFileReaderService.readFile(getPathToCrypto()), startDate, endDate));
+                clearScreen();
+                menuHeading();
+                menuFooting();
                 System.out.println("The list of values of the Cryptovalue "
                         + extractCurrency()
                         + " from the selected start date "
@@ -437,16 +467,20 @@ public class DisplayMenu {
                         + " to the selected end date "
                         + endDate
                         + " are listed below:\n");
-                for (InputData i : selValue) {
-                    System.out.print(i.getDate());
-                    System.out.println(" " + i.getPrice());
+                for (Double i : movingAverage) {
+                    System.out.println(df2.format(i)
+                                    + " "
+                                    + CURRENCY);
                 }
                 pressToProceed();
                 break;
             case 6:
                 List<InputData> selValueByPrice = newStockSorter.sortDataBy(
                         StockFileReaderService.readFile(getPathToCrypto()), StockSorter.byPrice, startDate, endDate);
-                System.out.println("The list of values of the Cryptovalue "
+                clearScreen();
+                menuHeading();
+                menuFooting();
+                System.out.println("The moving average of the Cryptovalue "
                         + extractCurrency()
                         + " from the selected start date "
                         + startDate
@@ -455,23 +489,32 @@ public class DisplayMenu {
                         + " sorted by price value are listed below:\n");
                 for (InputData i : selValueByPrice) {
                     System.out.print(i.getDate());
-                    System.out.println(" " + i.getPrice());
+                    System.out.println(" | "
+                            + df2.format(i.getPrice())
+                            + " "
+                            + CURRENCY);
                 }
                 pressToProceed();
                 break;
             case 7:
                 List<InputData> selValueByDate = newStockSorter.sortDataBy(
                         StockFileReaderService.readFile(getPathToCrypto()), StockSorter.byDate, startDate, endDate);
+                clearScreen();
+                menuHeading();
+                menuFooting();
                 System.out.println("The list of values of the Cryptovalue "
                         + extractCurrency()
                         + " from the selected start date "
                         + startDate
                         + " to the selected end date "
                         + endDate
-                        + " sorted by price value are listed below:\n");
+                        + " sorted by date are listed below:\n");
                 for (InputData i : selValueByDate) {
                     System.out.print(i.getDate());
-                    System.out.println(" " + i.getPrice());
+                    System.out.println(" | "
+                            + df2.format(i.getPrice())
+                            + " "
+                            + CURRENCY);
                 }
                 pressToProceed();
                 break;
@@ -479,7 +522,7 @@ public class DisplayMenu {
     }
 
     private void pressToProceed() {
-        System.out.println("\nPress Enter to get back to -> Operations Menu");
+        System.out.println("\nPress Enter to get back to the Menu");
         Scanner newScanner = new Scanner(System.in);
         newScanner.nextLine();
         menuControl();

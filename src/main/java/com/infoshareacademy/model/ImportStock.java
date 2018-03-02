@@ -37,14 +37,4 @@ public class ImportStock {
             System.out.println(fnfExc);
         }
     }
-
-    public void showPriceAndDate() {
-        System.out.println("Number of items: " + resources.size());
-        for (InputData i : resources) {
-            System.out.print(i.getDate());
-            System.out.println(" " + i.getPrice());
-        }
-    }
-
-
 }

@@ -27,7 +27,7 @@ public class DateService {
                     break;
                 }
             } catch (DateTimeParseException e) {
-                System.out.print("  please write correct format " + DATE_FORMAT + ": ");
+                System.out.print("  please write correct format " + DATE_FORMAT + " with 2017 year: ");
             }
         } while (true);
         return result;

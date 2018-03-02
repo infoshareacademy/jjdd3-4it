@@ -6,7 +6,10 @@ public class InputReaderService {
 
     public static String read() {
         Scanner scanner = new Scanner(System.in);
-        String inputData = scanner.nextLine();
+        String inputData = null;
+        if (scanner.hasNext()) {
+            inputData = scanner.next();
+        }
         return inputData;
     }
 
