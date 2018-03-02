@@ -11,7 +11,7 @@ public class InputReaderServiceTest {
 
 
     @Test
-    public void shouldReadStringValue() {
+    void shouldReadStringValue() {
         //Given
         System.setIn(new ByteArrayInputStream("10.0\n".getBytes()));
 
@@ -23,7 +23,7 @@ public class InputReaderServiceTest {
     }
 
     @Test
-    public void shountNotReadTwoStringValue() {
+    void shountNotReadTwoStringValue() {
         //Given
         System.setIn(new ByteArrayInputStream("10.0\n 12.0\n".getBytes()));
 
@@ -37,7 +37,7 @@ public class InputReaderServiceTest {
     }
 
     @Test
-    public void shouldReadIntegerValue() {
+    void shouldReadIntegerValue() {
         //Given
         System.setIn(new ByteArrayInputStream("10\n".getBytes()));
 
@@ -49,7 +49,7 @@ public class InputReaderServiceTest {
     }
 
     @Test
-    public void shouldThrowExeptionWhenValueIsNotInteger() {
+    void shouldThrowExeptionWhenValueIsNotInteger() {
         //Given
         System.setIn(new ByteArrayInputStream(("test\n").getBytes()));
 
