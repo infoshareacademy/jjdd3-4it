@@ -1,8 +1,7 @@
-Go back to Crypto Currency Menu to select a different Currency.
-Print the minimum value of the currency in between the dates defined.
-Print the maximum value of the currency in between the dates defined.
-Print the average value of the currency in between the dates defined.
-Print the median value of the currency in between the dates defined.
-Print the moving average value of the currency in between the dates defined.
-Print all the Crypto Currency daily value in between the dates defined sorted by price value.
-Print all the Crypto Currency daily value in between the dates defined sorted by date value.
+Show the minimum value of the currency in between the dates defined.
+Show the maximum value of the currency in between the dates defined.
+Show the average value of the currency in between the dates defined.
+Show the median value of the currency in between the dates defined.
+Show the moving average value of the currency in between the dates defined.
+Show all the Crypto Currency daily value in between the dates defined sorted by price value.
+Show all the Crypto Currency daily value in between the dates defined sorted by date value.
