@@ -1,10 +1,14 @@
 package com.infoshareacademy.tools;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class DateService {
+    private static Logger LOG = LoggerFactory.getLogger(DateService.class);
     private static final PropertyService propertyService = new PropertyService();
     private static final String DATE_FORMAT = propertyService.getDateFormat();
 
@@ -27,7 +31,8 @@ public class DateService {
                     break;
                 }
             } catch (DateTimeParseException e) {
-                System.out.print("  please write correct format " + DATE_FORMAT + " with 2017 year: ");
+                System.out.println("  please write correct format " + DATE_FORMAT + " with 2017 year: ");
+                LOG.error("User choose wrong date format {}", result);
             }
         } while (true);
         return result;
