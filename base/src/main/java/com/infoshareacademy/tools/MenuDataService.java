@@ -1,8 +1,13 @@
 package com.infoshareacademy.tools;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.List;
 
 public class MenuDataService {
+
+    private static Logger LOG = LoggerFactory.getLogger(MenuDataService.class);
 
     static int checkNumerCorrectFormat() {
 
@@ -12,6 +17,7 @@ public class MenuDataService {
                 return result;
             } catch (NumberFormatException e) {
                 System.out.print("  please write correct numeric format: ");
+                LOG.error("User write not Integer format");
             }
         } while (true);
     }
