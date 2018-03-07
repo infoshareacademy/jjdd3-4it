@@ -9,7 +9,7 @@ import java.util.List;
 
 public class StockFileReaderService {
 
-    public static Logger LOG = LoggerFactory.getLogger(StockFileReaderService.class);
+    private static Logger LOG = LoggerFactory.getLogger(StockFileReaderService.class);
 
     public static List<InputData> readFile(String cryptoFile) {
         LOG.info("Application use {} file", cryptoFile);

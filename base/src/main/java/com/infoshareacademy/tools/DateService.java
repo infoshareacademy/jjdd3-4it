@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class DateService {
-    public static Logger LOG = LoggerFactory.getLogger(DateService.class);
+    private static Logger LOG = LoggerFactory.getLogger(DateService.class);
     private static final PropertyService propertyService = new PropertyService();
     private static final String DATE_FORMAT = propertyService.getDateFormat();
 

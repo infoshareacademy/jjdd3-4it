@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class StockSorter {
 
-    public static final Logger LOG = LoggerFactory.getLogger(StockSorter.class);
+    private static final Logger LOG = LoggerFactory.getLogger(StockSorter.class);
 
     public static final Comparator<InputData> byPrice = (d1, d2) -> Double.compare(d1.getPrice(), d2.getPrice());
     public static final Comparator<InputData> byDate = (l1, l2) -> l1.getDate().compareTo(l2.getDate());

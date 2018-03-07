@@ -7,7 +7,7 @@ import java.util.List;
 
 public class MenuDataService {
 
-    public static Logger LOG = LoggerFactory.getLogger(MenuDataService.class);
+    private static Logger LOG = LoggerFactory.getLogger(MenuDataService.class);
 
     static int checkNumerCorrectFormat() {
 

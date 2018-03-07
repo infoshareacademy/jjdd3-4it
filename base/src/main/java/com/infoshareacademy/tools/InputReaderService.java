@@ -6,7 +6,8 @@ import org.slf4j.LoggerFactory;
 import java.util.Scanner;
 
 public class InputReaderService {
-    public static Logger LOG = LoggerFactory.getLogger(InputReaderService.class);
+    private static Logger LOG = LoggerFactory.getLogger(InputReaderService.class);
+
     public static String read() {
         Scanner scanner = new Scanner(System.in);
         String inputData = null;
