@@ -23,9 +23,9 @@ public class StockSorter {
         return list.stream()
                 .filter(p ->
                         p.getDate().isEqual(start) ||
-                        p.getDate().isEqual(end) ||
-                        p.getDate().isAfter(start) &&
-                        p.getDate().isBefore(end))
+                                p.getDate().isEqual(end) ||
+                                p.getDate().isAfter(start) &&
+                                        p.getDate().isBefore(end))
                 .sorted(inputData)
                 .collect(Collectors.toList());
 
