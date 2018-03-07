@@ -37,9 +37,9 @@ public class WelcomeServlet extends HttpServlet {
 
         Template template = TemplateProvider.createTemplate(getServletContext(), "welcome.ftlh");
 
-        try{
+        try {
             template.process(dataModel, response.getWriter());
-        }catch(TemplateException e){
+        } catch(TemplateException e) {
             e.printStackTrace();
         }
     }
