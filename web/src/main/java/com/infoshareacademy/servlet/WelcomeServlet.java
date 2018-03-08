@@ -33,7 +33,7 @@ public class WelcomeServlet extends HttpServlet {
         List<String> currencyList = dataProviderBean.getFromFile(fullPath);
 
         Map<String, List> dataModel = new HashMap<>();
-        dataModel.put("currencies", currencyList);
+        dataModel.put("src/main/currencies", currencyList);
 
         Template template = TemplateProvider.createTemplate(getServletContext(), "welcome.ftlh");
 

@@ -1,5 +1,3 @@
-package com.infoshareacademy.view;
-
 import com.infoshareacademy.controller.MathStock;
 import com.infoshareacademy.controller.SearchStock;
 import com.infoshareacademy.controller.StockSorter;
@@ -8,10 +6,10 @@ import com.infoshareacademy.tools.DateService;
 import com.infoshareacademy.tools.MenuDataService;
 import com.infoshareacademy.tools.PropertyService;
 import com.infoshareacademy.tools.StockFileReaderService;
-import java.text.DecimalFormat;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -379,13 +377,14 @@ public class DisplayMenu {
         MathStock newMath = new MathStock();
         SearchStock newSearchStock = new SearchStock();
         StockSorter newStockSorter = new StockSorter();
+        List<InputData> loadedFile = StockFileReaderService.readFile(getPathToCrypto());
         switch (userOperation) {
             case 1:
                 clearScreen();
                 menuHeading();
                 menuFooting();
                 double minimum = newSearchStock.printPriceMin(newSearchStock.streamList(
-                        StockFileReaderService.readFile(getPathToCrypto()), startDate, endDate));
+                        loadedFile, startDate, endDate));
                 System.out.println("The minimum value of the Cryptovalue "
                         + extractCurrency()
                         + " from the selected start date "
@@ -403,7 +402,7 @@ public class DisplayMenu {
                 menuHeading();
                 menuFooting();
                 double maximum = newSearchStock.printPriceMax(newSearchStock.streamList(
-                        StockFileReaderService.readFile(getPathToCrypto()), startDate, endDate));
+                        loadedFile, startDate, endDate));
                 System.out.println("The maximum value of the Cryptovalue "
                         + extractCurrency()
                         + " from the selected start date "
@@ -418,7 +417,7 @@ public class DisplayMenu {
                 break;
             case 3:
                 double average = newMath.averagePriceForRange(
-                        newSearchStock.streamList(StockFileReaderService.readFile(getPathToCrypto()),
+                        newSearchStock.streamList(loadedFile,
                                 startDate, endDate));
                 clearScreen();
                 menuHeading();
@@ -437,7 +436,7 @@ public class DisplayMenu {
                 break;
             case 4:
                 double median = newMath.medianPriceForRange(
-                        newSearchStock.streamList(StockFileReaderService.readFile(getPathToCrypto()),
+                        newSearchStock.streamList(loadedFile,
                                 startDate, endDate));
                 clearScreen();
                 menuHeading();
@@ -456,7 +455,7 @@ public class DisplayMenu {
                 break;
             case 5:
                 List<Double> movingAverage = newMath.movingAveragePriceForRange(
-                        newSearchStock.streamList(StockFileReaderService.readFile(getPathToCrypto()), startDate, endDate));
+                        newSearchStock.streamList(loadedFile, startDate, endDate));
                 clearScreen();
                 menuHeading();
                 menuFooting();
@@ -476,7 +475,7 @@ public class DisplayMenu {
                 break;
             case 6:
                 List<InputData> selValueByPrice = newStockSorter.sortDataBy(
-                        StockFileReaderService.readFile(getPathToCrypto()), StockSorter.byPrice, startDate, endDate);
+                        loadedFile, StockSorter.byPrice, startDate, endDate);
                 clearScreen();
                 menuHeading();
                 menuFooting();
@@ -498,7 +497,7 @@ public class DisplayMenu {
                 break;
             case 7:
                 List<InputData> selValueByDate = newStockSorter.sortDataBy(
-                        StockFileReaderService.readFile(getPathToCrypto()), StockSorter.byDate, startDate, endDate);
+                        loadedFile, StockSorter.byDate, startDate, endDate);
                 clearScreen();
                 menuHeading();
                 menuFooting();
