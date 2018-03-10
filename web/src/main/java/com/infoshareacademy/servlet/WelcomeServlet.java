@@ -2,7 +2,6 @@ package com.infoshareacademy.servlet;
 
 
 import com.infoshareacademy.freemarker.TemplateProvider;
-import com.infoshareacademy.service.DataProviderBean;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -33,7 +32,7 @@ public class WelcomeServlet extends HttpServlet {
         List<String> currencyList = dataProviderBean.getFromFile(fullPath);
 
         Map<String, List> dataModel = new HashMap<>();
-        dataModel.put("currencies", currencyList);
+        dataModel.put("src/main/currencies", currencyList);
 
         Template template = TemplateProvider.createTemplate(getServletContext(), "welcome.ftlh");
 

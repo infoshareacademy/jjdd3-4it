@@ -1,14 +1,14 @@
 package com.infoshareacademy.controller;
 
-import com.infoshareacademy.model.InputData;
+        import com.infoshareacademy.model.InputData;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+        import org.slf4j.Logger;
+        import org.slf4j.LoggerFactory;
 
-import java.time.LocalDate;
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
+        import java.time.LocalDate;
+        import java.util.Comparator;
+        import java.util.List;
+        import java.util.stream.Collectors;
 
 public class StockSorter {
 
@@ -23,9 +23,9 @@ public class StockSorter {
         return list.stream()
                 .filter(p ->
                         p.getDate().isEqual(start) ||
-                                p.getDate().isEqual(end) ||
-                                p.getDate().isAfter(start) &&
-                                        p.getDate().isBefore(end))
+                        p.getDate().isEqual(end) ||
+                        p.getDate().isAfter(start) &&
+                        p.getDate().isBefore(end))
                 .sorted(inputData)
                 .collect(Collectors.toList());
 

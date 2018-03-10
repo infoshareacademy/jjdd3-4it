@@ -2,31 +2,17 @@ package com.infoshareacademy.controller;
 
 import com.infoshareacademy.model.InputData;
 
-import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class SearchStock {
 
+    public InputData printPriceMax(List<InputData> resources) {
 
-    public List<InputData> streamList(List<InputData> resources, LocalDate start, LocalDate end) {
-
-        return resources.stream()
-                .filter(p ->
-                        p.getDate().isEqual(start) ||
-                        p.getDate().isEqual(end) ||
-                        p.getDate().isAfter(start) &&
-                        p.getDate().isBefore(end))
-                .collect(Collectors.toList());
+        return resources.stream().max((p1, p2) -> Double.compare(p1.getPrice(), p2.getPrice())).get();
     }
 
-    public double printPriceMax(List<InputData> resources) {
+    public InputData printPriceMin(List<InputData> resources) {
 
-        return resources.stream().max((p1, p2) -> Double.compare(p1.getPrice(), p2.getPrice())).get().getPrice();
-    }
-
-    public double printPriceMin(List<InputData> resources) {
-
-        return resources.stream().min((p1, p2) -> Double.compare(p1.getPrice(), p2.getPrice())).get().getPrice();
+        return resources.stream().min((p1, p2) -> Double.compare(p1.getPrice(), p2.getPrice())).get();
     }
 }

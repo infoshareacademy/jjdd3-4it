@@ -1,4 +1,4 @@
-package com.infoshareacademy.service;
+package com.infoshareacademy.servlet;
 
 import javax.enterprise.context.RequestScoped;
 import java.io.File;

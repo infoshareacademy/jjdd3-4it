@@ -1,6 +1,7 @@
 package com.infoshareacademy.controller;
 
 import com.infoshareacademy.model.ImportStock;
+import com.infoshareacademy.model.InputData;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -18,7 +19,8 @@ public class SearchStockTest {
         SearchStock searchStock = new SearchStock();
 
         // When
-        double maxValueActual = searchStock.printPriceMax(importStock.getResources());
+        InputData maxValueWithDate  = searchStock.printPriceMax(importStock.getResources());
+        double maxValueActual = maxValueWithDate.getPrice();
         double maxValueExpected = 1156.73;
 
         // Then
@@ -35,7 +37,8 @@ public class SearchStockTest {
         SearchStock searchStock = new SearchStock();
 
         // When
-        double minValueActual = searchStock.printPriceMin(importStock.getResources());
+        InputData minValueWithDate =searchStock.printPriceMin(importStock.getResources());
+        double minValueActual = minValueWithDate.getPrice();
         double minValueExpected = 963.66;
 
         // Then
