@@ -40,7 +40,7 @@ public class StockReaderServlet extends HttpServlet{
 
         List<InputData> cryptoData = countingFunctionBean.sortDataByBean(path);
 
-        double max = countingFunctionBean.printMaxPriceBean(cryptoData, path);
+        InputData max = countingFunctionBean.printMaxPriceBean(cryptoData, path);
 
         double min = countingFunctionBean.printMinPriceBean(cryptoData, path);
 
@@ -54,6 +54,7 @@ public class StockReaderServlet extends HttpServlet{
         //REFACTOR SZBLONY FREEMARKET
         Map<String, Object> dataModel = new HashMap<>();
         dataModel.put("cryptos", cryptoData);
+        dataModel.put("maxs", max);
 
 
         Template template = TemplateProvider.createTemplate(getServletContext(), "users-list.ftlh");
@@ -62,8 +63,6 @@ public class StockReaderServlet extends HttpServlet{
 
         try {
             template.process(dataModel, resp.getWriter());
-            printWriter.write("-----------------------\n");
-            printWriter.write(String.valueOf(max));
             printWriter.write("-----------------------\n");
             printWriter.write(String.valueOf(min));
             printWriter.write("-----------------------\n");

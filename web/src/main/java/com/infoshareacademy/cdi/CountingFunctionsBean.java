@@ -29,7 +29,7 @@ public class CountingFunctionsBean {
     //SearchStock
     private SearchStock searchStock = new SearchStock();
 
-    public double printMaxPriceBean(List<InputData> resources, String cryptoFIle){
+    public InputData printMaxPriceBean(List<InputData> resources, String cryptoFIle){
         return searchStock.printPriceMax(sortDataByBean(cryptoFIle));
     }
 
