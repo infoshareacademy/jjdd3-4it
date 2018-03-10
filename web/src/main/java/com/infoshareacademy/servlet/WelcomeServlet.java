@@ -2,7 +2,6 @@ package com.infoshareacademy.servlet;
 
 
 import com.infoshareacademy.freemarker.TemplateProvider;
-import com.infoshareacademy.service.DataProviderBean;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 

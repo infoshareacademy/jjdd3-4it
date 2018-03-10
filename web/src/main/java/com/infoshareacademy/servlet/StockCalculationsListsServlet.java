@@ -14,17 +14,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.core.StreamingOutput;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @WebServlet("/list")
-public class StockReaderServlet extends HttpServlet{
+public class StockCalculationsListsServlet extends HttpServlet {
 
-    private static final Logger LOG = LoggerFactory.getLogger(StockReaderServlet.class);
+    private static final Logger LOG = LoggerFactory.getLogger(StockCalculationsListsServlet.class);
 
     @EJB
     CountingFunctionsBean countingFunctionBean;
@@ -32,15 +31,17 @@ public class StockReaderServlet extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        String pathToFile = getServletContext().getResource("/WEB-INF/currency/bitCoin.csv").getPath();
+        String path = req.getParameter("path");
+        LocalDate startDate = LocalDate.parse(req.getParameter("start"));
+        LocalDate endDate = LocalDate.parse(req.getParameter("end"));
+        String pathToFile = getServletContext().getResource("/WEB-INF/currency/" + path).getPath();
         LOG.info("PATH TO FILE: {}", pathToFile);
 
-        List<InputData> cryptoData = countingFunctionBean.sortDataByBean(pathToFile);
-        InputData minPrice = countingFunctionBean.printMinPriceBean(cryptoData, pathToFile);
-        InputData maxPrice = countingFunctionBean.printMaxPriceBean(cryptoData, pathToFile);
-        Double averageOfPrice = countingFunctionBean.avaragePriceForRangeBean(cryptoData, pathToFile);
-        Double medianOfPrice = countingFunctionBean.medianPriceForRangeBean(cryptoData, pathToFile);
+        List<InputData> cryptoData = countingFunctionBean.sortDataByBean(pathToFile, startDate, endDate);
+        InputData minPrice = countingFunctionBean.printMinPriceBean(pathToFile, startDate, endDate);
+        InputData maxPrice = countingFunctionBean.printMaxPriceBean(pathToFile, startDate, endDate);
+        Double averageOfPrice = countingFunctionBean.avaragePriceForRangeBean(pathToFile, startDate, endDate);
+        Double medianOfPrice = countingFunctionBean.medianPriceForRangeBean(pathToFile, startDate, endDate);
 
 
         Map<String, Object> dataModel = new HashMap<>();

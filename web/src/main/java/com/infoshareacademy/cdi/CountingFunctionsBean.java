@@ -12,40 +12,37 @@ import java.util.List;
 
 @Stateless
 public class CountingFunctionsBean {
-    //StockFileReaderService
+
     private StockFileReaderService stockFileReaderService = new StockFileReaderService();
 
     public List<InputData> readFileBean(String cryptoFile) {
         return stockFileReaderService.readFile(cryptoFile);
     }
 
-    //StockSorter
     private StockSorter stockSorter = new StockSorter();
 
-    public List<InputData> sortDataByBean(String cryptoFile){
-        return stockSorter.sortDataBy(readFileBean(cryptoFile),stockSorter.byPrice, LocalDate.parse("2017-01-01"), LocalDate.parse("2017-01-03"));
+    public List<InputData> sortDataByBean(String cryptoFile, LocalDate startDate, LocalDate endDate){
+        return stockSorter.sortDataBy(readFileBean(cryptoFile),stockSorter.byPrice, startDate, endDate);
     }
 
-    //SearchStock
     private SearchStock searchStock = new SearchStock();
 
-    public InputData printMaxPriceBean(List<InputData> resources, String cryptoFile){
-        return searchStock.printPriceMax(sortDataByBean(cryptoFile));
+    public InputData printMaxPriceBean(String cryptoFile, LocalDate startDate, LocalDate endDate){
+        return searchStock.printPriceMax(sortDataByBean(cryptoFile, startDate, endDate));
     }
 
-    public InputData printMinPriceBean(List<InputData> resources, String cryptoFile){
-        return searchStock.printPriceMin(sortDataByBean(cryptoFile));
+    public InputData printMinPriceBean(String cryptoFile, LocalDate startDate, LocalDate endDate){
+        return searchStock.printPriceMin(sortDataByBean(cryptoFile, startDate, endDate));
     }
 
-    //MathStock
     private MathStock mathStock = new MathStock();
 
-    public double medianPriceForRangeBean(List<InputData> resources, String cryptoFile){
-        return mathStock.medianPriceForRange(sortDataByBean(cryptoFile));
+    public double medianPriceForRangeBean(String cryptoFile, LocalDate startDate, LocalDate endDate){
+        return mathStock.medianPriceForRange(sortDataByBean(cryptoFile, startDate, endDate));
     }
 
-    public double avaragePriceForRangeBean(List<InputData> resources, String cryptoFile){
-        return mathStock.averagePriceForRange(sortDataByBean(cryptoFile));
+    public double avaragePriceForRangeBean(String cryptoFile, LocalDate startDate, LocalDate endDate){
+        return mathStock.averagePriceForRange(sortDataByBean(cryptoFile, startDate, endDate));
     }
 
 
