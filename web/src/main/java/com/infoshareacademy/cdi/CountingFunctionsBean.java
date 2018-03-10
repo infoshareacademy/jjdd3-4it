@@ -29,23 +29,23 @@ public class CountingFunctionsBean {
     //SearchStock
     private SearchStock searchStock = new SearchStock();
 
-    public InputData printMaxPriceBean(List<InputData> resources, String cryptoFIle){
-        return searchStock.printPriceMax(sortDataByBean(cryptoFIle));
+    public InputData printMaxPriceBean(List<InputData> resources, String cryptoFile){
+        return searchStock.printPriceMax(sortDataByBean(cryptoFile));
     }
 
-    public double printMinPriceBean(List<InputData> resources, String cryptoFIle){
-        return searchStock.printPriceMin(sortDataByBean(cryptoFIle));
+    public InputData printMinPriceBean(List<InputData> resources, String cryptoFile){
+        return searchStock.printPriceMin(sortDataByBean(cryptoFile));
     }
 
     //MathStock
     private MathStock mathStock = new MathStock();
 
-    public double medianPriceForRangeBean(List<InputData> resources, String cryptoFIle){
-        return mathStock.medianPriceForRange(sortDataByBean(cryptoFIle));
+    public double medianPriceForRangeBean(List<InputData> resources, String cryptoFile){
+        return mathStock.medianPriceForRange(sortDataByBean(cryptoFile));
     }
 
-    public double avaragePriceForRangeBean(List<InputData> resources, String cryptoFIle){
-        return mathStock.averagePriceForRange(sortDataByBean(cryptoFIle));
+    public double avaragePriceForRangeBean(List<InputData> resources, String cryptoFile){
+        return mathStock.averagePriceForRange(sortDataByBean(cryptoFile));
     }
 
 

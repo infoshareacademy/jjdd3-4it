@@ -10,7 +10,10 @@
         </div>
     </#items>
 </#list>
-
+<p>MAX: ${max.date} ${max.price}</p>
+<p>MIN: ${min.date} ${min.price}</p>
+<p>AVG: ${avg}</p>
+<p>MED: ${med}</p>
 
 </body>
 </html>

@@ -33,45 +33,31 @@ public class StockReaderServlet extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        LOG.info("StockReaderServlet");
+        String pathToFile = getServletContext().getResource("/WEB-INF/currency/bitCoin.csv").getPath();
+        LOG.info("PATH TO FILE: {}", pathToFile);
 
-        String path = getServletContext().getResource("/WEB-INF/currency/bitCoin.csv").getPath();
-        LOG.info("PATH TO FILE: {}", path);
-
-        List<InputData> cryptoData = countingFunctionBean.sortDataByBean(path);
-
-        InputData max = countingFunctionBean.printMaxPriceBean(cryptoData, path);
-
-        double min = countingFunctionBean.printMinPriceBean(cryptoData, path);
-
-        double avg = countingFunctionBean.avaragePriceForRangeBean(cryptoData, path);
-
-        double med = countingFunctionBean.medianPriceForRangeBean(cryptoData, path);
-
-        PrintWriter printWriter = resp.getWriter();
+        List<InputData> cryptoData = countingFunctionBean.sortDataByBean(pathToFile);
+        InputData minPrice = countingFunctionBean.printMinPriceBean(cryptoData, pathToFile);
+        InputData maxPrice = countingFunctionBean.printMaxPriceBean(cryptoData, pathToFile);
+        Double averageOfPrice = countingFunctionBean.avaragePriceForRangeBean(cryptoData, pathToFile);
+        Double medianOfPrice = countingFunctionBean.medianPriceForRangeBean(cryptoData, pathToFile);
 
 
-        //REFACTOR SZBLONY FREEMARKET
         Map<String, Object> dataModel = new HashMap<>();
         dataModel.put("cryptos", cryptoData);
-        dataModel.put("maxs", max);
+        dataModel.put("min", minPrice);
+        dataModel.put("max", maxPrice);
+        dataModel.put("avg", averageOfPrice);
+        dataModel.put("med", medianOfPrice);
 
-
-        Template template = TemplateProvider.createTemplate(getServletContext(), "users-list.ftlh");
-
-
+        Template template = TemplateProvider.createTemplate(getServletContext(), "start-menu.ftlh");
 
         try {
             template.process(dataModel, resp.getWriter());
-            printWriter.write("-----------------------\n");
-            printWriter.write(String.valueOf(min));
-            printWriter.write("-----------------------\n");
-            printWriter.write(String.valueOf(med));
-            printWriter.write("-----------------------\n");
-            printWriter.write(String.valueOf(avg));
-
         } catch (TemplateException e) {
             e.printStackTrace();
         }
+
+
     }
 }

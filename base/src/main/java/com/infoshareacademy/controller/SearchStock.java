@@ -11,8 +11,8 @@ public class SearchStock {
         return resources.stream().max((p1, p2) -> Double.compare(p1.getPrice(), p2.getPrice())).get();
     }
 
-    public double printPriceMin(List<InputData> resources) {
+    public InputData printPriceMin(List<InputData> resources) {
 
-        return resources.stream().min((p1, p2) -> Double.compare(p1.getPrice(), p2.getPrice())).get().getPrice();
+        return resources.stream().min((p1, p2) -> Double.compare(p1.getPrice(), p2.getPrice())).get();
     }
 }
