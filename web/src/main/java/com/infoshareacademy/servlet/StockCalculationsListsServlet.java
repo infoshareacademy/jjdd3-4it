@@ -50,6 +50,14 @@ public class StockCalculationsListsServlet extends HttpServlet {
         dataModel.put("max", maxPrice);
         dataModel.put("avg", averageOfPrice);
         dataModel.put("med", medianOfPrice);
+        dataModel.put("startdate",startDate);
+        dataModel.put("enddate",endDate);
+        String whichCoin;
+        whichCoin=path;
+        whichCoin=whichCoin.toLowerCase();
+
+        whichCoin=whichCoin.substring(0,whichCoin.length()-4);
+        dataModel.put("whichCoin",whichCoin);
 
         Template template = TemplateProvider.createTemplate(getServletContext(), "start-menu.ftlh");
 
