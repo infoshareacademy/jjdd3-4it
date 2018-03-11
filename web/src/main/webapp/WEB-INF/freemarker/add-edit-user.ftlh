@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome user template</title>
+</head>
+<body>
+<form method="post" action="/${action!"add-user"}" enctype="multipart/form-data">
+    Image: <input type="file" name="image"/><br/><br/>
+    <input type="submit" name="save" value="save"/><br/><br/>
+</form>
+</body>
+</html>
