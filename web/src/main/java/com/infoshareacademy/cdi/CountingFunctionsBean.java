@@ -45,9 +45,4 @@ public class CountingFunctionsBean {
         return mathStock.averagePriceForRange(sortDataByBean(cryptoFile, startDate, endDate));
     }
 
-
-
-
-
-
 }

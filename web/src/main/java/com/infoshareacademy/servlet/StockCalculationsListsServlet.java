@@ -43,7 +43,6 @@ public class StockCalculationsListsServlet extends HttpServlet {
         Double averageOfPrice = countingFunctionBean.avaragePriceForRangeBean(pathToFile, startDate, endDate);
         Double medianOfPrice = countingFunctionBean.medianPriceForRangeBean(pathToFile, startDate, endDate);
 
-
         Map<String, Object> dataModel = new HashMap<>();
         dataModel.put("cryptos", cryptoData);
         dataModel.put("min", minPrice);
