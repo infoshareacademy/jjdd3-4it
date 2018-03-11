@@ -36,7 +36,7 @@ public class OperationServlet extends HttpServlet {
 
         try {
             template.process(dataModel, response.getWriter());
-        } catch(TemplateException e) {
+        } catch (TemplateException e) {
             e.printStackTrace();
         }
     }
