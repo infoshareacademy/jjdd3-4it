@@ -1,5 +1,8 @@
 package com.infoshareacademy.model;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
@@ -8,6 +11,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ImportStock {
+    private static Logger LOG = LoggerFactory.getLogger(ImportStock.class);
     private File file;
     private List<InputData> resources = new ArrayList<>();
 
@@ -20,6 +24,7 @@ public class ImportStock {
     }
 
     public void readFromFile() {
+        LOG.info("User retrieves data from file {} with method readFromFile", file);
         try (Scanner inputStream = new Scanner(file)) {
             if (inputStream.hasNext()) {
                 inputStream.next();
@@ -35,6 +40,7 @@ public class ImportStock {
         } catch (FileNotFoundException fnfExc) {
             System.out.println("Invalid file name or wrong path to file!!!");
             System.out.println(fnfExc);
+            LOG.error("Chosen file was not found");
         }
     }
 }

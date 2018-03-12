@@ -17,7 +17,6 @@ public class CountingFunctionsBean {
     private static Logger LOG = LoggerFactory.getLogger(CountingFunctionsBean.class);
     private StockFileReaderService stockFileReaderService = new StockFileReaderService();
 
-
     public List<InputData> readFileBean(String cryptoFile) {
         return stockFileReaderService.readFile(cryptoFile);
     }
@@ -48,6 +47,5 @@ public class CountingFunctionsBean {
     public double avaragePriceForRangeBean(String cryptoFile, LocalDate startDate, LocalDate endDate) {
         return mathStock.averagePriceForRange(sortDataByBean(cryptoFile, startDate, endDate));
     }
-
 
 }

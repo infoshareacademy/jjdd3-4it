@@ -2,8 +2,7 @@
 <html>
 <head>
     <title>Users list</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="../styles/styles.css">
 </head>
 <body>
@@ -33,7 +32,13 @@
 <#list cryptos>
     <#items as crypto>
             <p>${crypto.date} ${crypto.price}</p>
+        </div>
     </#items>
 </#list>
+<p>MAX: ${max.date} ${max.price}</p>
+<p>MIN: ${min.date} ${min.price}</p>
+<p>AVG: ${avg}</p>
+<p>MED: ${med}</p>
+
 </body>
 </html>
