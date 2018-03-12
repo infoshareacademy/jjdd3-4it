@@ -35,7 +35,7 @@ public class StockCalculationsListsServlet extends HttpServlet {
         LocalDate startDate = LocalDate.parse(req.getParameter("start"));
         LocalDate endDate = LocalDate.parse(req.getParameter("end"));
         String pathToFile = getServletContext().getResource("/WEB-INF/currency/" + path).getPath();
-        LOG.info("PATH TO FILE: {}", pathToFile);
+        LOG.info("Path to file: {}", pathToFile);
 
         List<InputData> cryptoData = countingFunctionBean.sortDataByBean(pathToFile, startDate, endDate);
         InputData minPrice = countingFunctionBean.printMinPriceBean(pathToFile, startDate, endDate);
