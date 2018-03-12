@@ -59,7 +59,6 @@ public class StockCalculationsListsServlet extends HttpServlet {
         String whichCoin;
         whichCoin=currencyName;
         whichCoin=whichCoin.toLowerCase();
-        whichCoin=whichCoin.substring(0,whichCoin.length());
         dataModel.put("whichCoin",whichCoin);
 
         Template template = TemplateProvider.createTemplate(getServletContext(), "start-menu.ftlh");
