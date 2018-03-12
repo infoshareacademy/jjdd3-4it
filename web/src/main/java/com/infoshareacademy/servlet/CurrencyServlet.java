@@ -25,7 +25,7 @@ public class CurrencyServlet extends HttpServlet {
     CurrencyProviderBean currencyProviderBean;
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         ServletContext context = this.getServletContext();
         String fullPath = context.getRealPath("/WEB-INF/currencies");
@@ -38,7 +38,7 @@ public class CurrencyServlet extends HttpServlet {
 
         try {
             template.process(dataModel, response.getWriter());
-        } catch(TemplateException e) {
+        } catch (TemplateException e) {
             e.printStackTrace();
         }
     }

@@ -28,6 +28,7 @@ public class StockCalculationsListsServlet extends HttpServlet {
     @EJB
     CountingFunctionsBean countingFunctionBean;
 
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -37,10 +38,8 @@ public class StockCalculationsListsServlet extends HttpServlet {
         String currencyName = req.getParameter("currency");
 //        String operation = req.getParameter("operation");
 //        resp.getWriter().println("operation: " + operation);
-
-
         String pathToFile = getServletContext().getResource("/WEB-INF/currency/" + currencyName + ".csv").getPath();
-        LOG.info("PATH TO FILE: {}", pathToFile);
+        LOG.info("PPath to file: {}", pathToFile);
 
         List<InputData> cryptoData = countingFunctionBean.sortDataByBean(pathToFile, startDate, endDate);
         InputData minPrice = countingFunctionBean.printMinPriceBean(pathToFile, startDate, endDate);
@@ -48,12 +47,20 @@ public class StockCalculationsListsServlet extends HttpServlet {
         Double averageOfPrice = countingFunctionBean.avaragePriceForRangeBean(pathToFile, startDate, endDate);
         Double medianOfPrice = countingFunctionBean.medianPriceForRangeBean(pathToFile, startDate, endDate);
 
+
         Map<String, Object> dataModel = new HashMap<>();
         dataModel.put("cryptos", cryptoData);
         dataModel.put("min", minPrice);
         dataModel.put("max", maxPrice);
         dataModel.put("avg", averageOfPrice);
         dataModel.put("med", medianOfPrice);
+        dataModel.put("startdate",startDate);
+        dataModel.put("enddate",endDate);
+        String whichCoin;
+        whichCoin=currencyName;
+        whichCoin=whichCoin.toLowerCase();
+        whichCoin=whichCoin.substring(0,whichCoin.length()-4);
+        dataModel.put("whichCoin",whichCoin);
 
         Template template = TemplateProvider.createTemplate(getServletContext(), "start-menu.ftlh");
 
