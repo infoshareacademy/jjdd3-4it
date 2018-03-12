@@ -15,13 +15,12 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.infoshareacademy.servlet.CurrencyServlet;
 
 @WebServlet("/operation")
 public class OperationServlet extends HttpServlet {
 
     @Inject
-    OperationProviderBean OperationProviderBean;
+    com.infoshareacademy.cdi.OperationProviderBean OperationProviderBean;
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

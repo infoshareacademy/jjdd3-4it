@@ -1,7 +1,8 @@
-package com.infoshareacademy.servlet;
+package com.infoshareacademy.cdi;
 
 import com.infoshareacademy.domain.CurrencyObject;
 
+import javax.ejb.Stateless;
 import javax.enterprise.context.RequestScoped;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-@RequestScoped
+@Stateless
 public class OperationProviderBean {
 
     public List getFromFile(String path) {
