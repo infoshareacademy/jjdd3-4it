@@ -1,6 +1,8 @@
 package com.infoshareacademy.controller;
 
 import com.infoshareacademy.model.InputData;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,6 +14,7 @@ public class MathStock {
 
     private double averagePrice;
     private double medianPrice;
+    private static final Logger LOG = LoggerFactory.getLogger(MathStock.class);
 
     List<Double> listHelp = new ArrayList<Double>();
     private int cycle = 4;
@@ -26,7 +29,7 @@ public class MathStock {
             averagePrice += resources.get(i).getPrice();
         }
         averagePrice /= (resources.size());
-
+        LOG.info("Average Price is compute", averagePrice);
         return averagePrice;
     }
 
@@ -41,11 +44,13 @@ public class MathStock {
         if (medianRange % 2 != 0) {
             medianRange = (medianRange - 1) / 2;
             medianPrice = listHelp.get(medianRange);
+            LOG.info("Median Price is compute", medianPrice);
             return medianPrice;
 
         } else {
             medianRange = medianRange / 2;
             medianPrice = (listHelp.get(medianRange) + listHelp.get(medianRange - 1)) / 2;
+            LOG.info("Median Price is compute", medianPrice);
             return medianPrice;
         }
 
@@ -62,6 +67,7 @@ public class MathStock {
             listForAveragePrice.add(r, movingAveragePrice);
             r++;
         }
+        LOG.info("Moving average Price is compute", movingAveragePrice);
         return listForAveragePrice;
     }
 
