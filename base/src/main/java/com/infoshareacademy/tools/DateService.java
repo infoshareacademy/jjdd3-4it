@@ -13,10 +13,12 @@ public class DateService {
     private static final String DATE_FORMAT = propertyService.getDateFormat();
 
     static LocalDate dateInRange(String input) throws DateTimeParseException {
+        LOG.warn("What input: {}", input);
         return LocalDate.parse(input);
     }
 
     static LocalDate dateCorrectFormat(LocalDate date) throws DateTimeParseException {
+        LOG.warn("What type of date: {}", DATE_FORMAT);
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DATE_FORMAT);
         String formattedDate = date.format(dtf);
         return LocalDate.parse(formattedDate);
