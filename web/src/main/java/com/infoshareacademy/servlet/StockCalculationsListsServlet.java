@@ -28,35 +28,44 @@ public class StockCalculationsListsServlet extends HttpServlet {
     @EJB
     CountingFunctionsBean countingFunctionBean;
 
-
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String path = req.getParameter("path");
+
         LocalDate startDate = LocalDate.parse(req.getParameter("start"));
         LocalDate endDate = LocalDate.parse(req.getParameter("end"));
-        String pathToFile = getServletContext().getResource("/WEB-INF/currency/" + path).getPath();
-        LOG.info("PATH TO FILE: {}", pathToFile);
+        String currencyName = req.getParameter("currency");
+        String operation = req.getParameter("operation");
 
-        List<InputData> cryptoData = countingFunctionBean.sortDataByBean(pathToFile, startDate, endDate);
-        InputData minPrice = countingFunctionBean.printMinPriceBean(pathToFile, startDate, endDate);
-        InputData maxPrice = countingFunctionBean.printMaxPriceBean(pathToFile, startDate, endDate);
-        Double averageOfPrice = countingFunctionBean.avaragePriceForRangeBean(pathToFile, startDate, endDate);
-        Double medianOfPrice = countingFunctionBean.medianPriceForRangeBean(pathToFile, startDate, endDate);
-
-        Map<String, Object> dataModel = new HashMap<>();
-        dataModel.put("cryptos", cryptoData);
-        dataModel.put("min", minPrice);
-        dataModel.put("max", maxPrice);
-        dataModel.put("avg", averageOfPrice);
-        dataModel.put("med", medianOfPrice);
-
-        Template template = TemplateProvider.createTemplate(getServletContext(), "start-menu.ftlh");
-
-        try {
-            template.process(dataModel, resp.getWriter());
-        } catch (TemplateException e) {
-            e.printStackTrace();
-        }
+        resp.getWriter().println("startDate: " + startDate);
+        resp.getWriter().println("endDate: " + endDate);
+        resp.getWriter().println("currencyName: " + currencyName);
+        resp.getWriter().println("operation: " + operation);
+//
+//
+//        String pathToFile = getServletContext().getResource("/WEB-INF/currency/" + path).getPath();
+//        LOG.info("PATH TO FILE: {}", pathToFile);
+//
+//        List<InputData> cryptoData = countingFunctionBean.sortDataByBean(pathToFile, startDate, endDate);
+//        InputData minPrice = countingFunctionBean.printMinPriceBean(pathToFile, startDate, endDate);
+//        InputData maxPrice = countingFunctionBean.printMaxPriceBean(pathToFile, startDate, endDate);
+//        Double averageOfPrice = countingFunctionBean.avaragePriceForRangeBean(pathToFile, startDate, endDate);
+//        Double medianOfPrice = countingFunctionBean.medianPriceForRangeBean(pathToFile, startDate, endDate);
+//
+//        Map<String, Object> dataModel = new HashMap<>();
+//        dataModel.put("cryptos", cryptoData);
+//        dataModel.put("min", minPrice);
+//        dataModel.put("max", maxPrice);
+//        dataModel.put("avg", averageOfPrice);
+//        dataModel.put("med", medianOfPrice);
+//
+//        Template template = TemplateProvider.createTemplate(getServletContext(), "start-menu.ftlh");
+//
+//        try {
+//            template.process(dataModel, resp.getWriter());
+//        } catch (TemplateException e) {
+//            e.printStackTrace();
+//        }
 
 
     }

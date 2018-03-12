@@ -23,10 +23,10 @@
             <#list currencies>
                 <#items as FrontendObject>
                 <div class="col-md-4">
-                        <img class="img-top" style="max-width: 10rem;" alt="image" src=${FrontendObject.url}>
-                            <h5 class="card-title" name="currencyName">${FrontendObject.name}</h5>
-                            <p class="card-text">${FrontendObject.description}</p>
-                            <input type="submit" name="Go" value=${FrontendObject.name}><br/><br/>
+                    <img class="img-top" style="max-width: 10rem;" alt="image" src=${FrontendObject.url}>
+                    <h5 class="card-title" name="currencyName">${FrontendObject.name}</h5>
+                    <p class="card-text">${FrontendObject.description}</p>
+                    <input type="submit" name="Go" value=${FrontendObject.name}><br/><br/>
                 </div>
                 </#items>
             </#list>

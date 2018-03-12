@@ -21,19 +21,17 @@
 <hr/>
 
 <p>Kindly select the starting date:</p>
-<form action="/action_page.php">
+<form action="/web/list">
     From Date:
     <input type="date" name="start" value="2017-01-01" min="2017-01-01" max="2017-12-31" required>
-</form>
-<p></p>
-<p>Kindly select the ending date: </p>
-<form action="/action_page.php">
+    <p></p>
+    <p>Kindly select the ending date: </p>
     To Date:
     <input type="date" name="end" value="2017-12-31" min="2017-01-01" max="2017-12-31" required>
-</form>
-<hr/>
-<h4>From the list below please select an operation to be performed on the currency you chose:</h4>
-<hr/>
+    <hr/>
+    <h4>From the list below please select an operation to be performed on the currency you chose:</h4>
+    <hr/>
+    <input type="hidden" name="currency" value="${currencyName}"/>
             <#list operation>
                 <#items as FrontendObject>
                 <div class="col">
@@ -41,13 +39,15 @@
                         <div class="card-body" name=${FrontendObject.name}>
                             <h5 class="card-title">${FrontendObject.description}</h5>
                             <div class="card-footer">
-                                <a href="/web/list" class="btn btn-primary">Show Result</a>
+                                <button name="operation" type="submit" value=${FrontendObject.name}>Show Result</button>
+                                <!--<a href="/web/list" class="btn btn-primary">Show Result</a>-->
                             </div>
                         </div>
                     </div>
                 </div>
                 </#items>
             </#list>
+</form>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

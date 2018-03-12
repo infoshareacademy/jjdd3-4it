@@ -15,7 +15,7 @@ public class CurrencyProviderBean {
     public List getFromFile(String path) {
 
         Scanner newScanner = null;
-                List<String> newStringList = new ArrayList();
+        List<String> newStringList = new ArrayList();
         String[] toObject = new String[2];
         List<CurrencyObject> newFrontObjectList = new ArrayList();
 
