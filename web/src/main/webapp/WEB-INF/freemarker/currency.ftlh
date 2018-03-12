@@ -10,43 +10,28 @@
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="WEB-INF/css/styles.css">
 
-    <title>Operation list</title>
+    <title>Currency list</title>
 </head>
 <body>
-<form method="post" action="/web${action!"/list"}">
-<p></p>
-<a href="/web/currency" id="goback" class="btn btn-primary">Go Back To Crypto Currency Selection</a>
+<h2 class="title">Welcome to your favourite application kindly delivered to you by 4IT Development Team</h2>
 <hr/>
-<h2>Your selected Crypto Currency is ${currencyName}</h2>
+<h3 class="title">From the list below please select the Crypto Currency of your choice</h3>
 <hr/>
-
-<p>Kindly select the starting date:</p>
-<form action="/web/list">
-    From Date:
-    <input type="date" name="start" value="2017-01-01" min="2017-01-01" max="2017-12-31" required>
-    <p></p>
-    <p>Kindly select the ending date: </p>
-    To Date:
-    <input type="date" name="end" value="2017-12-31" min="2017-01-01" max="2017-12-31" required>
-    <hr/>
-    <h4>From the list below please select an operation to be performed on the currency you chose:</h4>
-    <hr/>
-    <input type="hidden" name="currency" value="${currencyName}"/>
-            <#list operation>
+<form method="post" action="/web${action!"/operation"}">
+<div class="container">
+<div class="row">
+            <#list currencies>
                 <#items as FrontendObject>
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body" name=${FrontendObject.name}>
-                            <h5 class="card-title">${FrontendObject.description}</h5>
-                            <div class="card-footer">
-                                <button name="operation" type="submit" value=${FrontendObject.name}>Show Result</button>
-                                <!--<a href="/web/list" class="btn btn-primary">Show Result</a>-->
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-md-4">
+                    <img class="img-top" style="max-width: 10rem;" alt="image" src=${FrontendObject.url}>
+                    <h5 class="card-title" name="currencyName">${FrontendObject.name}</h5>
+                    <p class="card-text">${FrontendObject.description}</p>
+                    <input type="submit" name="Go" value=${FrontendObject.name}><br/><br/>
                 </div>
                 </#items>
             </#list>
+        </div>
+</div>
 </form>
 
 <!-- Optional JavaScript -->

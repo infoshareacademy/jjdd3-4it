@@ -30,12 +30,16 @@ public class StockCalculationsListsServlet extends HttpServlet {
 
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String path = req.getParameter("path");
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+
         LocalDate startDate = LocalDate.parse(req.getParameter("start"));
         LocalDate endDate = LocalDate.parse(req.getParameter("end"));
-        String pathToFile = getServletContext().getResource("/WEB-INF/currency/" + path).getPath();
-        LOG.info("Path to file: {}", pathToFile);
+        String currencyName = req.getParameter("currency");
+//        String operation = req.getParameter("operation");
+//        resp.getWriter().println("operation: " + operation);
+        String pathToFile = getServletContext().getResource("/WEB-INF/currency/" + currencyName + ".csv").getPath();
+        LOG.info("PPath to file:  {}", pathToFile);
 
         List<InputData> cryptoData = countingFunctionBean.sortDataByBean(pathToFile, startDate, endDate);
         InputData minPrice = countingFunctionBean.printMinPriceBean(pathToFile, startDate, endDate);
@@ -53,9 +57,8 @@ public class StockCalculationsListsServlet extends HttpServlet {
         dataModel.put("startdate",startDate);
         dataModel.put("enddate",endDate);
         String whichCoin;
-        whichCoin=path;
+        whichCoin=currencyName;
         whichCoin=whichCoin.toLowerCase();
-
         whichCoin=whichCoin.substring(0,whichCoin.length()-4);
         dataModel.put("whichCoin",whichCoin);
 
