@@ -13,20 +13,46 @@
     <title>Currency list</title>
 </head>
 <body>
-<h2 class="title">Welcome to your favourite application kindly delivered to you by 4IT Development Team</h2>
-<hr/>
-<h3 class="title">From the list below please select the Crypto Currency of your choice</h3>
-<hr/>
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark"">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/web/currency"> Currencies <span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+        <div class="nav-item dropdown mr-sm-2">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Admin Panel
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Action 1</a>
+                <a class="dropdown-item" href="#">Action 2</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Action 3</a>
+            </div>
+        </div>
+    </div>
+</nav>
 <form method="post" action="/web${action!"/operation"}">
 <div class="container">
-<div class="row">
+<div class="row height20">
             <#list currencies>
                 <#items as FrontendObject>
-                <div class="col-md-4">
-                    <img class="img-top" style="max-width: 10rem;" alt="image" src=${FrontendObject.url}>
-                    <h5 class="card-title" name="currencyName">${FrontendObject.name}</h5>
-                    <p class="card-text">${FrontendObject.description}</p>
+                <div class="card col-md-5">
+                    <div class="card-body">
+                    <h2 class="card-header text-center">
+                        ${FrontendObject.name}
+                    </h2>
+                    <img class="card-img-top center-block" alt="Image" style="width:150px;height:150px;" src=${FrontendObject.url}>
+                    <p class="card-text text-justify">${FrontendObject.description}</p>
+                    <div class="card-footer border-success">
                     <input type="submit" name="Go" value=${FrontendObject.name}><br/><br/>
+                    </div>
+                </div>
                 </div>
                 </#items>
             </#list>

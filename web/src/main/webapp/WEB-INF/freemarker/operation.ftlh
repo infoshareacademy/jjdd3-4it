@@ -13,13 +13,32 @@
     <title>Operation list</title>
 </head>
 <body>
-<form method="post" action="/web${action!"/list"}">
-<p></p>
-<a href="/web/currency" id="goback" class="btn btn-primary">Go Back To Crypto Currency Selection</a>
-<hr/>
-<h2>Your selected Crypto Currency is ${currencyName}</h2>
-<hr/>
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark"">
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
 
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+            <a class="nav-link" href="/web/currency"> Currencies <span class="sr-only">(current)</span></a>
+        </li>
+    </ul>
+    <div class="nav-item dropdown mr-sm-2">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Admin Panel
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Action 1</a>
+            <a class="dropdown-item" href="#">Action 2</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Action 3</a>
+        </div>
+    </div>
+</div>
+</nav>
+
+<form method="post" action="/web${action!"/list"}">
 <p>Kindly select the starting date:</p>
 <form action="/web/list">
     From Date:
@@ -40,7 +59,6 @@
                             <h5 class="card-title">${FrontendObject.description}</h5>
                             <div class="card-footer">
                                 <button name="operation" type="submit" value=${FrontendObject.name}>Show Result</button>
-                                <!--<a href="/web/list" class="btn btn-primary">Show Result</a>-->
                             </div>
                         </div>
                     </div>
