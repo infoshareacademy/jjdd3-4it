@@ -39,7 +39,7 @@ public class StockCalculationsListsServlet extends HttpServlet {
 //        String operation = req.getParameter("operation");
 //        resp.getWriter().println("operation: " + operation);
         String pathToFile = getServletContext().getResource("/WEB-INF/currency/" + currencyName + ".csv").getPath();
-        LOG.info("PPath to file:  {}", pathToFile);
+        LOG.info("Path to file:  {}", pathToFile);
 
         List<InputData> cryptoData = countingFunctionBean.sortDataByBean(pathToFile, startDate, endDate);
         InputData minPrice = countingFunctionBean.printMinPriceBean(pathToFile, startDate, endDate);
