@@ -30,7 +30,6 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="#">Action 1</a>
-            <a class="dropdown-item" href="#">Action 2</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#">Action 3</a>
         </div>
@@ -39,17 +38,15 @@
 </nav>
 
 <form method="post" action="/web${action!"/list"}">
-<p>Kindly select the starting date:</p>
-<form action="/web/list">
-    From Date:
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+    <span class="navbar-brand mb-0 h2"> From date: </span>
     <input type="date" name="start" value="2017-01-01" min="2017-01-01" max="2017-12-31" required>
-    <p></p>
-    <p>Kindly select the ending date: </p>
-    To Date:
+    <span class="navbar-brand mb-0 h2"> To date: </span>
     <input type="date" name="end" value="2017-12-31" min="2017-01-01" max="2017-12-31" required>
-    <hr/>
-    <h4>From the list below please select an operation to be performed on the currency you chose:</h4>
-    <hr/>
+    </nav>
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+    <span class="navbar-brand mb-0 h1">From the list below please select an operation to be performed on the currency you chose:</span>
+    </nav>
     <input type="hidden" name="currency" value="${currencyName}"/>
             <#list operation>
                 <#items as FrontendObject>

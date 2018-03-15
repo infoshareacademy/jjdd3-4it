@@ -30,7 +30,6 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="#">Action 1</a>
-                <a class="dropdown-item" href="#">Action 2</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Action 3</a>
             </div>
@@ -39,15 +38,17 @@
 </nav>
 <form method="post" action="/web${action!"/operation"}">
 <div class="container">
-<div class="row height20">
+<div class="row">
             <#list currencies>
                 <#items as FrontendObject>
-                <div class="card col-md-5">
+                <div class="card col-md-4">
                     <div class="card-body">
                     <h2 class="card-header text-center">
                         ${FrontendObject.name}
                     </h2>
-                    <img class="card-img-top center-block" alt="Image" style="width:150px;height:150px;" src=${FrontendObject.url}>
+                        <div class="row">
+                            <img class="card-img-top center-block mx-auto" alt="Image" style="width:150px;height:150px;" src=${FrontendObject.url}>
+                        </div>
                     <p class="card-text text-justify">${FrontendObject.description}</p>
                     <div class="card-footer border-success">
                     <input type="submit" name="Go" value=${FrontendObject.name}><br/><br/>
@@ -56,7 +57,7 @@
                 </div>
                 </#items>
             </#list>
-        </div>
+</div>
 </div>
 </form>
 
