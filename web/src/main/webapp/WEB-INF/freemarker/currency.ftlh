@@ -21,7 +21,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="/web/currency"> Currencies <span class="sr-only">(current)</span></a>
+                <a class="nav-link h2" href="/web/currency"> Currencies <span class="sr-only">(current)</span></a>
             </li>
         </ul>
         <div class="nav-item dropdown mr-sm-2">

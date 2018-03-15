@@ -21,7 +21,7 @@
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-            <a class="nav-link" href="/web/currency"> Currencies <span class="sr-only">(current)</span></a>
+            <a class="nav-link h2" href="/web/currency"> Currencies <span class="sr-only">(current)</span></a>
         </li>
     </ul>
     <div class="nav-item dropdown mr-sm-2">
@@ -39,27 +39,22 @@
 
 <form method="post" action="/web${action!"/list"}">
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
-    <span class="navbar-brand mb-0 h2"> From date: </span>
+    <span class="navbar-brand mb-0 h3"> From date: </span>
     <input type="date" name="start" value="2017-01-01" min="2017-01-01" max="2017-12-31" required>
-    <span class="navbar-brand mb-0 h2"> To date: </span>
+    <span class="navbar-brand mb-0 h3"> To date: </span>
     <input type="date" name="end" value="2017-12-31" min="2017-01-01" max="2017-12-31" required>
     </nav>
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
-    <span class="navbar-brand mb-0 h1">From the list below please select an operation to be performed on the currency you chose:</span>
+    <span class="navbar-brand mb-0 h4">From the list below please select an operation to be performed on the currency you chose:</span>
     </nav>
     <input type="hidden" name="currency" value="${currencyName}"/>
             <#list operation>
                 <#items as FrontendObject>
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body" name=${FrontendObject.name}>
-                            <h5 class="card-title">${FrontendObject.description}</h5>
-                            <div class="card-footer">
-                                <button name="operation" type="submit" value=${FrontendObject.name}>Show Result</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                        <h4>
+                        <input type="radio" name="operation" value=${FrontendObject.name}>&nbsp;${FrontendObject.description}<br>
+                        </input>
+                        </h4>
+                <hr>
                 </#items>
             </#list>
 </form>
