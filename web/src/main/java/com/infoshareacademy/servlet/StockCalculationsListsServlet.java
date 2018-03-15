@@ -1,6 +1,7 @@
 package com.infoshareacademy.servlet;
 
 import com.infoshareacademy.cdi.CountingFunctionsBean;
+import com.infoshareacademy.dao.InputDataDao;
 import com.infoshareacademy.freemarker.TemplateProvider;
 import com.infoshareacademy.model.InputData;
 import freemarker.template.Template;
@@ -9,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,8 +27,11 @@ public class StockCalculationsListsServlet extends HttpServlet {
 
     private static final Logger LOG = LoggerFactory.getLogger(StockCalculationsListsServlet.class);
 
-    @EJB
+    @Inject
     CountingFunctionsBean countingFunctionBean;
+
+    @Inject
+    InputDataDao inputDataDao;
 
 
     @Override
@@ -41,6 +46,13 @@ public class StockCalculationsListsServlet extends HttpServlet {
         String pathToFile = getServletContext().getResource("/WEB-INF/currency/" + currencyName + ".csv").getPath();
         LOG.info("Path to file:  {}", pathToFile);
 
+
+        List<InputData> printData = countingFunctionBean.readFileBean(pathToFile);
+        for (InputData inputDataDb : printData) {
+            inputDataDb.setCurrency(currencyName);
+            inputDataDao.save(inputDataDb);
+        }
+
         List<InputData> cryptoData = countingFunctionBean.sortDataByBean(pathToFile, startDate, endDate);
         InputData minPrice = countingFunctionBean.printMinPriceBean(pathToFile, startDate, endDate);
         InputData maxPrice = countingFunctionBean.printMaxPriceBean(pathToFile, startDate, endDate);
@@ -54,13 +66,13 @@ public class StockCalculationsListsServlet extends HttpServlet {
         dataModel.put("max", maxPrice);
         dataModel.put("avg", averageOfPrice);
         dataModel.put("med", medianOfPrice);
-        dataModel.put("startdate",startDate);
-        dataModel.put("enddate",endDate);
+        dataModel.put("startdate", startDate);
+        dataModel.put("enddate", endDate);
         String whichCoin;
-        whichCoin=currencyName;
-        whichCoin=whichCoin.toLowerCase();
-        whichCoin=whichCoin.substring(0,whichCoin.length()-4);
-        dataModel.put("whichCoin",whichCoin);
+        whichCoin = currencyName;
+        whichCoin = whichCoin.toLowerCase();
+        whichCoin = whichCoin.substring(0, whichCoin.length() - 4);
+        dataModel.put("whichCoin", whichCoin);
 
         Template template = TemplateProvider.createTemplate(getServletContext(), "start-menu.ftlh");
 
