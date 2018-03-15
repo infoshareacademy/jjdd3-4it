@@ -45,13 +45,14 @@
     <input type="date" name="end" value="2017-12-31" min="2017-01-01" max="2017-12-31" required>
     </nav>
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
-    <span class="navbar-brand mb-0 h4">From the list below please select an operation to be performed on the currency you chose:</span>
+    <span class="navbar-brand mb-0 h4">From the list below please select an operation to be performed on the Crypto Currency ${currencyName}:</span>
     </nav>
+    <span style="display:block; height:25px;"></span>
     <input type="hidden" name="currency" value="${currencyName}"/>
             <#list operation>
                 <#items as FrontendObject>
                         <h4>
-                        <input type="radio" name="operation" value=${FrontendObject.name}>&nbsp;${FrontendObject.description}<br>
+                            <span style="display:inline-block; width:50px;"></span><input type="radio" name="operation" value=${FrontendObject.name}>&nbsp;${FrontendObject.description}<br>
                         </input>
                         </h4>
                 <hr>
