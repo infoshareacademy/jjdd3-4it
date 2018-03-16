@@ -44,8 +44,11 @@
     <span class="navbar-brand mb-0 h3"> To date: </span>
     <input type="date" name="end" value="2017-12-31" min="2017-01-01" max="2017-12-31" required>
     </nav>
-    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark justify-content-between">
     <span class="navbar-brand mb-0 h4">From the list below please select an operation to be performed on the Crypto Currency ${currencyName}:</span>
+    <div class="btn mr-sm-2">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Show Result</button>
+    </div>
     </nav>
     <span style="display:block; height:25px;"></span>
     <input type="hidden" name="currency" value="${currencyName}"/>
