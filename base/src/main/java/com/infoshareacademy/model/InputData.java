@@ -15,19 +15,26 @@ public class InputData  {
 
     @Column(name= "date")
     @NotNull
-    private final LocalDate date;
+    private LocalDate date;
 
     @Column(name = "price")
     @NotNull
-    private final Double price;
+    private  Double price;
 
     @Column(name = "currency")
     @NotNull
     private String currency;
 
-    InputData(LocalDate date, Double price) {
+    public InputData() {
+    }
+
+    public InputData(LocalDate date, Double price) {
         this.date = date;
         this.price = price;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public LocalDate getDate() {
@@ -48,10 +55,8 @@ public class InputData  {
 
     @Override
     public String toString() {
-        return "InputData{" +
-                "date=" + date +
-                ", price=" + price +
-                ", currency='" + currency + '\'' +
-                '}';
+        return date +
+                " " + price +
+                " " + currency;
     }
 }

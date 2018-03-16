@@ -9,7 +9,6 @@ import freemarker.template.TemplateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -53,6 +52,12 @@ public class StockCalculationsListsServlet extends HttpServlet {
             inputDataDao.save(inputDataDb);
         }
 
+
+
+
+
+
+
         List<InputData> cryptoData = countingFunctionBean.sortDataByBean(pathToFile, startDate, endDate);
         InputData minPrice = countingFunctionBean.printMinPriceBean(pathToFile, startDate, endDate);
         InputData maxPrice = countingFunctionBean.printMaxPriceBean(pathToFile, startDate, endDate);
@@ -81,6 +86,8 @@ public class StockCalculationsListsServlet extends HttpServlet {
         } catch (TemplateException e) {
             e.printStackTrace();
         }
+
+
 
 
     }
