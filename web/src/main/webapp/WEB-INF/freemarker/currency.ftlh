@@ -38,25 +38,25 @@
 </nav>
 <span style="display:block; height:25px;"></span>
 <form method="post" action="/web${action!"/operation"}">
-<div class="container">
-<div class="row">
+    <div class="container">
+        <div class="row">
             <#list currencies>
                 <#items as FrontendObject>
                 <div class="card col-md-4">
                     <div class="card-body">
-                    <h2 class="card-header text-center">
-                        <input type="submit" name="Go" value=${FrontendObject.name}>
-                    </h2>
+                        <h2 class="card-header text-center">
+                            <input type="submit" name="Go" value=${FrontendObject.name}>
+                        </h2>
                         <div class="row">
                             <img class="card-img-top center-block mx-auto" alt="Image" style="width:150px;height:150px;" src=${FrontendObject.url}>
                         </div>
-                    <p class="card-text text-justify">${FrontendObject.description}</p>
-                </div>
+                        <p class="card-text text-justify">${FrontendObject.description}</p>
+                    </div>
                 </div>
                 </#items>
             </#list>
-</div>
-</div>
+        </div>
+    </div>
 </form>
 
 <!-- Optional JavaScript -->

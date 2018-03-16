@@ -54,10 +54,10 @@
     <input type="hidden" name="currency" value="${currencyName}"/>
             <#list operation>
                 <#items as FrontendObject>
-                        <h4>
-                            <span style="display:inline-block; width:50px;"></span><input type="radio" name="operation" value=${FrontendObject.name}>&nbsp;${FrontendObject.description}<br>
+                        <h5>
+                            <span style="display:inline-block; width:40px;"></span><input type="radio" name="operation" value=${FrontendObject.name}>&nbsp;${FrontendObject.description}<br>
                         </input>
-                        </h4>
+                        </h5>
                 <hr>
                 </#items>
             </#list>
