@@ -21,7 +21,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link h2" href="/web/currency"> Currencies <span class="sr-only">(current)</span></a>
+                <a class="nav-link h3" href="/web/currency"> Currencies <span class="sr-only">(current)</span></a>
             </li>
         </ul>
         <div class="nav-item dropdown mr-sm-2">
@@ -45,7 +45,7 @@
                 <div class="card col-md-4">
                     <div class="card-body">
                         <h2 class="card-header text-center">
-                            <input type="submit" name="Go" value=${FrontendObject.name}>
+                            <input type="submit" name="cryptoCurrency" value=${FrontendObject.name}>
                         </h2>
                         <div class="row">
                             <img class="card-img-top center-block mx-auto" alt="Image" style="width:150px;height:150px;" src=${FrontendObject.url}>

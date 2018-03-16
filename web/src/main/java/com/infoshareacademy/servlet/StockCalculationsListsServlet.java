@@ -35,7 +35,7 @@ public class StockCalculationsListsServlet extends HttpServlet {
 
         LocalDate startDate = LocalDate.parse(req.getParameter("start"));
         LocalDate endDate = LocalDate.parse(req.getParameter("end"));
-        String currencyName = req.getParameter("currency");
+        String currencyName = req.getParameter("cryptoCurrency");
 //        String operation = req.getParameter("operation");
 //        resp.getWriter().println("operation: " + operation);
         String pathToFile = getServletContext().getResource("/WEB-INF/currency/" + currencyName + ".csv").getPath();
@@ -56,11 +56,7 @@ public class StockCalculationsListsServlet extends HttpServlet {
         dataModel.put("med", medianOfPrice);
         dataModel.put("startdate",startDate);
         dataModel.put("enddate",endDate);
-        String whichCoin;
-        whichCoin=currencyName;
-        whichCoin=whichCoin.toLowerCase();
-        whichCoin=whichCoin.substring(0,whichCoin.length()-4);
-        dataModel.put("whichCoin",whichCoin);
+        dataModel.put("cryptoCurrency",currencyName);
 
         Template template = TemplateProvider.createTemplate(getServletContext(), "start-menu.ftlh");
 

@@ -22,6 +22,29 @@ public class OperationServlet extends HttpServlet {
     @Inject
     com.infoshareacademy.cdi.OperationProviderBean OperationProviderBean;
 
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        ServletContext context = this.getServletContext();
+        String fullPath = context.getRealPath("/WEB-INF/operations");
+        List<OperationObject> operationList = OperationProviderBean.getFromFile(fullPath);
+
+        String cryptoCurrency = request.getParameter("cryptoCurrency");
+
+        Map<String, Object> dataModel = new HashMap<>();
+        dataModel.put("operation", operationList);
+        dataModel.put("cryptoCurrency", cryptoCurrency);
+
+        Template template = TemplateProvider.createTemplate(getServletContext(), "operation.ftlh");
+
+        try {
+            template.process(dataModel, response.getWriter());
+        } catch (TemplateException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -29,11 +52,11 @@ public class OperationServlet extends HttpServlet {
         String fullPath = context.getRealPath("/WEB-INF/operations");
         List<OperationObject> operationList = OperationProviderBean.getFromFile(fullPath);
 
-        String currencyName = request.getParameter("Go");
+        String cryptoCurrency = request.getParameter("cryptoCurrency");
 
         Map<String, Object> dataModel = new HashMap<>();
         dataModel.put("operation", operationList);
-        dataModel.put("currencyName", currencyName);
+        dataModel.put("cryptoCurrency", cryptoCurrency);
 
         Template template = TemplateProvider.createTemplate(getServletContext(), "operation.ftlh");
 

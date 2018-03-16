@@ -21,7 +21,7 @@
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-            <a class="nav-link h2" href="/web/currency"> Currencies <span class="sr-only">(current)</span></a>
+            <a class="nav-link h3" href="/web/currency"> Currencies <span class="sr-only">(current)</span></a>
         </li>
     </ul>
     <div class="nav-item dropdown mr-sm-2">
@@ -45,17 +45,17 @@
     <input type="date" name="end" value="2017-12-31" min="2017-01-01" max="2017-12-31" required>
     </nav>
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark justify-content-between">
-    <span class="navbar-brand mb-0 h4">From the list below please select an operation to be performed on the Crypto Currency ${currencyName}:</span>
+    <span class="navbar-brand mb-0 h4">From the list below please select an operation to be performed on the Crypto Currency ${cryptoCurrency}:</span>
     <div class="btn mr-sm-2">
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Show Result</button>
     </div>
     </nav>
     <span style="display:block; height:25px;"></span>
-    <input type="hidden" name="currency" value="${currencyName}"/>
+    <input type="hidden" name="cryptoCurrency" value="${cryptoCurrency}"/>
             <#list operation>
                 <#items as FrontendObject>
                         <h5>
-                            <span style="display:inline-block; width:40px;"></span><input type="radio" name="operation" value=${FrontendObject.name}>&nbsp;${FrontendObject.description}<br>
+                            <span style="display:inline-block; width:40px;"></span><input type="radio" name="operation" value=${FrontendObject.name} required>&nbsp;${FrontendObject.description}<br>
                         </input>
                         </h5>
                 <hr>
