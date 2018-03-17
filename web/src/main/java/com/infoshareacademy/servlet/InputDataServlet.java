@@ -23,12 +23,5 @@ public class InputDataServlet extends HttpServlet {
     InputDataDao inputDataDao;
 
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        final List<InputData> result = inputDataDao.findAllData();
-        LOG.info("Size of list {}-----------------------------------", result.size());
-        for (InputData inputData: result) {
-            resp.getWriter().println(inputData);
-        }
-    }
+
 }

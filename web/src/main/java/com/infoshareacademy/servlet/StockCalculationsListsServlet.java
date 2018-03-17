@@ -36,34 +36,19 @@ public class StockCalculationsListsServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-
         LocalDate startDate = LocalDate.parse(req.getParameter("start"));
         LocalDate endDate = LocalDate.parse(req.getParameter("end"));
-        String currencyName = req.getParameter("currency");
-//        String operation = req.getParameter("operation");
-//        resp.getWriter().println("operation: " + operation);
+        String currencyName = req.getParameter("currency").toLowerCase();
         String pathToFile = getServletContext().getResource("/WEB-INF/currency/" + currencyName + ".csv").getPath();
         LOG.info("Path to file:  {}", pathToFile);
 
+        saveInputDataToDataBase(req, resp, currencyName, pathToFile);
 
-        List<InputData> printData = countingFunctionBean.readFileBean(pathToFile);
-        for (InputData inputDataDb : printData) {
-            inputDataDb.setCurrency(currencyName);
-            inputDataDao.save(inputDataDb);
-        }
-
-
-
-
-
-
-
-        List<InputData> cryptoData = countingFunctionBean.sortDataByBean(pathToFile, startDate, endDate);
-        InputData minPrice = countingFunctionBean.printMinPriceBean(pathToFile, startDate, endDate);
-        InputData maxPrice = countingFunctionBean.printMaxPriceBean(pathToFile, startDate, endDate);
-        Double averageOfPrice = countingFunctionBean.avaragePriceForRangeBean(pathToFile, startDate, endDate);
-        Double medianOfPrice = countingFunctionBean.medianPriceForRangeBean(pathToFile, startDate, endDate);
-
+        List<InputData> cryptoData = countingFunctionBean.sortDataByBean(startDate, endDate);
+        InputData minPrice = countingFunctionBean.printMinPriceBean(startDate, endDate);
+        InputData maxPrice = countingFunctionBean.printMaxPriceBean(startDate, endDate);
+        Double averageOfPrice = countingFunctionBean.avaragePriceForRangeBean(startDate, endDate);
+        Double medianOfPrice = countingFunctionBean.medianPriceForRangeBean(startDate, endDate);
 
         Map<String, Object> dataModel = new HashMap<>();
         dataModel.put("cryptos", cryptoData);
@@ -73,11 +58,7 @@ public class StockCalculationsListsServlet extends HttpServlet {
         dataModel.put("med", medianOfPrice);
         dataModel.put("startdate", startDate);
         dataModel.put("enddate", endDate);
-        String whichCoin;
-        whichCoin = currencyName;
-        whichCoin = whichCoin.toLowerCase();
-        whichCoin = whichCoin.substring(0, whichCoin.length() - 4);
-        dataModel.put("whichCoin", whichCoin);
+        dataModel.put("currencyname", currencyName);
 
         Template template = TemplateProvider.createTemplate(getServletContext(), "start-menu.ftlh");
 
@@ -87,8 +68,28 @@ public class StockCalculationsListsServlet extends HttpServlet {
             e.printStackTrace();
         }
 
+    }
 
+    private List<InputData> findAllInputDataFromDataBase(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        final List<InputData> dataBaseInput = inputDataDao.findAllData();
+        LOG.info("Size of list {}", dataBaseInput.size());
+        for (InputData inputData : dataBaseInput) {
+            resp.getWriter().println(inputData);
+        }
+        return dataBaseInput;
+    }
 
+    private void deleteInputDataFromDataBase(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String deleteId = req.getParameter("id");
+        inputDataDao.delete(Long.parseLong(deleteId));
+        LOG.info("Deleted currrency");
+    }
 
+    private void saveInputDataToDataBase(HttpServletRequest req, HttpServletResponse reqp, String currencyName, String pathToFile) throws IOException {
+        List<InputData> printData = countingFunctionBean.readFileBean(pathToFile);
+        for (InputData inputDataDb : printData) {
+            inputDataDb.setCurrency(currencyName);
+            inputDataDao.save(inputDataDb);
+        }
     }
 }

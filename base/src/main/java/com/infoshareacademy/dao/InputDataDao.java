@@ -16,7 +16,7 @@ public class InputDataDao {
     private EntityManager entityManager;
 
     public void save(InputData inputData){
-        final  Query query = entityManager.createQuery("SELECT s FROM InputData s WHERE s.currency=? AND s.date=?");
+        Query query = entityManager.createQuery("SELECT s FROM InputData s WHERE s.currency=? AND s.date=?");
         query.setParameter(1, inputData.getCurrency());
         query.setParameter(2, inputData.getDate());
         if(query.getResultList().isEmpty()){
@@ -25,8 +25,15 @@ public class InputDataDao {
     }
 
     public List<InputData> findAllData(){
-        final Query query = entityManager.createQuery("SELECT s FROM InputData s");
+        Query query = entityManager.createQuery("SELECT s FROM InputData s");
         return query.getResultList();
+    }
+
+    public void delete(Long id) {
+        InputData deletedData = entityManager.find(InputData.class, id);
+        if (deletedData!=null) {
+            entityManager.remove(deletedData);
+        }
     }
 
 }
