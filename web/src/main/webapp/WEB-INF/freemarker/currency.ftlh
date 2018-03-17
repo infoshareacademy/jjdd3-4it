@@ -18,8 +18,8 @@
 <h3 class="title">From the list below please select the Crypto Currency of your choice</h3>
 <hr/>
 <form method="post" action="/web${action!"/operation"}">
-<div class="container">
-<div class="row">
+    <div class="container">
+        <div class="row">
             <#list currencies>
                 <#items as FrontendObject>
                 <div class="col-md-4">
@@ -31,7 +31,7 @@
                 </#items>
             </#list>
         </div>
-</div>
+    </div>
 </form>
 
 <!-- Optional JavaScript -->

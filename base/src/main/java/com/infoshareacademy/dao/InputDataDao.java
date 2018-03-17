@@ -15,23 +15,23 @@ public class InputDataDao {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public void save(InputData inputData){
+    public void save(InputData inputData) {
         Query query = entityManager.createQuery("SELECT s FROM InputData s WHERE s.currency=? AND s.date=?");
         query.setParameter(1, inputData.getCurrency());
         query.setParameter(2, inputData.getDate());
-        if(query.getResultList().isEmpty()){
+        if (query.getResultList().isEmpty()) {
             entityManager.persist(inputData);
         }
     }
 
-    public List<InputData> findAllData(){
+    public List<InputData> findAllData() {
         Query query = entityManager.createQuery("SELECT s FROM InputData s");
         return query.getResultList();
     }
 
     public void delete(Long id) {
         InputData deletedData = entityManager.find(InputData.class, id);
-        if (deletedData!=null) {
+        if (deletedData != null) {
             entityManager.remove(deletedData);
         }
     }

@@ -6,7 +6,8 @@ public class CurrencyObject {
     private String url;
     private String path;
 
-    public CurrencyObject(){};
+    public CurrencyObject() {
+    }
 
     public CurrencyObject(String name, String description, String url, String path) {
         this.name = name;
