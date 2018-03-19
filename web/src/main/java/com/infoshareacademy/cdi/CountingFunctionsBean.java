@@ -17,19 +17,19 @@ import java.util.List;
 @Stateless
 public class CountingFunctionsBean {
     @Inject
-    InputDataDao inputDataDao;
+    private InputDataDao inputDataDao;
 
     private static Logger LOG = LoggerFactory.getLogger(CountingFunctionsBean.class);
     private StockFileReaderService stockFileReaderService = new StockFileReaderService();
 
     public List<InputData> readFileBean(String cryptoFile) {
+        LOG.info("choosing cryptoFile {}", cryptoFile);
         return stockFileReaderService.readFile(cryptoFile);
     }
 
     private StockSorter stockSorter = new StockSorter();
 
     public List<InputData> sortDataByBean(LocalDate startDate, LocalDate endDate) {
-        LOG.info("choosing cryptoFile");
         return stockSorter.sortDataBy(inputDataDao.findAllData(), stockSorter.byDate, startDate, endDate);
     }
 

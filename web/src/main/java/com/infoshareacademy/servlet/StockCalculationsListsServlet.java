@@ -27,11 +27,9 @@ public class StockCalculationsListsServlet extends HttpServlet {
     private static final Logger LOG = LoggerFactory.getLogger(StockCalculationsListsServlet.class);
 
     @Inject
-    CountingFunctionsBean countingFunctionBean;
-
+    private CountingFunctionsBean countingFunctionBean;
     @Inject
-    InputDataDao inputDataDao;
-
+    private InputDataDao inputDataDao;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -42,16 +40,18 @@ public class StockCalculationsListsServlet extends HttpServlet {
         String pathToFile = getServletContext().getResource("/WEB-INF/currency/" + currencyName + ".csv").getPath();
         LOG.info("Path to file:  {}", pathToFile);
 
-        saveInputDataToDataBase(req, resp, currencyName, pathToFile);
+        LOG.info("Save data to database");
+        saveInputDataToDataBase(currencyName, pathToFile);
 
-        List<InputData> cryptoData = countingFunctionBean.sortDataByBean(startDate, endDate);
+        LOG.info("start counting min, max, avg. med");
+        List<InputData> sortCryptoData = countingFunctionBean.sortDataByBean(startDate, endDate);
         InputData minPrice = countingFunctionBean.printMinPriceBean(startDate, endDate);
         InputData maxPrice = countingFunctionBean.printMaxPriceBean(startDate, endDate);
         Double averageOfPrice = countingFunctionBean.avaragePriceForRangeBean(startDate, endDate);
         Double medianOfPrice = countingFunctionBean.medianPriceForRangeBean(startDate, endDate);
 
         Map<String, Object> dataModel = new HashMap<>();
-        dataModel.put("cryptos", cryptoData);
+        dataModel.put("cryptos", sortCryptoData);
         dataModel.put("min", minPrice);
         dataModel.put("max", maxPrice);
         dataModel.put("avg", averageOfPrice);
@@ -70,23 +70,9 @@ public class StockCalculationsListsServlet extends HttpServlet {
 
     }
 
-    private List<InputData> findAllInputDataFromDataBase(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        final List<InputData> dataBaseInput = inputDataDao.findAllData();
-        LOG.info("Size of list {}", dataBaseInput.size());
-        for (InputData inputData : dataBaseInput) {
-            resp.getWriter().println(inputData);
-        }
-        return dataBaseInput;
-    }
-
-    private void deleteInputDataFromDataBase(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String deleteId = req.getParameter("id");
-        inputDataDao.delete(Long.parseLong(deleteId));
-        LOG.info("Deleted currrency");
-    }
-
-    private void saveInputDataToDataBase(HttpServletRequest req, HttpServletResponse reqp, String currencyName, String pathToFile) throws IOException {
+    private void saveInputDataToDataBase(String currencyName, String pathToFile) throws IOException {
         List<InputData> printData = countingFunctionBean.readFileBean(pathToFile);
+        LOG.info("Data add to data base from currency {}", currencyName);
         for (InputData inputDataDb : printData) {
             inputDataDb.setCurrency(currencyName);
             inputDataDao.save(inputDataDb);
