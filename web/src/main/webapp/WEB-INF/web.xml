@@ -12,7 +12,7 @@
         <password>pass123</password>
     </data-source>
 
+    <welcome-file-list>
+        <welcome-file>/currency</welcome-file>
+    </welcome-file-list>
 </web-app>
-
-        <!--porty 4110 - 4119-->
-        <!--4it.jjdd3.is-academy.pl-->

@@ -34,9 +34,10 @@ public class StockCalculationsListsServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+
         LocalDate startDate = LocalDate.parse(req.getParameter("start"));
         LocalDate endDate = LocalDate.parse(req.getParameter("end"));
-        String currencyName = req.getParameter("currency").toLowerCase();
+        String currencyName = req.getParameter("cryptoCurrency").toLowerCase();
         String pathToFile = getServletContext().getResource("/WEB-INF/currency/" + currencyName + ".csv").getPath();
         LOG.info("Path to file:  {}", pathToFile);
 
@@ -58,7 +59,7 @@ public class StockCalculationsListsServlet extends HttpServlet {
         dataModel.put("med", medianOfPrice);
         dataModel.put("startdate", startDate);
         dataModel.put("enddate", endDate);
-        dataModel.put("currencyname", currencyName);
+        dataModel.put("cryptoCurrency", currencyName);
 
         Template template = TemplateProvider.createTemplate(getServletContext(), "start-menu.ftlh");
 

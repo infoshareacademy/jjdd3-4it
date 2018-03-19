@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -29,12 +30,15 @@ public class OperationServlet extends HttpServlet {
         ServletContext context = this.getServletContext();
         String fullPath = context.getRealPath("/WEB-INF/operations");
         List<OperationObject> operationList = OperationProviderBean.getFromFile(fullPath);
+        String cryptoCurrency = request.getParameter("cryptoCurrency");
 
-        String currencyName = request.getParameter("Go");
+        HttpSession session = request.getSession();
+        session.setAttribute("cryptoCurrency", cryptoCurrency);
+        session.setAttribute("fullPath", fullPath);
 
         Map<String, Object> dataModel = new HashMap<>();
         dataModel.put("operation", operationList);
-        dataModel.put("currencyName", currencyName);
+        dataModel.put("cryptoCurrency", cryptoCurrency);
 
         Template template = TemplateProvider.createTemplate(getServletContext(), "operation.ftlh");
 
@@ -44,4 +48,27 @@ public class OperationServlet extends HttpServlet {
             e.printStackTrace();
         }
     }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        HttpSession session = request.getSession();
+        String fullPath = (String)session.getAttribute("fullPath");
+        String cryptoCurrency = (String) session.getAttribute("cryptoCurrency");
+
+        List<OperationObject> operationList = OperationProviderBean.getFromFile(fullPath);
+
+        Map<String, Object> dataModel = new HashMap<>();
+        dataModel.put("operation", operationList);
+        dataModel.put("cryptoCurrency", cryptoCurrency);
+
+        Template template = TemplateProvider.createTemplate(getServletContext(), "operation.ftlh");
+
+        try {
+            template.process(dataModel, response.getWriter());
+        } catch (TemplateException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
