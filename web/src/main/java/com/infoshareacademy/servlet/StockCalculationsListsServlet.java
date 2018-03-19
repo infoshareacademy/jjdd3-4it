@@ -1,6 +1,7 @@
 package com.infoshareacademy.servlet;
 
 import com.infoshareacademy.cdi.CountingFunctionsBean;
+import com.infoshareacademy.dao.InputDataDao;
 import com.infoshareacademy.freemarker.TemplateProvider;
 import com.infoshareacademy.model.InputData;
 import freemarker.template.Template;
@@ -8,7 +9,7 @@ import freemarker.template.TemplateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,42 +26,39 @@ public class StockCalculationsListsServlet extends HttpServlet {
 
     private static final Logger LOG = LoggerFactory.getLogger(StockCalculationsListsServlet.class);
 
-    @EJB
-    CountingFunctionsBean countingFunctionBean;
-
+    @Inject
+    private CountingFunctionsBean countingFunctionBean;
+    @Inject
+    private InputDataDao inputDataDao;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-
         LocalDate startDate = LocalDate.parse(req.getParameter("start"));
         LocalDate endDate = LocalDate.parse(req.getParameter("end"));
-        String currencyName = req.getParameter("currency");
-//        String operation = req.getParameter("operation");
-//        resp.getWriter().println("operation: " + operation);
+        String currencyName = req.getParameter("currency").toLowerCase();
         String pathToFile = getServletContext().getResource("/WEB-INF/currency/" + currencyName + ".csv").getPath();
-        LOG.info("PPath to file:  {}", pathToFile);
+        LOG.info("Path to file:  {}", pathToFile);
 
-        List<InputData> cryptoData = countingFunctionBean.sortDataByBean(pathToFile, startDate, endDate);
-        InputData minPrice = countingFunctionBean.printMinPriceBean(pathToFile, startDate, endDate);
-        InputData maxPrice = countingFunctionBean.printMaxPriceBean(pathToFile, startDate, endDate);
-        Double averageOfPrice = countingFunctionBean.avaragePriceForRangeBean(pathToFile, startDate, endDate);
-        Double medianOfPrice = countingFunctionBean.medianPriceForRangeBean(pathToFile, startDate, endDate);
+        LOG.info("Save data to database");
+        saveInputDataToDataBase(currencyName, pathToFile);
 
+        LOG.info("start counting min, max, avg. med");
+        List<InputData> sortCryptoData = countingFunctionBean.sortDataByBean(startDate, endDate);
+        InputData minPrice = countingFunctionBean.printMinPriceBean(startDate, endDate);
+        InputData maxPrice = countingFunctionBean.printMaxPriceBean(startDate, endDate);
+        Double averageOfPrice = countingFunctionBean.avaragePriceForRangeBean(startDate, endDate);
+        Double medianOfPrice = countingFunctionBean.medianPriceForRangeBean(startDate, endDate);
 
         Map<String, Object> dataModel = new HashMap<>();
-        dataModel.put("cryptos", cryptoData);
+        dataModel.put("cryptos", sortCryptoData);
         dataModel.put("min", minPrice);
         dataModel.put("max", maxPrice);
         dataModel.put("avg", averageOfPrice);
         dataModel.put("med", medianOfPrice);
-        dataModel.put("startdate",startDate);
-        dataModel.put("enddate",endDate);
-        String whichCoin;
-        whichCoin=currencyName;
-        whichCoin=whichCoin.toLowerCase();
-        whichCoin=whichCoin.substring(0,whichCoin.length()-4);
-        dataModel.put("whichCoin",whichCoin);
+        dataModel.put("startdate", startDate);
+        dataModel.put("enddate", endDate);
+        dataModel.put("currencyname", currencyName);
 
         Template template = TemplateProvider.createTemplate(getServletContext(), "start-menu.ftlh");
 
@@ -70,6 +68,14 @@ public class StockCalculationsListsServlet extends HttpServlet {
             e.printStackTrace();
         }
 
+    }
 
+    private void saveInputDataToDataBase(String currencyName, String pathToFile) throws IOException {
+        List<InputData> printData = countingFunctionBean.readFileBean(pathToFile);
+        LOG.info("Data add to data base from currency {}", currencyName);
+        for (InputData inputDataDb : printData) {
+            inputDataDb.setCurrency(currencyName);
+            inputDataDao.save(inputDataDb);
+        }
     }
 }

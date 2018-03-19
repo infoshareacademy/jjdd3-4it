@@ -2,14 +2,14 @@
 <html>
 <head>
     <title>Users list</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="../styles/styles.css">
 </head>
 <body>
 <div class="jumbotron">
-
-
-    <p><h2 class="display-4">Your choise is: ${whichCoin} </h2></p>
+    <p>
+    <h2 class="display-4">Your choise is: ${currencyname} </h2></p>
 
     <p class="lead">Start date: ${startdate}</p>
 
@@ -32,9 +32,6 @@
         </div>
     </div>
 </div>
-
-
-
 
 <#list cryptos>
     <#items as crypto>
