@@ -4,7 +4,8 @@ public class OperationObject {
     private String name;
     private String description;
 
-    public OperationObject(){};
+    public OperationObject() {
+    }
 
     public OperationObject(String name, String description) {
         this.name = name;
