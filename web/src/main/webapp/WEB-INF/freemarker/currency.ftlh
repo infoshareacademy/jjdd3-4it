@@ -13,12 +13,7 @@
     <title>Currency list</title>
 </head>
 <body>
-<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark"
-">
-<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-</button>
+<nav class="navbar sticky-top navbar-expand navbar-dark bg-dark">
 
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
@@ -28,13 +23,13 @@
     </ul>
     <div class="nav-item dropdown mr-sm-2">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-           aria-haspopup="true" aria-expanded="false">
+           aria-haspopup="true" aria-expanded="false" style="color:white">
             Admin Panel
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="#">Action 1</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Action 3</a>
+            <a class="dropdown-item" href="#">Action 2</a>
         </div>
     </div>
 </div>
