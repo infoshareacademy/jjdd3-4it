@@ -1,0 +1,27 @@
+version: "2"
+
+services:
+  fourit-db:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=pass123
+      - MYSQL_DATABASE=fourit-db
+      - MYSQL_USER=fourit
+      - MYSQL_PASSWORD=pass123
+
+    ports:
+      - 4112:3306
+
+  web:
+    build:
+     context: ./web
+
+    ports:
+      - 4110:8080
+      - 4111:9990
+
+    depends_on:
+      - fourit-db
+
+    links:
+      - fourit-db

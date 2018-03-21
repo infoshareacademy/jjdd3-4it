@@ -23,7 +23,7 @@
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-            <a class="nav-link h3" href="/web/currency"> Currencies <span class="sr-only">(current)</span></a>
+            <a class="nav-link h3" href="/currency"> Currencies <span class="sr-only">(current)</span></a>
         </li>
     </ul>
     <div class="nav-item dropdown mr-sm-2">
@@ -40,7 +40,7 @@
 </div>
 </nav>
 <span style="display:block; height:25px;"></span>
-<form method="post" action="/web${action!"/operation"}">
+<form method="post" action="${action!"/operation"}">
     <div class="container">
         <div class="row">
             <#list currencies>
