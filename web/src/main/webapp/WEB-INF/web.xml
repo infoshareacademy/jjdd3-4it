@@ -7,7 +7,7 @@
     <data-source>
         <name>java:ds/fourit-app</name>
         <class-name>com.mysql.cj.jdbc.MysqlDataSource</class-name>
-        <url>jdbc:mysql://0.0.0.0:4110/fourit</url>
+        <url>jdbc:mysql://fourit-db:3306/fourit-db</url>
         <user>root</user>
         <password>pass123</password>
     </data-source>

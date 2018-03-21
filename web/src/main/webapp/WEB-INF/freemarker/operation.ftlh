@@ -15,27 +15,27 @@
 <body>
 <nav class="navbar sticky-top navbar-expand navbar-dark bg-dark">
 
-<div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-            <a class="nav-link h3" href="/web/currency"> Currencies <span class="sr-only">(current)</span></a>
-        </li>
-    </ul>
-    <div class="nav-item dropdown mr-sm-2">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-           aria-haspopup="true" aria-expanded="false" style="color:white">
-            Admin Panel
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action 1</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Action 2</a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link h3" href="/currency"> Currencies <span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+        <div class="nav-item dropdown mr-sm-2">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false" style="color:white">
+                Admin Panel
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Action 1</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Action 2</a>
+            </div>
         </div>
     </div>
-</div>
 </nav>
 
-<form method="post" action="/web${action!"/list"}">
+<form method="post" action="${action!"/list"}">
     <nav class="navbar navbar-expand navbar-dark bg-dark">
         <span class="navbar-brand mb-0 h3"> From date: </span>
         <input type="date" name="start" value="2017-01-01" min="2017-01-01" max="2017-12-31" required>
