@@ -88,4 +88,8 @@ public class StockCalculationsListsServlet extends HttpServlet {
     private void saveStatisticToDataBase(String currencyName) {
         currencyStatisticDao.save(new CurrencyStatistic(currencyName, 1));
     }
+
+    private void findExistigCurrencyInStatic(String currencyName){
+        currencyStatisticDao.findExistCurrency(new CurrencyStatistic(currencyName,));
+    }
 }
