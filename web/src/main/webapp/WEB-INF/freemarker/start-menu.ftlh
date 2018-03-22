@@ -62,11 +62,9 @@
     </div>
 </div>
 
-<#list cryptos>
-    <#items as crypto>
-            <p>${crypto.date} ${crypto.price}</p>
-    </#items>
-</#list>
+<div class="axisX">${axisX}</div>
+<div class="axisY">${axisY}</div>
+
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
