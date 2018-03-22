@@ -15,7 +15,7 @@ public class AxisStringConverterBean {
         for (int i = 0; i < inputData.size();i++ ) {
             axisX = axisX + "'" + inputData.get(i).getDate() + "'";
             if (i != inputData.size()-1) {
-                axisX = axisX + ",";
+                axisX = axisX + ", ";
             }
         }
         return axisX;
@@ -24,9 +24,9 @@ public class AxisStringConverterBean {
     public String axisY(List<InputData> inputData){
         String axisY = "";
         for (int i = 0; i < inputData.size();i++ ) {
-            axisY = axisY + "'" + inputData.get(i).getPrice() + "'";
+            axisY = axisY + inputData.get(i).getPrice();
             if (i != inputData.size()-1) {
-                axisY = axisY + ",";
+                axisY = axisY + ", ";
             }
         }
         return axisY;
