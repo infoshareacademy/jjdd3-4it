@@ -13,7 +13,7 @@ public class AxisStringConverterBean {
     public String axisX(List<InputData> inputData){
         String axisX = "";
         for (int i = 0; i < inputData.size();i++ ) {
-            axisX = axisX + "'" + inputData.get(i).getDate() + "'";
+            axisX = axisX + "`" + inputData.get(i).getDate() + "`";
             if (i != inputData.size()-1) {
                 axisX = axisX + ", ";
             }
