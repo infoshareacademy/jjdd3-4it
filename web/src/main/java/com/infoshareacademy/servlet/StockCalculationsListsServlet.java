@@ -47,8 +47,15 @@ public class StockCalculationsListsServlet extends HttpServlet {
 
         LOG.info("Save data to database");
         saveInputDataToDataBase(currencyName, pathToFile);
-        saveStatisticToDataBase(currencyName);
 
+        CurrencyStatistic currencyStatistic = currencyStatisticDao.findStatisticByCurrency(currencyName);
+        if (currencyStatistic == null) {
+            saveStatisticToDataBase(currencyName);
+        } else {
+            Integer currencyValue = currencyStatistic.getValue();
+            currencyStatistic.setValue(currencyValue + 1);
+            currencyStatisticDao.update(currencyStatistic);
+        }
         LOG.info("start counting min, max, avg. med");
         List<InputData> sortCryptoData = countingFunctionBean.sortDataByBean(startDate, endDate);
         InputData minPrice = countingFunctionBean.printMinPriceBean(startDate, endDate);
@@ -89,7 +96,4 @@ public class StockCalculationsListsServlet extends HttpServlet {
         currencyStatisticDao.save(new CurrencyStatistic(currencyName, 1));
     }
 
-    private void findExistigCurrencyInStatic(String currencyName){
-        currencyStatisticDao.findExistCurrency(new CurrencyStatistic(currencyName,));
-    }
 }
