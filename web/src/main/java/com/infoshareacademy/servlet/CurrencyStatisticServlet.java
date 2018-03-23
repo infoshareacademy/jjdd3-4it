@@ -24,9 +24,7 @@ public class CurrencyStatisticServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         findAllCurrenciesStatistic(req, resp);
-
     }
 
     private void findAllCurrenciesStatistic(HttpServletRequest req, HttpServletResponse resp) throws IOException {
