@@ -45,17 +45,10 @@ public class StockCalculationsListsServlet extends HttpServlet {
         String pathToFile = getServletContext().getResource("/WEB-INF/currency/" + currencyName + ".csv").getPath();
         LOG.info("Path to file:  {}", pathToFile);
 
-        LOG.info("Save data to database");
-        saveInputDataToDataBase(currencyName, pathToFile);
 
-        CurrencyStatistic currencyStatistic = currencyStatisticDao.findStatisticByCurrency(currencyName);
-        if (currencyStatistic == null) {
-            saveStatisticToDataBase(currencyName);
-        } else {
-            Integer currencyValue = currencyStatistic.getValue();
-            currencyStatistic.setValue(currencyValue + 1);
-            currencyStatisticDao.update(currencyStatistic);
-        }
+        saveInputDataToDataBase(currencyName, pathToFile);
+        generateMathMethods(currencyName);
+
         LOG.info("start counting min, max, avg. med");
         List<InputData> sortCryptoData = countingFunctionBean.sortDataByBean(startDate, endDate);
         InputData minPrice = countingFunctionBean.printMinPriceBean(startDate, endDate);
@@ -78,12 +71,13 @@ public class StockCalculationsListsServlet extends HttpServlet {
         try {
             template.process(dataModel, resp.getWriter());
         } catch (TemplateException e) {
-            e.printStackTrace();
+            LOG.error("Error template loading: {}", e);
         }
 
     }
 
     private void saveInputDataToDataBase(String currencyName, String pathToFile) throws IOException {
+        LOG.info("Save data with currenciesto database");
         List<InputData> printData = countingFunctionBean.readFileBean(pathToFile);
         LOG.info("Data add to data base from currency {}", currencyName);
         for (InputData inputDataDb : printData) {
@@ -94,6 +88,18 @@ public class StockCalculationsListsServlet extends HttpServlet {
 
     private void saveStatisticToDataBase(String currencyName) {
         currencyStatisticDao.save(new CurrencyStatistic(currencyName, 1));
+    }
+
+    private void generateMathMethods(String currencyName) {
+        LOG.info("Save statistic to database");
+        CurrencyStatistic currencyStatistic = currencyStatisticDao.findStatisticByCurrency(currencyName);
+        if (currencyStatistic == null) {
+            saveStatisticToDataBase(currencyName);
+        } else {
+            Integer currencyValue = currencyStatistic.getValue();
+            currencyStatistic.setValue(currencyValue + 1);
+            currencyStatisticDao.update(currencyStatistic);
+        }
     }
 
 }

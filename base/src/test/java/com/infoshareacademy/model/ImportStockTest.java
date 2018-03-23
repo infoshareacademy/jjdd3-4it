@@ -3,6 +3,7 @@ package com.infoshareacademy.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import com.infoshareacademy.controller.ImportStock;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;

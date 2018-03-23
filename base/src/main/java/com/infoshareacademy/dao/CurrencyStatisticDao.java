@@ -20,25 +20,20 @@ public class CurrencyStatisticDao {
     private static final Logger LOG = LoggerFactory.getLogger(CurrencyStatisticDao.class);
 
     public void save(CurrencyStatistic currencyStatistic) {
-//        if(findExistCurrency(currencyStatistic).isEmpty()){
-//            LOG.info("Data exist in database");
         entityManager.persist(currencyStatistic);
-        //}
     }
 
     public CurrencyStatistic update(CurrencyStatistic currencyStatistic) {
         return entityManager.merge(currencyStatistic);
     }
 
-    public List<CurrencyStatistic> findExistCurrency(CurrencyStatistic currencyStatistic) {
-        Query query = entityManager.createQuery("SELECT s FROM CurrencyStatistic s WHERE s.name=?");
-        query.setParameter(1, currencyStatistic.getName());
-
-        return query.getResultList();
-    }
-
     public CurrencyStatistic findStatisticByCurrency(String name) {
         return entityManager.find(CurrencyStatistic.class, name);
+    }
+
+    public List<CurrencyStatistic> findAll() {
+        Query query = entityManager.createQuery("SELECT s FROM CurrencyStatistic s");
+        return query.getResultList();
     }
 
 }
