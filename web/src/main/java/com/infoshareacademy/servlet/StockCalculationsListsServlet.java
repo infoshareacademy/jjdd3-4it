@@ -1,5 +1,6 @@
 package com.infoshareacademy.servlet;
 
+import com.infoshareacademy.cdi.AxisStringConverterBean;
 import com.infoshareacademy.cdi.CountingFunctionsBean;
 import com.infoshareacademy.dao.CurrencyStatisticDao;
 import com.infoshareacademy.dao.InputDataDao;
@@ -33,6 +34,8 @@ public class StockCalculationsListsServlet extends HttpServlet {
     @Inject
     private InputDataDao inputDataDao;
     @Inject
+    private AxisStringConverterBean axisStringConverterBean;
+    @Inject
     private CurrencyStatisticDao currencyStatisticDao;
 
     @Override
@@ -53,9 +56,10 @@ public class StockCalculationsListsServlet extends HttpServlet {
         InputData maxPrice = countingFunctionBean.printMaxPriceBean(startDate, endDate);
         Double averageOfPrice = countingFunctionBean.avaragePriceForRangeBean(startDate, endDate);
         Double medianOfPrice = countingFunctionBean.medianPriceForRangeBean(startDate, endDate);
+        String axisX = axisStringConverterBean.axisX(sortCryptoData);
+        String axisY = axisStringConverterBean.axisY(sortCryptoData);
 
         Map<String, Object> dataModel = new HashMap<>();
-        dataModel.put("cryptos", sortCryptoData);
         dataModel.put("min", minPrice);
         dataModel.put("max", maxPrice);
         dataModel.put("avg", averageOfPrice);
@@ -63,6 +67,8 @@ public class StockCalculationsListsServlet extends HttpServlet {
         dataModel.put("startdate", startDate);
         dataModel.put("enddate", endDate);
         dataModel.put("cryptoCurrency", currencyName);
+        dataModel.put("axisX", axisX);
+        dataModel.put("axisY", axisY);
 
         Template template = TemplateProvider.createTemplate(getServletContext(), "start-menu.ftlh");
 

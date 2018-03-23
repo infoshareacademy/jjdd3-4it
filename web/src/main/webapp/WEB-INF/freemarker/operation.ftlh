@@ -34,7 +34,9 @@
         </div>
     </div>
 </nav>
-
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+    <span class="navbar-brand mb-0 h3"> Select the required Time Frame for the value ${cryptoCurrency}</span>
+</nav>
 <form method="post" action="${action!"/list"}">
     <nav class="navbar navbar-expand navbar-dark bg-dark">
         <span class="navbar-brand mb-0 h3"> From date: </span>
@@ -42,25 +44,14 @@
         <span class="navbar-brand mb-0 h3"> To date: </span>
         <input type="date" name="end" value="2017-12-31" min="2017-01-01" max="2017-12-31" required>
     </nav>
-    <nav class="navbar navbar-expand navbar-dark bg-dark justify-content-between">
-        <span class="navbar-brand mb-0 h4">From the list below please select an operation to be performed on the Crypto Currency ${cryptoCurrency}:</span>
-        <div class="btn mr-sm-2">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Show Result</button>
+    <nav class="navbar navbar-expand navbar-light bg-light justify-content-between">
+        <div class="btn">
+            <button class="btn btn-outline-success" type="submit">Show Result</button>
         </div>
     </nav>
     <span style="display:block; height:25px;"></span>
     <input type="hidden" name="cryptoCurrency" value="${cryptoCurrency}"/>
-            <#list operation>
-                <#items as FrontendObject>
-                        <h5>
-                            <span style="display:inline-block; width:40px;"></span><input type="radio" name="operation"
-                                                                                          value=${FrontendObject.name} required>&nbsp;${FrontendObject.description}
-                            <br>
-                            </input>
-                        </h5>
-                <hr>
-                </#items>
-            </#list>
+
 </form>
 
 <!-- Optional JavaScript -->

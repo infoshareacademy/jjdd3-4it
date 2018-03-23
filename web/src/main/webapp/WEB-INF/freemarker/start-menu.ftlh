@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="WEB-INF/css/styles.css">
-
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <title>Operation list</title>
 </head>
 <body>
@@ -38,9 +38,6 @@
         </div>
     </div>
 </nav>
-<nav class="navbar navbar-dark bg-dark justify-content-between">
-    <span class="navbar-text h5" style="color:white">Crypto Currency: ${cryptoCurrency}</span>
-</nav>
 <nav class="navbar navbar-dark bg-dark justify-content-between" style="color:white">
     <span class="navbar-text h5" style="color:white">Report from date ${startdate} to date ${enddate}</span>
 </nav>
@@ -63,11 +60,80 @@
     </div>
 </div>
 
-<#list cryptos>
-    <#items as crypto>
-            <p>${crypto.date} ${crypto.price}</p>
-    </#items>
-</#list>
+<div id="myDiv"></div>
+
+<script>
+
+    // Plotly.d3.csv("https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv")
+
+    var trace1 =
+
+            {
+                type: "scatter",
+                mode: "lines",
+                name: 'Diagram',
+                x: [${axisX}],
+                y: [${axisY}],
+                line: {color: '#17BECF'}
+            }
+    ;
+
+    var max = {
+        x: ['${max.date}'],
+        y: ['${max.price}'],
+        mode: 'markers',
+        name: 'maximum',
+        marker: {
+            color: 'rgb(219, 64, 82)',
+            size: 12
+        }
+    };
+    var min = {
+        x: ['${min.date}'],
+        y: ['${min.price}'],
+        mode: 'markers',
+        name: 'minimum',
+        marker: {
+            color: 'rgb(100, 100, 0)',
+            size: 12
+        }
+    };
+    var med = {
+        x: ['${startdate}', '${enddate}'],
+        y: ['${med}', '${med}'],
+        mode: 'linear',
+        name: 'median',
+        marker: {
+            color: 'rgb(0, 64, 82)',
+            size: 12
+        }
+    };
+    var avg = {
+        x: ['${startdate}', '${enddate}'],
+        y: ['${avg}', '${avg}'],
+        mode: 'linear',
+        name: 'average',
+        marker: {
+            color: 'rgb(128, 0, 128)',
+            size: 6
+        }
+    };
+
+    var data = [trace1, max, min, med, avg];
+
+    var layout = {
+        title: '${cryptoCurrency}',
+        xaxis: {
+            range: ['${startdate}', '${enddate}'],
+            type: 'date'
+
+        }
+    };
+
+    Plotly.newPlot('myDiv', data, layout);
+
+</script>
+
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
