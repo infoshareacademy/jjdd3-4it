@@ -1,8 +1,10 @@
 package com.infoshareacademy.servlet;
 
 import com.infoshareacademy.cdi.CountingFunctionsBean;
+import com.infoshareacademy.dao.CurrencyStatisticDao;
 import com.infoshareacademy.dao.InputDataDao;
 import com.infoshareacademy.freemarker.TemplateProvider;
+import com.infoshareacademy.model.CurrencyStatistic;
 import com.infoshareacademy.model.InputData;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -30,10 +32,11 @@ public class StockCalculationsListsServlet extends HttpServlet {
     private CountingFunctionsBean countingFunctionBean;
     @Inject
     private InputDataDao inputDataDao;
+    @Inject
+    private CurrencyStatisticDao currencyStatisticDao;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
 
         LocalDate startDate = LocalDate.parse(req.getParameter("start"));
         LocalDate endDate = LocalDate.parse(req.getParameter("end"));
@@ -41,8 +44,8 @@ public class StockCalculationsListsServlet extends HttpServlet {
         String pathToFile = getServletContext().getResource("/WEB-INF/currency/" + currencyName + ".csv").getPath();
         LOG.info("Path to file:  {}", pathToFile);
 
-        LOG.info("Save data to database");
         saveInputDataToDataBase(currencyName, pathToFile);
+        generateMathMethods(currencyName);
 
         LOG.info("start counting min, max, avg. med");
         List<InputData> sortCryptoData = countingFunctionBean.sortDataByBean(startDate, endDate);
@@ -66,12 +69,12 @@ public class StockCalculationsListsServlet extends HttpServlet {
         try {
             template.process(dataModel, resp.getWriter());
         } catch (TemplateException e) {
-            e.printStackTrace();
+            LOG.error("Error template loading: {}", e);
         }
-
     }
 
     private void saveInputDataToDataBase(String currencyName, String pathToFile) throws IOException {
+        LOG.info("Save data with currenciesto database");
         List<InputData> printData = countingFunctionBean.readFileBean(pathToFile);
         LOG.info("Data add to data base from currency {}", currencyName);
         for (InputData inputDataDb : printData) {
@@ -79,4 +82,21 @@ public class StockCalculationsListsServlet extends HttpServlet {
             inputDataDao.save(inputDataDb);
         }
     }
+
+    private void saveStatisticToDataBase(String currencyName) {
+        currencyStatisticDao.save(new CurrencyStatistic(currencyName, 1));
+    }
+
+    private void generateMathMethods(String currencyName) {
+        LOG.info("Save statistic to database");
+        CurrencyStatistic currencyStatistic = currencyStatisticDao.findStatisticByCurrency(currencyName);
+        if (currencyStatistic == null) {
+            saveStatisticToDataBase(currencyName);
+        } else {
+            Integer currencyValue = currencyStatistic.getValue();
+            currencyStatistic.setValue(currencyValue + 1);
+            currencyStatisticDao.update(currencyStatistic);
+        }
+    }
+
 }

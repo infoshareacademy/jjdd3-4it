@@ -1,6 +1,5 @@
 package com.infoshareacademy.controller;
 
-import com.infoshareacademy.model.ImportStock;
 import com.infoshareacademy.model.InputData;
 import org.junit.jupiter.api.Test;
 

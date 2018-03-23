@@ -1,6 +1,5 @@
 package com.infoshareacademy.controller;
 
-import com.infoshareacademy.model.ImportStock;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
