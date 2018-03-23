@@ -1,5 +1,6 @@
 package com.infoshareacademy.servlet;
 
+import com.infoshareacademy.cdi.AxisStringConverterBean;
 import com.infoshareacademy.cdi.CountingFunctionsBean;
 import com.infoshareacademy.dao.InputDataDao;
 import com.infoshareacademy.freemarker.TemplateProvider;
@@ -30,6 +31,8 @@ public class StockCalculationsListsServlet extends HttpServlet {
     private CountingFunctionsBean countingFunctionBean;
     @Inject
     private InputDataDao inputDataDao;
+    @Inject
+    private AxisStringConverterBean axisStringConverterBean;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -45,11 +48,13 @@ public class StockCalculationsListsServlet extends HttpServlet {
         saveInputDataToDataBase(currencyName, pathToFile);
 
         LOG.info("start counting min, max, avg. med");
-        List<InputData> sortCryptoData = countingFunctionBean.sortDataByBean(startDate, endDate);
+        List<InputData> sortCryptoData = countingFunctionBean.readFileBean(pathToFile);
         InputData minPrice = countingFunctionBean.printMinPriceBean(startDate, endDate);
         InputData maxPrice = countingFunctionBean.printMaxPriceBean(startDate, endDate);
         Double averageOfPrice = countingFunctionBean.avaragePriceForRangeBean(startDate, endDate);
         Double medianOfPrice = countingFunctionBean.medianPriceForRangeBean(startDate, endDate);
+        String axisX = axisStringConverterBean.axisX(sortCryptoData);
+        String axisY = axisStringConverterBean.axisY(sortCryptoData);
 
         Map<String, Object> dataModel = new HashMap<>();
         dataModel.put("cryptos", sortCryptoData);
@@ -60,7 +65,8 @@ public class StockCalculationsListsServlet extends HttpServlet {
         dataModel.put("startdate", startDate);
         dataModel.put("enddate", endDate);
         dataModel.put("cryptoCurrency", currencyName);
-
+        dataModel.put("axisX", axisX);
+        dataModel.put("axisY", axisY);
         Template template = TemplateProvider.createTemplate(getServletContext(), "start-menu.ftlh");
 
         try {
