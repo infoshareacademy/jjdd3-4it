@@ -66,15 +66,20 @@
 <div id="myDiv"></div>
 
 <script>
-    var main = [
+
+   // Plotly.d3.csv("https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv")
+
+    var trace1 =
 
         {
+            type: "scatter",
+            mode: "lines",
+            name: 'Diagram',
             x: [${axisX}],
             y: [${axisY}],
-            type: 'scatter',
-            mode: "lines"
+            line: {color: '#17BECF'}
         }
-    ];
+    ;
 
     var max = {
         x: ['${max.date}'],
@@ -116,16 +121,20 @@
             size: 6
         }
     };
-    var data = [min, max, avg, med];
+
+    var data = [trace1,max, min, med, avg];
+
     var layout = {
-        title: 'Custom Range',
+        title: '${cryptoCurrency}',
         xaxis: {
             range: ['${startdate}', '${enddate}'],
             type: 'date'
 
         }
     };
-    Plotly.newPlot('myDiv', main, data, layout);
+
+    Plotly.newPlot('myDiv', data, layout);
+
 </script>
 
 <!-- Optional JavaScript -->
