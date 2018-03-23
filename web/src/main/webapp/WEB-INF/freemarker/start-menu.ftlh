@@ -70,7 +70,7 @@
     <div id="myDiv"></div>
 
     <script>
-    var data1 =
+    var main =
     {
     x: [${axisX}],
     y: [${axisY}],
@@ -79,7 +79,7 @@
     };
 
 
-    var data2 = {
+    var max = {
         x: ['${max.date}'],
         y: ['${max.price}'],
         mode: 'markers',
@@ -90,12 +90,50 @@
             size: 12
         }
     };
-   var data = [data1, data2];
+    var min = {
+        x: ['${min.date}'],
+        y: ['${min.price}'],
+        mode: 'markers',
+        name: 'minimum',
+        marker: {
+            color: 'rgb(100, 100, 0)',
+            size: 12
+        }
+    };
+    var med = {
+        x: ['${startdate}', '${enddate}'],
+        y: ['${med}','${med}'],
+        mode: 'linear',
+        name: 'median',
+        marker: {
+            color: 'rgb(0, 64, 82)',
+            size: 12
+        }
+    };
+    var avg = {
+        x: ['${startdate}', '${enddate}'],
+        y: ['${avg}','${avg}'],
+        mode: 'linear',
+        name: 'average',
+        marker: {
+            color: 'rgb(128, 0, 128)',
+            size: 6
+        }
+    };
+        var data = [main, min, max, avg, med];
     var layout = {
         title: 'Custom Range',
         xaxis: {
             range: ['${startdate}', '${enddate}'],
-            type: 'date'
+            type: 'date',
+            //autorange: true,
+
+        },
+        yaxis: {
+         autorange:true,
+         autoscale:true,
+         range: ['${min.price}', '${min.price}'],
+         type: 'linear'
 
         }
     };

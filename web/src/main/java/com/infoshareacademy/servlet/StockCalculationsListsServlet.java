@@ -48,7 +48,7 @@ public class StockCalculationsListsServlet extends HttpServlet {
         saveInputDataToDataBase(currencyName, pathToFile);
 
         LOG.info("start counting min, max, avg. med");
-        List<InputData> sortCryptoData = countingFunctionBean.readFileBean(pathToFile);
+        List<InputData> sortCryptoData = countingFunctionBean.sortDataByBean(startDate,endDate);
         InputData minPrice = countingFunctionBean.printMinPriceBean(startDate, endDate);
         InputData maxPrice = countingFunctionBean.printMaxPriceBean(startDate, endDate);
         Double averageOfPrice = countingFunctionBean.avaragePriceForRangeBean(startDate, endDate);
