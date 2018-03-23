@@ -1,5 +1,6 @@
-package com.infoshareacademy.model;
+package com.infoshareacademy.controller;
 
+import com.infoshareacademy.model.InputData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

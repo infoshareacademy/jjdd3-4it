@@ -64,18 +64,18 @@
 
 <script>
 
-   // Plotly.d3.csv("https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv")
+    // Plotly.d3.csv("https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv")
 
     var trace1 =
 
-        {
-            type: "scatter",
-            mode: "lines",
-            name: 'Diagram',
-            x: [${axisX}],
-            y: [${axisY}],
-            line: {color: '#17BECF'}
-        }
+            {
+                type: "scatter",
+                mode: "lines",
+                name: 'Diagram',
+                x: [${axisX}],
+                y: [${axisY}],
+                line: {color: '#17BECF'}
+            }
     ;
 
     var max = {
@@ -100,7 +100,7 @@
     };
     var med = {
         x: ['${startdate}', '${enddate}'],
-        y: ['${med}','${med}'],
+        y: ['${med}', '${med}'],
         mode: 'linear',
         name: 'median',
         marker: {
@@ -110,7 +110,7 @@
     };
     var avg = {
         x: ['${startdate}', '${enddate}'],
-        y: ['${avg}','${avg}'],
+        y: ['${avg}', '${avg}'],
         mode: 'linear',
         name: 'average',
         marker: {
@@ -119,7 +119,7 @@
         }
     };
 
-    var data = [trace1,max, min, med, avg];
+    var data = [trace1, max, min, med, avg];
 
     var layout = {
         title: '${cryptoCurrency}',

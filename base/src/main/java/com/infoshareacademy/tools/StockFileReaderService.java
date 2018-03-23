@@ -1,6 +1,6 @@
 package com.infoshareacademy.tools;
 
-import com.infoshareacademy.model.ImportStock;
+import com.infoshareacademy.controller.ImportStock;
 import com.infoshareacademy.model.InputData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
