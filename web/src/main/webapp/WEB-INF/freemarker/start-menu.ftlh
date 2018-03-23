@@ -38,9 +38,6 @@
         </div>
     </div>
 </nav>
-<nav class="navbar navbar-dark bg-dark justify-content-between">
-    <span class="navbar-text h5" style="color:white">Crypto Currency: ${cryptoCurrency}</span>
-</nav>
 <nav class="navbar navbar-dark bg-dark justify-content-between" style="color:white">
     <span class="navbar-text h5" style="color:white">Report from date ${startdate} to date ${enddate}</span>
 </nav>
