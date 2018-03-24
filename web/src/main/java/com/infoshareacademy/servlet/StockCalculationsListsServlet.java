@@ -69,7 +69,6 @@ public class StockCalculationsListsServlet extends HttpServlet {
         dataModel.put("cryptoCurrency", currencyName);
         dataModel.put("axisX", axisX);
         dataModel.put("axisY", axisY);
-        //findAll(currencyName,req,resp);
         Template template = TemplateProvider.createTemplate(getServletContext(), "start-menu.ftlh");
 
         try {
