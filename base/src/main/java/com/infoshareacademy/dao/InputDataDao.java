@@ -29,6 +29,7 @@ public class InputDataDao {
     }
 
     public List<InputData> findAll(String currencyName) {
+        LOG.info("Find currency data");
         Query query = entityManager.createQuery("SELECT s FROM InputData s WHERE s.currency=?");
         query.setParameter(1, currencyName);
         return query.getResultList();

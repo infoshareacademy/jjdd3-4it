@@ -5,6 +5,8 @@ import com.infoshareacademy.domain.CurrencyObject;
 import com.infoshareacademy.freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.servlet.ServletContext;
@@ -20,6 +22,8 @@ import java.util.Map;
 
 @WebServlet("/currency")
 public class CurrencyServlet extends HttpServlet {
+
+    private static final Logger LOG = LoggerFactory.getLogger(CurrencyServlet.class);
 
     @Inject
     CurrencyProviderBean currencyProviderBean;
@@ -39,7 +43,7 @@ public class CurrencyServlet extends HttpServlet {
         try {
             template.process(dataModel, response.getWriter());
         } catch (TemplateException e) {
-            e.printStackTrace();
+            LOG.error("Error template loading: {}", e);
         }
     }
 }

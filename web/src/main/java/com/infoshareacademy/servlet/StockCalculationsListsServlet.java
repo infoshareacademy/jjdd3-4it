@@ -48,7 +48,7 @@ public class StockCalculationsListsServlet extends HttpServlet {
         LOG.info("Path to file:  {}", pathToFile);
 
         saveInputDataToDataBase(currencyName, pathToFile);
-        generateMathMethods(currencyName);
+        addCurencyCountValueToStatisticDatabase(currencyName);
 
         LOG.info("start counting min, max, avg. med");
         List<InputData> sortCryptoData = countingFunctionBean.sortDataByBean(currencyName, startDate, endDate);
@@ -79,7 +79,7 @@ public class StockCalculationsListsServlet extends HttpServlet {
     }
 
     private void saveInputDataToDataBase(String currencyName, String pathToFile) throws IOException {
-        LOG.info("Save data with currenciesto database");
+        LOG.info("Save data with currencies to database");
         List<InputData> printData = countingFunctionBean.readFileBean(pathToFile);
         LOG.info("Data add to data base from currency {}", currencyName);
         for (InputData inputDataDb : printData) {
@@ -92,7 +92,7 @@ public class StockCalculationsListsServlet extends HttpServlet {
         currencyStatisticDao.save(new CurrencyStatistic(currencyName, 1));
     }
 
-    private void generateMathMethods(String currencyName) {
+    private void addCurencyCountValueToStatisticDatabase(String currencyName) {
         LOG.info("Save statistic to database");
         CurrencyStatistic currencyStatistic = currencyStatisticDao.findStatisticByCurrency(currencyName);
         if (currencyStatistic == null) {
