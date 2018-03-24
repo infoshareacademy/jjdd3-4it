@@ -1,7 +1,7 @@
 package com.infoshareacademy.servlet;
 
 import com.infoshareacademy.cdi.AxisStringConverterBean;
-import com.infoshareacademy.cdi.CountingFunctionsBean;
+import com.infoshareacademy.cdi.StockCalculationsListsBean;
 import com.infoshareacademy.dao.CurrencyStatisticDao;
 import com.infoshareacademy.dao.InputDataDao;
 import com.infoshareacademy.freemarker.TemplateProvider;
@@ -30,7 +30,7 @@ public class StockCalculationsListsServlet extends HttpServlet {
     private static final Logger LOG = LoggerFactory.getLogger(StockCalculationsListsServlet.class);
 
     @Inject
-    private CountingFunctionsBean countingFunctionBean;
+    private StockCalculationsListsBean countingFunctionBean;
     @Inject
     private InputDataDao inputDataDao;
     @Inject
@@ -51,11 +51,11 @@ public class StockCalculationsListsServlet extends HttpServlet {
         generateMathMethods(currencyName);
 
         LOG.info("start counting min, max, avg. med");
-        List<InputData> sortCryptoData = countingFunctionBean.sortDataByBean(startDate, endDate);
-        InputData minPrice = countingFunctionBean.printMinPriceBean(startDate, endDate);
-        InputData maxPrice = countingFunctionBean.printMaxPriceBean(startDate, endDate);
-        Double averageOfPrice = countingFunctionBean.avaragePriceForRangeBean(startDate, endDate);
-        Double medianOfPrice = countingFunctionBean.medianPriceForRangeBean(startDate, endDate);
+        List<InputData> sortCryptoData = countingFunctionBean.sortDataByBean(currencyName, startDate, endDate);
+        InputData minPrice = countingFunctionBean.printMinPriceBean(currencyName, startDate, endDate);
+        InputData maxPrice = countingFunctionBean.printMaxPriceBean(currencyName, startDate, endDate);
+        Double averageOfPrice = countingFunctionBean.avaragePriceForRangeBean(currencyName, startDate, endDate);
+        Double medianOfPrice = countingFunctionBean.medianPriceForRangeBean(currencyName, startDate, endDate);
         String axisX = axisStringConverterBean.axisX(sortCryptoData);
         String axisY = axisStringConverterBean.axisY(sortCryptoData);
 
@@ -69,7 +69,7 @@ public class StockCalculationsListsServlet extends HttpServlet {
         dataModel.put("cryptoCurrency", currencyName);
         dataModel.put("axisX", axisX);
         dataModel.put("axisY", axisY);
-
+        //findAll(currencyName,req,resp);
         Template template = TemplateProvider.createTemplate(getServletContext(), "start-menu.ftlh");
 
         try {

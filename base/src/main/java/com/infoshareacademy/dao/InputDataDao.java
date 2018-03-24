@@ -28,8 +28,9 @@ public class InputDataDao {
         }
     }
 
-    public List<InputData> findAllData() {
-        Query query = entityManager.createQuery("SELECT s FROM InputData s");
+    public List<InputData> findAll(String currencyName) {
+        Query query = entityManager.createQuery("SELECT s FROM InputData s WHERE s.currency=?");
+        query.setParameter(1, currencyName);
         return query.getResultList();
     }
 
