@@ -1,9 +1,11 @@
 package com.infoshareacademy.servlet;
 
-import com.infoshareacademy.domain.OperationObject;
+import com.infoshareacademy.model.OperationObject;
 import com.infoshareacademy.freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.servlet.ServletContext;
@@ -20,6 +22,8 @@ import java.util.Map;
 
 @WebServlet("/operation")
 public class OperationServlet extends HttpServlet {
+
+    private static final Logger LOG = LoggerFactory.getLogger(OperationServlet.class);
 
     @Inject
     com.infoshareacademy.cdi.OperationProviderBean OperationProviderBean;
@@ -45,7 +49,7 @@ public class OperationServlet extends HttpServlet {
         try {
             template.process(dataModel, response.getWriter());
         } catch (TemplateException e) {
-            e.printStackTrace();
+            LOG.error("Error template loading: {}", e);
         }
     }
 

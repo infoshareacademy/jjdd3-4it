@@ -20,18 +20,22 @@ public class CurrencyStatisticDao {
     private static final Logger LOG = LoggerFactory.getLogger(CurrencyStatisticDao.class);
 
     public void save(CurrencyStatistic currencyStatistic) {
+        LOG.info("Safe statistic to database");
         entityManager.persist(currencyStatistic);
     }
 
     public CurrencyStatistic update(CurrencyStatistic currencyStatistic) {
+        LOG.info("Update statistic");
         return entityManager.merge(currencyStatistic);
     }
 
     public CurrencyStatistic findStatisticByCurrency(String name) {
+        LOG.info("Find statistic data by name");
         return entityManager.find(CurrencyStatistic.class, name);
     }
 
     public List<CurrencyStatistic> findAll() {
+        LOG.info("Find statistic data");
         Query query = entityManager.createQuery("SELECT s FROM CurrencyStatistic s");
         return query.getResultList();
     }

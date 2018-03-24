@@ -1,4 +1,4 @@
-package com.infoshareacademy.domain;
+package com.infoshareacademy.model;
 
 public class CurrencyObject {
     private String name;

@@ -1,9 +1,8 @@
 package com.infoshareacademy.cdi;
 
-import com.infoshareacademy.domain.CurrencyObject;
+import com.infoshareacademy.model.CurrencyObject;
 
 import javax.ejb.Stateless;
-import javax.enterprise.context.RequestScoped;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -16,7 +15,6 @@ public class CurrencyProviderBean {
     public List getFromFile(String path) {
 
         Scanner newScanner = null;
-        List<String> newStringList = new ArrayList();
         String[] toObject = new String[2];
         List<CurrencyObject> newFrontObjectList = new ArrayList();
 
