@@ -1,9 +1,8 @@
 package com.infoshareacademy.cdi;
 
-import com.infoshareacademy.domain.CurrencyObject;
+import com.infoshareacademy.model.CurrencyObject;
 
 import javax.ejb.Stateless;
-import javax.enterprise.context.RequestScoped;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.infoshareacademy.domain;
+package com.infoshareacademy.model;
 
 public class OperationObject {
     private String name;

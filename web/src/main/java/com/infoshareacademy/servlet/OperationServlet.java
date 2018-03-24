@@ -1,6 +1,6 @@
 package com.infoshareacademy.servlet;
 
-import com.infoshareacademy.domain.OperationObject;
+import com.infoshareacademy.model.OperationObject;
 import com.infoshareacademy.freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
