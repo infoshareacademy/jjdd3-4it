@@ -1,5 +1,6 @@
 package com.infoshareacademy.servlet;
 
+import com.infoshareacademy.cdi.StatisticsStringConvertBean;
 import com.infoshareacademy.dao.CurrencyStatisticDao;
 import com.infoshareacademy.freemarker.TemplateProvider;
 import com.infoshareacademy.model.CurrencyStatistic;
@@ -26,6 +27,8 @@ public class CurrencyStatisticServlet extends HttpServlet {
 
     @Inject
     CurrencyStatisticDao currencyStatisticDao;
+    @Inject
+    StatisticsStringConvertBean statisticsStringConvertBean;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -35,11 +38,15 @@ public class CurrencyStatisticServlet extends HttpServlet {
     private void findAllCurrenciesStatistic(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         List<CurrencyStatistic> currenciesStatistics = currencyStatisticDao.findAll();
+        String labels = statisticsStringConvertBean.statsName(currenciesStatistics);
+        String values = statisticsStringConvertBean.statsValue(currenciesStatistics);
 
         LOG.info("Load statistic to screen");
 
-        Map<String, List> dataModel = new HashMap<>();
-        dataModel.put("stats", currenciesStatistics);
+        Map<String, String> dataModel = new HashMap<>();
+//        dataModel.put("stats", currenciesStatistics);
+        dataModel.put("labels", labels);
+        dataModel.put("values", values);
 
 //        for (CurrencyStatistic currencyStatistic : currenciesStatistics) {
 //            response.getWriter().println(currencyStatistic);
