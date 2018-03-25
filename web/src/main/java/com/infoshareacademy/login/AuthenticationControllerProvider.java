@@ -1,4 +1,4 @@
-package com.auth0.example;
+package com.infoshareacademy.login;
 
 import com.auth0.AuthenticationController;
 

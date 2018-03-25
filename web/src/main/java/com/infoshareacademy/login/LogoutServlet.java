@@ -1,4 +1,4 @@
-package com.auth0.example;
+package com.infoshareacademy.login;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
