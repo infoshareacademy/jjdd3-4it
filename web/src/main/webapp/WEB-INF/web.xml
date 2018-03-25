@@ -19,5 +19,20 @@
     <error-page>
         <location>/WEB-INF/html/general-error.html</location>
     </error-page>
+    
+    <context-param>
+        <param-name>com.auth0.domain</param-name>
+        <param-value>fourit.eu.auth0</param-value>
+    </context-param>
+    
+    <context-param>
+        <param-name>com.auth0.clientId</param-name>
+        <param-value>eQatm4l3a0h73U28a9aqqLrU5Csu0sWR</param-value>
+    </context-param>
+    
+    <context-param>
+        <param-name>com.auth0.clientSecret</param-name>
+        <param-value>dxOc-OHH_wm1FXpnzfQh5X2kVJ8tdI-8wPoR1NFobbdBsR1TWO2F0dPmBqDPS8QX</param-value>
+    </context-param>
 
 </web-app>
