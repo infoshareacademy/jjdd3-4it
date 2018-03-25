@@ -23,7 +23,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link h3" href="/currency"> Currencies </a>
+                <a class="nav-link h3" href="/currency"> Currencies <span class="sr-only">(current)</span></a>
             </li>
         </ul>
         <div class="nav-item dropdown mr-sm-2">
@@ -38,10 +38,8 @@
     </div>
 </nav>
 <div class="container">
-    <div class="row">
-        <div class="header col">
+    <div class="center-div">
         <h2>Crypto Currency Prevalence Ranking </h2>
-        </div>
     </div>
 </div>
 <div id="myDiv"><!-- Plotly chart will be drawn inside this DIV --></div>
