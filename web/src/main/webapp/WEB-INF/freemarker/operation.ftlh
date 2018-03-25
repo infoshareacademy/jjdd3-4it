@@ -24,12 +24,10 @@
         <div class="nav-item dropdown mr-sm-2">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                aria-haspopup="true" aria-expanded="false" style="color:white">
-                Admin Panel
+                Extras
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action 1</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Action 2</a>
+                <a class="dropdown-item" href="#">Statistics</a>
             </div>
         </div>
     </div>
