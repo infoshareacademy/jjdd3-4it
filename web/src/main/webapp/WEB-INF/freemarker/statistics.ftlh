@@ -12,6 +12,7 @@
 
     <title>Currency Usage Statistics</title>
 </head>
+<body>
 <nav class="navbar sticky-top navbar-expand navbar-dark bg-dark">
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -29,8 +30,16 @@
                 Extras
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Statistics</a>
+                <a class="dropdown-item" href="/statistic">Statistics</a>
             </div>
         </div>
     </div>
 </nav>
+            <#list stats>
+                <#items as currenciesStatistics>
+                <p>${CurrencyStatistic.name}</p>
+                <p>${CurrencyStatistic.value}</p>
+                </#items>
+            </#list>
+</body>
+</html>

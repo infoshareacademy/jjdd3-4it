@@ -39,7 +39,7 @@ public class CurrencyStatisticServlet extends HttpServlet {
         LOG.info("Load statistic to screen");
 
         Map<String, List> dataModel = new HashMap<>();
-        dataModel.put("currencies", currenciesStatistics);
+        dataModel.put("stats", currenciesStatistics);
 
         Template template = TemplateProvider.createTemplate(getServletContext(), "statistics.ftlh");
 
