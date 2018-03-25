@@ -35,9 +35,9 @@
 <div class="container">
     <div class="row">
             <#list stats>
-                <#items as currenciesStatistics>
-                <p>${currenciesStatistics.name}</p>
-                <p>${currenciesStatistics.value}</p>
+                <#items as statistics>
+                <p>${statistics.name}</p>
+                <p>${statistics.value}</p>
                 </#items>
             </#list>
     </div>

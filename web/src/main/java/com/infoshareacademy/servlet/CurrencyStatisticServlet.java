@@ -41,6 +41,10 @@ public class CurrencyStatisticServlet extends HttpServlet {
         Map<String, List> dataModel = new HashMap<>();
         dataModel.put("stats", currenciesStatistics);
 
+//        for (CurrencyStatistic currencyStatistic : currenciesStatistics) {
+//            response.getWriter().println(currencyStatistic);
+//        }
+
         Template template = TemplateProvider.createTemplate(getServletContext(), "statistics.ftlh");
 
         try {

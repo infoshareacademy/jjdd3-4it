@@ -22,7 +22,7 @@
                 <a class="nav-link h3" href="/currency"> Currencies </a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link h3" href="/operation" value=${cryptoCurrency}> Operations<span class="sr-only">(current)</span></a>
+                <a class="nav-link h3" href="/operation" value=${cryptoCurrency}> Date Selector<span class="sr-only">(current)</span></a>
             </li>
         </ul>
         <div class="nav-item dropdown mr-sm-2">
