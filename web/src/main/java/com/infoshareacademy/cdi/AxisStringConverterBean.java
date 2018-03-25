@@ -3,7 +3,6 @@ package com.infoshareacademy.cdi;
 import com.infoshareacademy.model.InputData;
 
 import javax.ejb.Stateless;
-import javax.enterprise.context.RequestScoped;
 import java.util.List;
 
 import static java.util.stream.Collectors.joining;

@@ -5,19 +5,24 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <!-- Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- Numeric JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/numeric/1.2.6/numeric.min.js"></script>
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="WEB-INF/css/styles.css">
 
-    <title>Operation list</title>
+    <title>Currency Usage Statistics</title>
 </head>
 <body>
 <nav class="navbar sticky-top navbar-expand navbar-dark bg-dark">
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link h3" href="/currency"> Currencies <span class="sr-only">(current)</span></a>
             </li>
         </ul>
@@ -32,25 +37,22 @@
         </div>
     </div>
 </nav>
-<nav class="navbar navbar-expand navbar-dark bg-dark">
-    <span class="navbar-brand mb-0 h3"> Select the required Time Frame for the value ${cryptoCurrency}</span>
-</nav>
-<form method="post" action="${action!"/list"}">
-    <nav class="navbar navbar-expand navbar-dark bg-dark">
-        <span class="navbar-brand mb-0 h3"> From date: </span>
-        <input type="date" name="start" value="2017-01-01" min="2017-01-01" max="2017-12-31" required>
-        <span class="navbar-brand mb-0 h3"> To date: </span>
-        <input type="date" name="end" value="2017-12-31" min="2017-01-01" max="2017-12-31" required>
-    </nav>
-    <nav class="navbar navbar-expand navbar-light bg-light justify-content-between">
-        <div class="btn">
-            <button class="btn btn-outline-success" type="submit">Show Result</button>
-        </div>
-    </nav>
-    <span style="display:block; height:25px;"></span>
-    <input type="hidden" name="cryptoCurrency" value="${cryptoCurrency}"/>
+<div class="container">
+    <div class="center-div">
+        <h2>Crypto Currency Prevalence Ranking </h2>
+    </div>
+</div>
+<div id="myDiv"><!-- Plotly chart will be drawn inside this DIV --></div>
+<script>
+    var data = [{
+        values: [${values}],
+        labels: [${labels}],
+        type: 'pie'
+    }];
 
-</form>
+    Plotly.newPlot('myDiv', data);
+
+</script>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
