@@ -39,7 +39,7 @@
 </nav>
 <div class="container">
     <div class="center-div">
-        <h2>Crypto Currency Prevalence Ranking </h2>
+        <h2 style="text-align:center">Crypto Currency Prevalence Ranking </h2>
     </div>
 </div>
 <div id="myDiv"><!-- Plotly chart will be drawn inside this DIV --></div>
